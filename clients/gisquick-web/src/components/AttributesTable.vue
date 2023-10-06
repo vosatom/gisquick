@@ -195,7 +195,7 @@
   </div>
 </template>
 
-<script>
+<script lang="js">
 import clamp from 'lodash/clamp'
 import keyBy from 'lodash/keyBy'
 import isEqual from 'lodash/isEqual'

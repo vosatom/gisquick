@@ -95,7 +95,7 @@
   </div>
 </template>
 
-<script>
+<script lang="js">
 import { mapState } from 'vuex'
 
 import Map from '@/mixins/Map'
@@ -361,7 +361,7 @@ export default {
   margin: 0;
   width: 20px;
   height: 36px;
-  
+
   min-width: 0;
   padding: 0;
   border-radius: 0;
