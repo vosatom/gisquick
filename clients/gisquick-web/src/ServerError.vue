@@ -3,7 +3,7 @@
     <div class="bg-logo"/>
     <div class="spacer"/>
     <div class="content">
-      <text-logo class="text-logo" height="50" width="300"/>
+      <img src="@/assets/text_logo.svg?url" class="logo"/>
       <slot>
         <template v-if="status === 503">
           <h1>We'll be back soon!</h1>
