@@ -99,6 +99,10 @@ export default {
         const p2 = map.getCoordinateFromPixel([right, bottom])
         return boundingExtent([p1, p2])
       },
+      fitToExtent (extent, options = {}) {
+        let padding = options.padding || map.ext.visibleAreaPadding()
+        map.getView().fit(extent, { ...options, duration: 450, padding })
+      },
       zoomToFeature: (feature, options = {}) => {
         const geom = feature.getGeometry()
         if (!geom) {
@@ -111,14 +115,15 @@ export default {
           center[0] += (-padding[3] * resolution + padding[1] * resolution) / 2
           center[1] += (-padding[2] * resolution + padding[0] * resolution) / 2
           map.getView().animate({
+            duration: 450,
+            ...options,
             center,
-            duration: 450
           })
         } else {
           const extent = geom.getExtent()
           // add 5% buffer (padding)
           const buffer = (map.getSize()[0] - padding[1] - padding[3]) * 0.05 * resolution
-          map.getView().fit(bufferExtent(extent, buffer), { duration: 450, padding })
+          map.getView().fit(bufferExtent(extent, buffer), { duration: 450, ...options, padding })
         }
       },
       refreshOverlays () {
