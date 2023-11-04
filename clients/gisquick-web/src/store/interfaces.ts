@@ -83,7 +83,6 @@ export enum TreeType {
 
 export interface ProjectConfig {
   base_layers: TreeElement[]
-  custom: Custom
   layers: TreeClass[]
   name: string
   ows_project: string
@@ -101,111 +100,6 @@ export interface ProjectConfig {
   units: Units
   use_mapcache: boolean
   zoom_extent: number[]
-}
-
-export interface Custom {
-}
-
-export interface ConfigFeatures {
-  route: Route
-  autocomplete: Autocomplete
-  isoline: Isoline
-  geocode: Geocode
-  reverseGeocode: Geocode
-  mapMatch: MapMatch
-}
-
-export interface Autocomplete {
-  id: string
-  provider: string
-  features: AutocompleteFeatures
-}
-
-export interface AutocompleteFeatures {
-  autoUpdate: boolean
-  biasToMapView: boolean
-}
-
-export interface Geocode {
-  id: string
-  provider: string
-}
-
-export interface Isoline {
-  id: string
-  provider: string
-  features: IsolineFeatures
-}
-
-export interface IsolineFeatures {
-  autoUpdate: boolean
-  distance: boolean
-  time: boolean
-  profiles: any[]
-}
-
-export interface MapMatch {
-  id: string
-  provider: string
-  features: MapMatchFeatures
-}
-
-export interface MapMatchFeatures {
-  profiles: any[]
-  details: any[]
-}
-
-export interface Route {
-  id: string
-  provider: string
-  features: RouteFeatures
-}
-
-export interface RouteFeatures {
-  alternatives: boolean
-  autoUpdate: boolean
-  elevation: boolean
-  details: any[]
-  profiles: string[]
-  instructions: boolean
-  instructionsSigns: boolean
-  defaultProfile: string
-  maxPoints: number
-}
-
-export interface Profiles {
-  bike: Bike
-  mtb_bike: Bike
-  walk: Bike
-}
-
-export interface Bike {
-  id: string
-  label: string
-}
-
-export interface Providers {
-  graphhopper: Cyclestreets
-  here: Cyclestreets
-  geoapify: Cyclestreets
-  cyclestreets: Cyclestreets
-  osrm: Cyclestreets
-  nominatim: Nominatim
-  photon: Nominatim
-  valhalla: Nominatim
-}
-
-export interface Cyclestreets {
-  id: string
-  type: string
-  baseUrl?: string
-  key?: string
-  locale: Lang
-}
-
-export interface Nominatim {
-  id: string
-  type: string
 }
 
 export interface TreeClass {
