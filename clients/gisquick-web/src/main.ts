@@ -32,7 +32,7 @@ import {
 
 // import all icons for hot reload functionality in dev mode
 if (process.env.NODE_ENV === 'development') {
-  import.meta.globEager('../icons/*.svg')
+  import.meta.glob('../icons/*.svg', { eager: true })
 }
 
 Vue.config.productionTip = false
