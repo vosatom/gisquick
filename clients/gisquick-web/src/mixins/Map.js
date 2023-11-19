@@ -34,7 +34,7 @@ export default {
   },
   computed: {
     ...mapState(['project', 'activeTool']),
-    ...mapGetters(['visibleBaseLayer', 'visibleLayers'])
+    ...mapGetters(['visibleBaseLayer', 'visibleLayers']),
   },
   watch: {
     visibleLayers: 'setVisibleLayers',

@@ -70,6 +70,7 @@ export default {
     },
     hiddenIdentificationTool () {
       return {
+        type: 'tool',
         name: 'hidden-identification', // idea: try empty string (because of permalink)
         data: this.identificationSettings,
         component: Identification
