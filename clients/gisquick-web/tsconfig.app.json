@@ -9,6 +9,7 @@
     "allowJs": true,
     "moduleResolution": "Node",
     "paths": {
+      "@storybook/vue3": ["./node_modules/@storybook/vue"],
       "@/*": ["./src/*"]
     }
   }
