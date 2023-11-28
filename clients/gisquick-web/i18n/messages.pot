@@ -2,6 +2,12 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 
+#: ./src/modules/comments/Comments.vue:5
+msgid "%{commentsCount} comment"
+msgid_plural "%{commentsCount} comments"
+msgstr[0] ""
+msgstr[1] ""
+
 #: ./src/components/measure/Measure.vue:9
 msgid "1st coordinate"
 msgstr ""
@@ -10,30 +16,43 @@ msgstr ""
 msgid "2nd coordinate"
 msgstr ""
 
-#: ./src/App.vue:22
+#: ./src/App.vue:23
 msgid "A new version of the map application is available"
 msgstr ""
 
 #: ./src/components/content-panel/BaseLayersTree.vue:43
-#: ./src/components/content-panel/LayersTree.vue:91
-#: ./src/components/content-panel/TopicsList.vue:36
+#: ./src/components/content-panel/LayersTree.vue:90
+#: ./src/components/content-panel/TopicsList.vue:49
 msgid "Abstract"
 msgstr ""
 
-#: ./src/components/feature-editor/GeometryEditor.vue:10
+#: src/components/feature-editor/GenericEditFormRelations.vue:153
+msgid "Add"
+msgstr ""
+
+#: ./src/components/feature-editor/GeometryEditor.vue:11
+#: src/components/feature-editor/GeometryEditor.vue:206
 msgid "Add geometry"
 msgstr ""
 
-#: ./src/components/AttributesTable.vue:115
-#: src/components/MobileAttributesTable.vue:278
+#: ./src/components/AttributesTable.vue:119
+#: src/components/MobileAttributesTable.vue:279
 msgid "Add new feature"
 msgstr ""
 
-#: ./src/App.vue:41
+#: ./src/App.vue:42
 msgid "Add to Home screen?"
 msgstr ""
 
-#: src/components/Identification.vue:147
+#: src/modules/routing/components/RouteQueryRow.vue:99
+msgid "Add waypoint"
+msgstr ""
+
+#: src/components/feature-editor/GeometryEditor.vue:208
+msgid "Added geometries"
+msgstr ""
+
+#: src/components/Identification.vue:137
 msgid "All visible layers"
 msgstr ""
 
@@ -51,16 +70,20 @@ msgstr ""
 msgid "April"
 msgstr ""
 
-#: ./src/components/measure/Measure.vue:97
-#: src/components/measure/Measure.vue:221
+#: ./src/components/measure/Measure.vue:103
+#: src/components/measure/Measure.vue:233
 msgid "Area"
 msgstr ""
 
-#: src/components/MobileAttributesTable.vue:330
+#: src/modules/routing/components/ElevationProfile.vue:38
+msgid "Ascent"
+msgstr ""
+
+#: src/components/MobileAttributesTable.vue:331
 msgid "Attributes"
 msgstr ""
 
-#: src/components/MapTools.vue:102
+#: src/components/MapTools.vue:116
 msgid "Attributes Table"
 msgstr ""
 
@@ -72,11 +95,15 @@ msgstr ""
 msgid "Authentication failed"
 msgstr ""
 
-#: ./src/components/LoginDialog.vue:110
+#: ./src/components/LoginDialog.vue:117
 msgid "Back to Login"
 msgstr ""
 
-#: src/components/content-panel/ContentPanel.vue:107
+#: src/modules/services/providers/cyclestreets/transformer.ts:67
+msgid "Balanced"
+msgstr ""
+
+#: src/components/content-panel/ContentPanel.vue:100
 msgid "Base Layers"
 msgstr ""
 
@@ -86,42 +113,68 @@ msgid "between"
 msgstr ""
 
 #: ./src/components/feature-editor/ImageInput.vue:156
-#: ./src/components/MobileAttributesTable.vue:164
+#: ./src/components/MobileAttributesTable.vue:165
 msgid "Cancel"
 msgstr ""
 
-#: src/components/measure/Measure.vue:188
+#: ./src/modules/bookmarks/Bookmarks.vue:25
+msgid "Change city"
+msgstr ""
+
+#: ./src/modules/routing/components/Routing.vue:95
+msgid "Change direction"
+msgstr ""
+
+#: src/components/measure/Measure.vue:198
+#: src/modules/routing/components/Routing.vue:323
 msgid "Clear"
 msgstr ""
 
-#: src/components/measure/Measure.vue:189
+#: src/components/measure/Measure.vue:199
 msgid "Clear all"
 msgstr ""
 
-#: ./src/components/AttributesTable.vue:142
-#: src/components/MobileAttributesTable.vue:323
+#: ./src/components/AttributesTable.vue:146
+#: src/components/MobileAttributesTable.vue:324
 msgid "Clear attributes filters"
+msgstr ""
+
+#: src/modules/search/Search.vue:216
+msgid "Clear search"
 msgstr ""
 
 #: ./src/AppNotifications.vue:17
 #: ./src/components/LocationTool.vue:20
+#: ./src/modules/issues/Issue.vue:30
 #: ./src/UserDashboard.vue:109
 msgid "Close"
+msgstr ""
+
+#: src/modules/routing/components/Routing.vue:325
+msgid "Close elevation profile"
+msgstr ""
+
+#: ./src/modules/embed/EmbedCode.vue:48
+msgid "Code has been copied to clipboard."
+msgstr ""
+
+#: src/extensions/PoiInfoPanel/PoiInfoPanel.vue:162
+msgid "Comment"
 msgstr ""
 
 #: src/components/AttributeFilter.vue:267
 msgid "contain"
 msgstr ""
 
-#: ./src/components/content-panel/ContentPanel.vue:4
-msgid "Content"
-msgstr ""
-
-#: ./src/components/LoginDialog.vue:103
+#: ./src/components/LoginDialog.vue:110
 msgid "Continue as Guest"
 msgstr ""
 
-#: src/components/measure/Measure.vue:190
+#: ./src/modules/embed/EmbedCode.vue:16
+msgid "Controls"
+msgstr ""
+
+#: src/components/measure/Measure.vue:200
 msgid "Coordinate systems"
 msgstr ""
 
@@ -129,11 +182,27 @@ msgstr ""
 msgid "Coordinates"
 msgstr ""
 
+#: ./src/modules/embed/EmbedCode.vue:45
+msgid "Copy code"
+msgstr ""
+
+#: ./src/modules/embed/EmbedCode.vue:5
+msgid "Copy embed code"
+msgstr ""
+
+#: ./src/components/LoginDialog.vue:104
+msgid "Create an account"
+msgstr ""
+
 #: ./src/UserDashboard.vue:64
 msgid "Created"
 msgstr ""
 
-#: ./src/components/content-panel/LayersTree.vue:95
+#: src/components/feature-editor/ImageInput.vue:209
+msgid "Crop"
+msgstr ""
+
+#: ./src/components/content-panel/LayersTree.vue:94
 #: ./src/components/MobileAttributesTable.vue:95
 msgid "Data"
 msgstr ""
@@ -142,8 +211,8 @@ msgstr ""
 msgid "Data Filters"
 msgstr ""
 
-#: ./src/components/feature-editor/FeatureEditor.vue:89
-#: ./src/components/feature-editor/NewFeatureEditor.vue:43
+#: ./src/components/feature-editor/FeatureEditor.vue:101
+#: ./src/components/feature-editor/NewFeatureEditor.vue:53
 msgid "Data updated"
 msgstr ""
 
@@ -151,23 +220,40 @@ msgstr ""
 msgid "December"
 msgstr ""
 
-#: ./src/components/feature-editor/FeatureEditor.vue:98
+#: ./src/components/feature-editor/GenericEditFormRelations.vue:55
+#: src/components/measure/Measure.vue:202
+msgid "Delete"
+msgstr ""
+
+#: ./src/components/feature-editor/FeatureEditor.vue:110
 msgid "Delete current object?"
 msgstr ""
 
-#: ./src/components/feature-editor/FeatureEditor.vue:55
+#: ./src/components/feature-editor/FeatureEditor.vue:65
+#: src/components/feature-editor/FeatureEditor.vue:174
 msgid "Delete object"
 msgstr ""
 
-#: ./src/components/feature-editor/FeatureEditor.vue:64
+#: src/modules/routing/components/ElevationProfile.vue:39
+msgid "Descent"
+msgstr ""
+
+#: ./src/components/feature-editor/FeatureEditor.vue:75
+#: src/components/feature-editor/FeatureEditor.vue:175
 msgid "Discard changes"
+msgstr ""
+
+#: src/components/feature-editor/SimpleFileInput.vue:61
+msgid "Discard file"
 msgstr ""
 
 #: src/components/MapAttributions.vue:22
 msgid "Display attributions"
 msgstr ""
 
-#: src/components/measure/Measure.vue:220
+#: src/components/measure/Measure.vue:232
+#: src/modules/routing/components/Instructions.vue:100
+#: src/modules/routing/components/Routing.vue:329
 msgid "Distance"
 msgstr ""
 
@@ -175,11 +261,23 @@ msgstr ""
 msgid "Don't show this message again"
 msgstr ""
 
-#: ./src/components/content-panel/LayersTree.vue:106
+#: ./src/components/content-panel/LayersTree.vue:109
 msgid "Download"
 msgstr ""
 
-#: src/components/MobileAttributesTable.vue:351
+#: src/components/feature-editor/SimpleFileInput.vue:62
+msgid "Download file"
+msgstr ""
+
+#: src/modules/routing/components/Routing.vue:331
+msgid "Download GPX"
+msgstr ""
+
+#: src/modules/routing/components/Instructions.vue:99
+msgid "Duration"
+msgstr ""
+
+#: src/components/MobileAttributesTable.vue:352
 msgid "Edit"
 msgstr ""
 
@@ -187,23 +285,40 @@ msgstr ""
 msgid "Edit feature"
 msgstr ""
 
-#: ./src/components/feature-editor/FeatureEditor.vue:32
+#: src/components/feature-editor/ImageInput.vue:207
+msgid "Edit file"
+msgstr ""
+
+#: ./src/components/feature-editor/FeatureEditor.vue:42
+#: src/components/feature-editor/FeatureEditor.vue:173
 msgid "Edit geometry"
 msgstr ""
 
-#: src/components/LoginDialog.vue:167
+#: src/modules/routing/components/Routing.vue:322
+msgid "Elevation profile"
+msgstr ""
+
+#: src/components/LoginDialog.vue:176
 msgid "Email"
 msgstr ""
 
-#: src/components/LoginDialog.vue:172
+#: src/components/LoginDialog.vue:181
 msgid "Email was sent to given email address."
+msgstr ""
+
+#: src/extensions/PoiInfoPanel/PoiInfoPanel.vue:161
+msgid "Embed"
+msgstr ""
+
+#: src/components/AppMenu.vue:78
+msgid "Embed code"
 msgstr ""
 
 #: src/components/AttributeFilter.vue:268
 msgid "empty"
 msgstr ""
 
-#: src/components/LoginDialog.vue:168
+#: src/components/LoginDialog.vue:177
 msgid "Enter your email address below and we will email instructions for setting a new password."
 msgstr ""
 
@@ -212,41 +327,47 @@ msgstr ""
 msgid "equal to"
 msgstr ""
 
-#: src/components/feature-editor/FeatureEditor.vue:229
-#: src/components/feature-editor/NewFeatureEditor.vue:117
+#: ./src/components/content-panel/JsonLegend.vue:12
+#: src/components/feature-editor/FeatureEditor.vue:253
+#: src/components/feature-editor/NewFeatureEditor.vue:133
+#: src/components/SearchTool.vue:257
 #: src/ui/ListTable.vue:105
 #: src/ui/Table.vue:211
 msgid "Error"
 msgstr ""
 
-#: ./src/components/AttributesTable.vue:126
-#: src/components/MobileAttributesTable.vue:285
+#: ./src/components/AttributesTable.vue:130
+#: src/components/MobileAttributesTable.vue:286
 msgid "Export"
 msgstr ""
 
-#: src/components/AttributesTable.vue:452
+#: src/components/AttributesTable.vue:479
 msgid "Failed to load data"
 msgstr ""
 
-#: src/components/LoginDialog.vue:171
+#: src/components/LoginDialog.vue:180
 msgid "Failed to process your request."
 msgstr ""
 
-#: src/components/feature-editor/MediaFileField.vue:226
+#: src/components/feature-editor/MediaFileField.vue:259
 msgid "Failed to upload file"
+msgstr ""
+
+#: src/modules/services/providers/cyclestreets/transformer.ts:65
+msgid "Fastest"
 msgstr ""
 
 #: src/ui/DatePicker.vue:173
 msgid "February"
 msgstr ""
 
-#: src/components/feature-editor/ImageInput.vue:244
-#: src/components/feature-editor/ImageInput.vue:296
-#: src/components/feature-editor/SimpleFileInput.vue:91
+#: src/components/feature-editor/ImageInput.vue:253
+#: src/components/feature-editor/ImageInput.vue:305
+#: src/components/feature-editor/SimpleFileInput.vue:98
 msgid "File exceeds maximum allowed size"
 msgstr ""
 
-#: ./src/components/AttributesTable.vue:152
+#: ./src/components/AttributesTable.vue:156
 #: src/components/AttributeFilter.vue:255
 msgid "Filter"
 msgstr ""
@@ -255,11 +376,11 @@ msgstr ""
 msgid "Filter by attribute value"
 msgstr ""
 
-#: src/components/AttributesTable.vue:317
+#: src/components/AttributesTable.vue:324
 msgid "Filter to visible area"
 msgstr ""
 
-#: ./src/components/LoginDialog.vue:111
+#: ./src/components/LoginDialog.vue:118
 msgid "Forgot password?"
 msgstr ""
 
@@ -268,11 +389,19 @@ msgstr ""
 msgid "Format"
 msgstr ""
 
+#: ./src/modules/issues/Issue.vue:3
+msgid "Found a problem on the route?"
+msgstr ""
+
 #: src/ui/DatePicker.vue:167
 msgid "Friday"
 msgstr ""
 
-#: src/components/AppMenu.vue:60
+#: src/modules/routing/components/RouteQueryRow.vue:95
+msgid "From"
+msgstr ""
+
+#: src/components/AppMenu.vue:67
 msgid "Full screen"
 msgstr ""
 
@@ -280,15 +409,23 @@ msgstr ""
 msgid "Geolocation Error"
 msgstr ""
 
+#: ./src/components/feature-editor/GeometryEditor.vue:85
+msgid "Geometry can be added by clicking into map"
+msgstr ""
+
+#: src/modules/routing/components/Instructions.vue:102
+msgid "Get off bike"
+msgstr ""
+
 #: src/components/AttributeFilter.vue:263
 msgid "greater than"
 msgstr ""
 
-#: src/components/AppMenu.vue:70
+#: src/components/AppMenu.vue:82
 msgid "Help"
 msgstr ""
 
-#: ./src/components/content-panel/LayersTree.vue:87
+#: ./src/components/content-panel/LayersTree.vue:86
 msgid "Identification"
 msgstr ""
 
@@ -296,9 +433,22 @@ msgstr ""
 msgid "Image will be saved in lower resolution"
 msgstr ""
 
-#: src/components/Identification.vue:155
-#: src/components/MobileAttributesTable.vue:345
+#: src/modules/mnk/MNKContent.vue:60
+#: src/modules/mnk/MobileMap.vue:165
+msgid "Info"
+msgstr ""
+
+#: src/components/Identification.vue:145
+#: src/components/MobileAttributesTable.vue:346
 msgid "Info Panel"
+msgstr ""
+
+#: ./src/modules/embed/EmbedCode.vue:22
+msgid "Infopanel"
+msgstr ""
+
+#: src/modules/routing/components/Routing.vue:330
+msgid "Instructions"
 msgstr ""
 
 #: src/components/AttributeFilter.vue:273
@@ -313,7 +463,11 @@ msgstr ""
 msgid "Integer,Integer,..."
 msgstr ""
 
-#: ./src/App.vue:43
+#: ./src/modules/bookmarks/Bookmarks.vue:9
+msgid "Interested in other cities? Select it from the list."
+msgstr ""
+
+#: ./src/App.vue:44
 msgid "It will give you the experience of a native app, with easy access and a standalone window without the browser's address bar and other controls."
 msgstr ""
 
@@ -333,12 +487,17 @@ msgstr ""
 msgid "Keywords list"
 msgstr ""
 
-#: src/components/Identification.vue:180
-#: src/components/MobileAttributesTable.vue:241
+#: ./src/extensions/PoiInfoPanel/PoiInfoPanel.vue:114
+msgid "Last updated:"
+msgstr ""
+
+#: src/components/Identification.vue:170
+#: src/components/MobileAttributesTable.vue:242
 msgid "Layer"
 msgstr ""
 
-#: src/components/content-panel/ContentPanel.vue:115
+#: src/modules/mnk/MNKContent.vue:68
+#: src/modules/mnk/MobileMap.vue:173
 msgid "Layers"
 msgstr ""
 
@@ -346,7 +505,7 @@ msgstr ""
 msgid "Layout"
 msgstr ""
 
-#: src/components/content-panel/ContentPanel.vue:109
+#: src/components/content-panel/ContentPanel.vue:102
 msgid "Legend"
 msgstr ""
 
@@ -354,24 +513,39 @@ msgstr ""
 msgid "less than"
 msgstr ""
 
-#: src/components/AttributesTable.vue:319
+#: src/components/AttributesTable.vue:327
 msgid "link"
 msgstr ""
 
-#: ./src/components/Map.vue:48
+#: src/extensions/PoiInfoPanel/PoiInfoPanel.vue:163
+msgid "Link"
+msgstr ""
+
+#: ./src/extensions/PoiInfoPanel/PoiInfoPanel.vue:92
+#: ./src/modules/routing/components/Routing.vue:214
+msgid "Link copied."
+msgstr ""
+
+#: ./src/components/EmbedMap.vue:12
+#: ./src/components/Map.vue:52
+#: ./src/modules/mnk/MNKMap.vue:48
 msgid "Loading"
 msgstr ""
 
-#: src/components/measure/Measure.vue:219
+#: ./src/extensions/PoiInfoPanel/PoiImageGroup.vue:9
+msgid "Loading..."
+msgstr ""
+
+#: src/components/measure/Measure.vue:231
 msgid "Location"
 msgstr ""
 
 #: ./src/components/LoginDialog.vue:94
-#: src/components/AppMenu.vue:49
+#: src/components/AppMenu.vue:56
 msgid "Login"
 msgstr ""
 
-#: src/components/AppMenu.vue:37
+#: src/components/AppMenu.vue:44
 #: src/UserDashboard.vue:202
 msgid "Logout"
 msgstr ""
@@ -380,13 +554,17 @@ msgstr ""
 msgid "March"
 msgstr ""
 
+#: src/modules/routing/components/ElevationProfile.vue:37
+msgid "MASL"
+msgstr ""
+
 #: src/ui/DatePicker.vue:176
 msgid "May"
 msgstr ""
 
-#: src/components/Identification.vue:181
-#: src/components/measure/Measure.vue:187
-#: src/components/MobileAttributesTable.vue:243
+#: src/components/Identification.vue:171
+#: src/components/measure/Measure.vue:197
+#: src/components/MobileAttributesTable.vue:244
 #: src/components/print/Print.vue:86
 #: src/UserDashboard.vue:210
 msgid "Menu"
@@ -396,7 +574,7 @@ msgstr ""
 msgid "Monday"
 msgstr ""
 
-#: src/components/AppMenu.vue:42
+#: src/components/AppMenu.vue:49
 #: src/UserDashboard.vue:197
 msgid "My profile"
 msgstr ""
@@ -405,9 +583,17 @@ msgstr ""
 msgid "My Projects"
 msgstr ""
 
-#: ./src/components/AttributesTable.vue:163
+#: ./src/components/AttributesTable.vue:167
 #: ./src/components/MobileAttributesTable.vue:34
 msgid "New Feature"
+msgstr ""
+
+#: ./src/modules/issues/Issue.vue:41
+msgid "New issue"
+msgstr ""
+
+#: ./src/components/feature-editor/GenericEditFormRelations.vue:46
+msgid "New item"
 msgstr ""
 
 #: ./src/IntroPage.vue:29
@@ -416,8 +602,8 @@ msgid ""
 "own maps!"
 msgstr ""
 
-#: ./src/App.vue:48
-#: ./src/components/feature-editor/FeatureEditor.vue:102
+#: ./src/App.vue:49
+#: ./src/components/feature-editor/FeatureEditor.vue:114
 msgid "No"
 msgstr ""
 
@@ -425,11 +611,22 @@ msgstr ""
 msgid "No Data"
 msgstr ""
 
+#: src/components/AttributesTable.vue:326
+msgid "No geometry"
+msgstr ""
+
 #: ./src/components/feature-editor/ImageInput.vue:75
 msgid "No image assigned"
 msgstr ""
 
-#: ./src/components/feature-editor/GeometryEditor.vue:22
+#: ./src/components/measure/Measure.vue:144
+#: ./src/components/measure/Measure.vue:44
+#: ./src/components/measure/Measure.vue:93
+msgid "No measurements yet"
+msgstr ""
+
+#: ./src/components/feature-editor/GeometryEditor.vue:24
+#: src/components/feature-editor/GeometryEditor.vue:207
 msgid "Node tool"
 msgstr ""
 
@@ -445,16 +642,16 @@ msgstr ""
 msgid "not in"
 msgstr ""
 
-#: ./src/App.vue:27
+#: ./src/App.vue:28
 msgid "Not now"
 msgstr ""
 
-#: src/components/feature-editor/GenericEditForm.vue:66
+#: src/components/feature-editor/GenericEditForm.vue:76
 #: src/components/feature-editor/NumberField.vue:48
 msgid "Not valid integer number"
 msgstr ""
 
-#: src/components/feature-editor/GenericEditForm.vue:65
+#: src/components/feature-editor/GenericEditForm.vue:75
 #: src/components/feature-editor/NumberField.vue:47
 msgid "Not valid number"
 msgstr ""
@@ -491,28 +688,36 @@ msgstr ""
 msgid "Opacity of overlay layers"
 msgstr ""
 
+#: src/extensions/PoiInfoPanel/PoiInfoPanel.vue:159
+msgid "Open in Google Maps"
+msgstr ""
+
 #: src/components/print/Print.vue:114
 msgid "Output format"
 msgstr ""
 
-#: src/components/content-panel/ContentPanel.vue:108
+#: src/components/content-panel/ContentPanel.vue:101
 msgid "Overlay Layers"
 msgstr ""
 
-#: src/components/AttributesTable.vue:318
-#: src/components/MobileAttributesTable.vue:290
+#: ./src/modules/embed/EmbedCode.vue:19
+msgid "Overlays"
+msgstr ""
+
+#: src/components/AttributesTable.vue:325
+#: src/components/MobileAttributesTable.vue:291
 msgid "Page size"
 msgstr ""
 
-#: src/components/LoginDialog.vue:166
+#: src/components/LoginDialog.vue:175
 msgid "Password"
 msgstr ""
 
-#: ./src/components/measure/Measure.vue:96
+#: ./src/components/measure/Measure.vue:102
 msgid "Perimeter"
 msgstr ""
 
-#: src/components/AppMenu.vue:66
+#: src/components/AppMenu.vue:73
 msgid "Permalink"
 msgstr ""
 
@@ -528,7 +733,7 @@ msgstr ""
 msgid "Print quality"
 msgstr ""
 
-#: src/components/feature-editor/MediaFileField.vue:224
+#: src/components/feature-editor/MediaFileField.vue:257
 msgid "Project size limit reached"
 msgstr ""
 
@@ -536,12 +741,38 @@ msgstr ""
 msgid "Publish project"
 msgstr ""
 
+#: src/modules/services/providers/cyclestreets/transformer.ts:66
+msgid "Quietest"
+msgstr ""
+
 #: src/UserDashboard.vue:222
 msgid "Recent"
 msgstr ""
 
+#: src/components/feature-editor/ImageInput.vue:208
+#: src/components/feature-editor/SimpleFileInput.vue:63
+msgid "Remove file"
+msgstr ""
+
+#: src/modules/routing/components/RouteQueryRow.vue:98
+msgid "Remove waypoint"
+msgstr ""
+
+#: ./src/modules/issues/Issue.vue:14
+msgid "Report an issue"
+msgstr ""
+
+#: src/components/feature-editor/GenericEditForm.vue:121
+#: src/components/feature-editor/GenericEditForm.vue:141
+msgid "Required"
+msgstr ""
+
 #: ./src/components/LoginDialog.vue:58
 msgid "Reset Password"
+msgstr ""
+
+#: src/components/feature-editor/ImageInput.vue:210
+msgid "Reset zoom"
 msgstr ""
 
 #: ./src/components/feature-editor/ImageInput.vue:145
@@ -550,11 +781,29 @@ msgstr ""
 msgid "Resolution"
 msgstr ""
 
+#: src/modules/routing/components/Routing.vue:324
+msgid "Reverse"
+msgstr ""
+
+#: ./src/modules/routing/components/Routing.vue:112
+#: src/modules/routing/components/Routing.vue:328
+msgid "Roundtrip"
+msgstr ""
+
+#: ./src/modules/embed/EmbedCode.vue:25
+#: src/modules/mnk/MNKContent.vue:75
+#: src/modules/mnk/MobileMap.vue:180
+msgid "Routing"
+msgstr ""
+
 #: src/ui/DatePicker.vue:168
 msgid "Saturday"
 msgstr ""
 
-#: ./src/components/feature-editor/FeatureEditor.vue:74
+#: ./src/components/feature-editor/FeatureEditor.vue:86
+#: ./src/components/feature-editor/NewFeatureEditor.vue:39
+#: src/components/feature-editor/FeatureEditor.vue:176
+#: src/components/feature-editor/NewFeatureEditor.vue:95
 msgid "Save changes"
 msgstr ""
 
@@ -563,16 +812,44 @@ msgstr ""
 msgid "Scale"
 msgstr ""
 
-#: ./src/components/feature-editor/MediaFileField.vue:59
+#: src/components/SearchTool.vue:125
+msgid "Search address"
+msgstr ""
+
+#: src/components/SearchTool.vue:126
+msgid "Search location"
+msgstr ""
+
+#: src/modules/search/Search.vue:215
+msgid "Search..."
+msgstr ""
+
+#: ./src/components/feature-editor/MediaFileField.vue:60
 msgid "Select"
 msgstr ""
 
-#: src/components/MobileAttributesTable.vue:242
+#: src/components/MobileAttributesTable.vue:243
 msgid "Select layer"
+msgstr ""
+
+#: src/modules/routing/components/Routing.vue:327
+msgid "Select path"
+msgstr ""
+
+#: src/modules/routing/components/Routing.vue:326
+msgid "Selected path"
 msgstr ""
 
 #: src/ui/DatePicker.vue:180
 msgid "September"
+msgstr ""
+
+#: src/modules/routing/components/Routing.vue:332
+msgid "Share"
+msgstr ""
+
+#: src/extensions/PoiInfoPanel/PoiInfoPanel.vue:160
+msgid "Show QR code"
 msgstr ""
 
 #: ./src/IntroPage.vue:24
@@ -598,15 +875,19 @@ msgstr ""
 msgid "Size"
 msgstr ""
 
+#: src/modules/routing/components/Instructions.vue:103
+msgid "Steps"
+msgstr ""
+
 #: src/ui/DatePicker.vue:169
 msgid "Sunday"
 msgstr ""
 
-#: src/components/Identification.vue:154
+#: src/components/Identification.vue:144
 msgid "Table"
 msgstr ""
 
-#: src/components/Identification.vue:156
+#: src/components/Identification.vue:146
 msgid "Table & Info Panel"
 msgstr ""
 
@@ -614,27 +895,39 @@ msgstr ""
 msgid "Text,Text,..."
 msgstr ""
 
+#: src/modules/issues/Issue.vue:108
+msgid "Thank you for reporting an issue."
+msgstr ""
+
 #: src/ui/DatePicker.vue:166
 msgid "Thursday"
 msgstr ""
 
-#: src/components/content-panel/ContentPanel.vue:114
+#: src/modules/routing/components/RouteQueryRow.vue:96
+msgid "To"
+msgstr ""
+
+#: src/components/content-panel/ContentPanel.vue:99
 msgid "Topics"
 msgstr ""
 
-#: ./src/components/measure/Measure.vue:50
+#: ./src/components/measure/Measure.vue:53
 msgid "Total length"
+msgstr ""
+
+#: ./src/modules/routing/components/Routing.vue:137
+msgid "Try again"
 msgstr ""
 
 #: src/ui/DatePicker.vue:164
 msgid "Tuesday"
 msgstr ""
 
-#: ./src/components/content-panel/LayersTree.vue:76
+#: ./src/components/content-panel/LayersTree.vue:75
 msgid "Type"
 msgstr ""
 
-#: src/components/measure/Measure.vue:191
+#: src/components/measure/Measure.vue:201
 msgid "Units"
 msgstr ""
 
@@ -646,12 +939,12 @@ msgstr ""
 msgid "Updated"
 msgstr ""
 
-#: ./src/components/feature-editor/FeatureEditor.vue:88
-#: ./src/components/feature-editor/NewFeatureEditor.vue:42
+#: ./src/components/feature-editor/FeatureEditor.vue:100
+#: ./src/components/feature-editor/NewFeatureEditor.vue:52
 msgid "Updating data"
 msgstr ""
 
-#: ./src/components/feature-editor/MediaFileField.vue:42
+#: ./src/components/feature-editor/MediaFileField.vue:43
 msgid "Uploading"
 msgstr ""
 
@@ -659,12 +952,16 @@ msgstr ""
 msgid "Use QGIS and Gisquick plugin to create your map, and then publish it from your profile page."
 msgstr ""
 
-#: src/components/LoginDialog.vue:165
+#: src/components/LoginDialog.vue:174
 msgid "Username / Email"
 msgstr ""
 
-#: ./src/components/content-panel/LayersTree.vue:102
+#: ./src/components/content-panel/LayersTree.vue:100
 msgid "Visit"
+msgstr ""
+
+#: src/modules/routing/components/RouteQueryRow.vue:97
+msgid "Waypoint"
 msgstr ""
 
 #: ./src/IntroPage.vue:10
@@ -679,8 +976,8 @@ msgstr ""
 msgid "Welcome to the Gisquick"
 msgstr ""
 
-#: ./src/App.vue:51
-#: ./src/components/feature-editor/FeatureEditor.vue:105
+#: ./src/App.vue:52
+#: ./src/components/feature-editor/FeatureEditor.vue:117
 msgid "Yes"
 msgstr ""
 
@@ -688,7 +985,9 @@ msgstr ""
 msgid "You didn't publish any project yet!"
 msgstr ""
 
-#: src/components/MobileAttributesTable.vue:339
+#: src/components/measure/Measure.vue:203
+#: src/components/MobileAttributesTable.vue:340
+#: src/modules/routing/components/Instructions.vue:101
 msgid "Zoom to"
 msgstr ""
 
@@ -697,17 +996,17 @@ msgctxt "adverb"
 msgid "Next"
 msgstr ""
 
-#: src/components/MapTools.vue:64
+#: src/components/MapTools.vue:67
 msgctxt "noun"
 msgid "Identification"
 msgstr ""
 
-#: src/components/MapTools.vue:80
+#: src/components/MapTools.vue:92
 msgctxt "noun"
 msgid "Measure"
 msgstr ""
 
-#: src/components/MapTools.vue:89
+#: src/components/MapTools.vue:102
 msgctxt "noun"
 msgid "Print"
 msgstr ""
@@ -723,7 +1022,7 @@ msgctxt "verb"
 msgid "Open"
 msgstr ""
 
-#: ./src/App.vue:30
+#: ./src/App.vue:31
 msgctxt "verb"
 msgid "Update"
 msgstr ""
