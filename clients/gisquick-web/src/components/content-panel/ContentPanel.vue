@@ -5,6 +5,11 @@
     </div>
     <v-tabs-header :items="tabsItems" v-model="activeMainTab"/>
     <v-tabs class="f-grow" :items="tabsItems" v-model="activeMainTab">
+      <template v-slot:topics>
+        <scroll-area>
+          <topics-list/>
+        </scroll-area>
+      </template>
       <template v-slot:base>
         <scroll-area>
           <base-layer-opacity
@@ -27,29 +32,14 @@
           @touchstart.native.stop=""
           @touchend.native.stop=""
         />
-        <text-tabs-header v-if="overlaysTabs.length > 1" :items="overlaysTabs" v-model="activeSecondaryTab"/>
-        <div v-else class="mt-2"/>
-        <v-tabs
-          class="secondary-tabs f-grow"
-          :items="overlaysTabs"
-          v-model="activeSecondaryTab"
-        >
-          <template v-slot:topics>
-            <scroll-area>
-              <topics-list/>
-            </scroll-area>
-          </template>
-          <template v-slot:layers>
-            <scroll-area>
-              <layers-tree
-                class="light"
-                :attribute-table-disabled="attributeTableDisabled"
-                :layers="project.overlays"
-                :expanded.sync="expandedOverlays"
-              />
-            </scroll-area>
-          </template>
-        </v-tabs>
+        <scroll-area>
+          <layers-tree
+            class="light"
+            :attribute-table-disabled="attributeTableDisabled"
+            :layers="project.overlays"
+            :expanded.sync="expandedOverlays"
+          />
+        </scroll-area>
       </template>
       <template v-slot:legend="{ visible }">
         <scroll-area class="legend-container">
@@ -82,7 +72,6 @@ export default {
   data () {
     return {
       activeMainTab: 'overlays',
-      activeSecondaryTab: '',
       expandedOverlays: {},
       expandedBaseLayers: {}
     }
@@ -104,20 +93,12 @@ export default {
     },
     tabsItems () {
       return [
+        this.hasTopics && { key: 'topics', icon: 'topics', label: this.$gettext('Topics') },
         this.hasBaseLayers && { key: 'base', icon: 'base-layer', label: this.$gettext('Base Layers') },
         { key: 'overlays', icon: 'overlays', label: this.$gettext('Overlay Layers') },
         { key: 'legend', icon: 'legend', label: this.$gettext('Legend') }
       ].filter(i => i)
     },
-    overlaysTabs () {
-      return [
-        this.hasTopics && { key: 'topics', label: this.$gettext('Topics') },
-        { key: 'layers', label: this.$gettext('Layers') }
-      ].filter(i => i)
-    }
-  },
-  created () {
-    this.activeSecondaryTab = this.topics?.length ? 'topics' : 'layers'
   },
   watch: {
     project: {
