@@ -365,6 +365,7 @@ export async function createBaseLayer (layerConfig, projectConfig = {}) {
  * @param {String} config.mapcacheUrl mapcache url for cached overlays
  * @param {String} config.project ows project name
  * @param {Object} controlOpts ol control options
+ * @returns {import('ol/Map').default}
  */
 export function createMap (config, controlOpts = {}) {
   const projection = getProj(config.projection)
