@@ -97,6 +97,13 @@
           </div>
           <div class="f-row-ac footer">
             <v-btn
+              v-if="signupUrl"
+              tag="a"
+              href="/accounts/signup/"
+            >
+              <translate>Create an account</translate>
+            </v-btn>
+            <v-btn
               v-if="!loginRequired"
               @click="$emit('close')"
             >
@@ -132,6 +139,7 @@ export default {
     loginRequired: Boolean,
     permissionDenied: Boolean,
     passwordResetUrl: String,
+    signupUrl: String,
     project: Object
   },
   data () {

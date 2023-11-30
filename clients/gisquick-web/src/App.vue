@@ -7,6 +7,7 @@
       :login-required="projectStatus !== 200"
       :permission-denied="projectStatus === 403"
       :password-reset-url="app.reset_password_url"
+      :signup-url="app.signup_url"
       :project="project"
       @login="onLogin"
       @close="$store.commit('showLogin', false)"
