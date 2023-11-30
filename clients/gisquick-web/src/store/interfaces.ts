@@ -100,6 +100,8 @@ export interface ProjectConfig {
   units: Units
   use_mapcache: boolean
   zoom_extent: number[]
+
+  description: string
 }
 
 export interface TreeClass {
