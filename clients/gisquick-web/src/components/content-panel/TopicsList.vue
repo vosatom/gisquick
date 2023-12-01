@@ -1,42 +1,56 @@
 <template>
   <div
-    class="layers-tree f-col"
+    class="layers-tree topics-list py-4"
   >
     <template v-for="(topic, index) in topics">
-    <div
-      :key="index"
-      class="item layer f-row-ac"
-      :class="{expanded: expandedItem === topic}"
-    >
-      <v-radio-btn
-        class="f-grow"
-        :label="topic.title"
-        :val="index"
-        :value="activeTopicIndex"
-        @input="setTopic"
-      />
-      <v-btn class="icon flat small" @click="toggleDetail(topic)">
-        <v-icon
-          class="toggle"
-          name="arrow-down"
-          size="12"
-        />
-        <!-- <v-icon
-          class="toggle"
-          name="arrow-down2"
-          size="16"
-        /> -->
-      </v-btn>
-    </div>
-    <collapse-transition :key="`detail-${index}`">
-      <div
-        v-if="expandedItem === topic"
-        class="metadata px-2 py-1"
-      >
-        <translate class="label">Abstract</translate>
-        <span>{{ topic.abstract }}</span>
+      <div class="f-col">
+        <label
+          :key="index"
+          class="item layer"
+          :class="{
+            expanded: expandedItem === topic,
+            active: activeTopicIndex === index,
+            'px-4': true,
+          }"
+          :title="topic.title"
+        >
+          <div class="f-row-ac">
+            <input
+              type="radio"
+              class="hidden"
+              :checked="activeTopicIndex === index"
+              @input="setTopic(index)"
+            />
+
+            <div class="f-grow text-ellipsis">{{ topic.title }}</div>
+            <v-btn class="icon flat small" @click="toggleDetail(topic)">
+              <v-icon class="toggle" name="arrow-down" size="12" />
+              <!-- <v-icon
+                class="toggle"
+                name="arrow-down2"
+                size="16"
+              /> -->
+            </v-btn>
+          </div>
+
+          <div
+            @click="setTopic(index)"
+            v-if="topic.thumbnail_url"
+            class="topic-thumbnail"
+          >
+            <img :src="topic.thumbnail_url" :alt="topic.abstract" />
+          </div>
+        </label>
+        <collapse-transition :key="`detail-${index}`">
+          <div
+            v-if="expandedItem === topic"
+            class="metadata px-2 py-1"
+          >
+            <translate class="label">Abstract</translate>
+            <span>{{ topic.abstract }}</span>
+          </div>
+        </collapse-transition>
       </div>
-    </collapse-transition>
     </template>
   </div>
 </template>
@@ -92,4 +106,32 @@ export default {
 
 <style lang="scss" scoped>
 @import './layers-tree.scss';
+.topic-thumbnail {
+  cursor: pointer;
+}
+
+.topics-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(163px, 1fr));
+}
+
+.title {
+  font-weight: bold;
+}
+
+.item {
+  cursor: pointer;
+  display: block;
+}
+
+.item.active {
+  color: var(--color-primary);
+  font-weight: bold;
+}
+
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 </style>
