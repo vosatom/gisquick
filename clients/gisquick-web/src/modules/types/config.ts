@@ -17,6 +17,13 @@ interface ProjectConfig {
   custom: Custom
 }
 
+export interface Topic {
+  id: string
+  title: string
+  abstract: string
+  visible_overlays: string[]
+}
+
 enum LayerType {
   RasterLayer = 'RasterLayer',
   VectorLayer = 'VectorLayer',

@@ -96,7 +96,7 @@ export interface ProjectConfig {
   scripts: null
   status: number
   tile_resolutions: number[]
-  topics: any[]
+  topics: Topic[]
   units: Units
   use_mapcache: boolean
   zoom_extent: number[]
@@ -104,6 +104,12 @@ export interface ProjectConfig {
   description: string
 }
 
+export interface Topic {
+  id: string
+  title: string
+  abstract: string
+  visible_overlays: string[]
+}
 export interface TreeClass {
   name: string
   title?: string
