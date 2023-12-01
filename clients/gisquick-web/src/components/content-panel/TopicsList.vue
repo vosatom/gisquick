@@ -42,7 +42,7 @@
 </template>
 
 <script lang="js">
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import difference from 'lodash/difference'
 
 export default {
@@ -53,6 +53,7 @@ export default {
   },
   computed: {
     ...mapState(['project']),
+    ...mapGetters(['visibleBaseLayer']),
     hiddenLayers () {
       return this.project.overlays.list.filter(l => l.hidden).map(l => l.name)
     },
@@ -67,7 +68,10 @@ export default {
     activeTopic () {
       // this ignores layers in hidden groups
       const visibleLayers = this.project.overlays.list.filter(l => l.visible && !l.hidden).map(l => l.name)
-      return this.topics.find(t => t.visible_overlays.length === visibleLayers.length && difference(t.visible_overlays, visibleLayers).length === 0)
+      return this.topics.find(t => t.visible_overlays.length === visibleLayers.length && difference(t.visible_overlays, visibleLayers).length === 0 &&
+          (!t.base_layer ||
+            (t.base_layer && t.base_layer === this.visibleBaseLayer.name)),
+      )
     },
     activeTopicIndex () {
       return this.topics.indexOf(this.activeTopic)
@@ -78,7 +82,9 @@ export default {
       this.expandedItem = this.expandedItem !== item ? item : null
     },
     setTopic (index) {
-      this.$store.commit('visibleLayers', this.topics[index].visible_overlays)
+      const topic = this.topics[index]
+      this.$store.commit('visibleLayers', topic.visible_overlays)
+      this.$store.commit('visibleBaseLayer', topic.base_layer)
     }
   }
 }
