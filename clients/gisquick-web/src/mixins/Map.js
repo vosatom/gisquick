@@ -36,6 +36,9 @@ export default {
   computed: {
     ...mapState(['project', 'activeTool']),
     ...mapGetters(['visibleBaseLayer', 'visibleLayers']),
+    isLoading () {
+      return this.status.overlays.loading || this.status.baseLayer.loading
+    }
   },
   watch: {
     visibleLayers: 'setVisibleLayers',
