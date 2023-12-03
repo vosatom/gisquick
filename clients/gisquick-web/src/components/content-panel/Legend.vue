@@ -9,6 +9,8 @@
         <strong v-text="item.layer.title"/>
         <a target="_blank" :href="item.url">Link</a>
       </div>
+      <LegendJSON v-else-if="item.type === 'json'" :url="item.url" :layer="item.layer"/>
+      <LegendTable v-else-if="item.type === 'table'" :data="item.legend_items"/>
       <img
         v-else
         :key="item.layer.name"
@@ -24,8 +26,11 @@
 import { mapGetters } from 'vuex'
 import { unByKey } from 'ol/Observable'
 import debounce from 'lodash/debounce'
+import LegendTable from './LegendTable'
+import LegendJSON from './LegendJSON'
 
 export default {
+  components: { LegendTable, LegendJSON },
   props: {
     visible: Boolean
   },
@@ -36,11 +41,10 @@ export default {
   },
   computed: {
     ...mapGetters(['visibleBaseLayer', 'visibleLayers']),
-    legendLayers () {
-      return [
-        this.visibleBaseLayer,
-        ...this.visibleLayers
-      ].filter(l => l && !l.legend_disabled && l.drawing_order > -1)
+    legendLayers() {
+      return [this.visibleBaseLayer, ...this.visibleLayers].filter(
+        (l) => l && !l.legend_disabled && (l.drawing_order > -1 || l.custom?.legend_type) && !l.clientLayer,
+      )
     },
     dpi () {
       return window.devicePixelRatio > 1 ? Math.round(92 * window.devicePixelRatio) : null
@@ -76,7 +80,26 @@ export default {
       }
       const source = this.$map.overlay.getSource()
       const view = this.$map.getView()
-      this.legendList = this.legendLayers.map(l => {
+      this.legendList = this.legendLayers.map((l) => {
+        if (l.custom?.legend_type === 'table') {
+          return {
+            layer: l,
+            type: l.custom.legend_type,
+            legend_items: l.custom.legend_items,
+          }
+        }
+        if (l.custom?.legend_type === 'json') {
+          const url = source.getLegendUrl(l.name, view, {
+            FORMAT: 'application/json',
+            SYMBOLHEIGHT: '14',
+            SYMBOLWIDTH: '16'
+          })
+          return {
+            layer: l,
+            type: l.custom.legend_type,
+            url: url.toString(),
+          }
+        }
         if (l.legend_url) {
           return {
             layer: l,
@@ -84,8 +107,17 @@ export default {
             url: l.legend_url
           }
         }
-        const opts = this.dpi ? { DPI: this.dpi } : null
-        const url = source.getLegendUrl(l.name, view, opts)
+        const opts = this.dpi ? { DPI: this.dpi } : undefined
+        const url = source.getLegendUrl(l.name, view, {
+          ...opts,
+          FORMAT: 'image/png',
+          SYMBOLHEIGHT: '4',
+          SYMBOLWIDTH: '6',
+          LAYERFONTSIZE: '10',
+          LAYERFONTBOLD: 'true',
+          ITEMFONTSIZE: '11',
+          ICONLABELSPACE: '3'
+        })
         return {
           layer: l,
           type: 'image',
