@@ -40,15 +40,8 @@ function GisquickWMSType (baseClass) {
         VERSION: '1.1.1',
         REQUEST: 'GetLegendGraphic',
         EXCEPTIONS: 'application/vnd.ogc.se_xml',
-        FORMAT: 'image/png',
-        SYMBOLHEIGHT: '4',
-        SYMBOLWIDTH: '6',
-        LAYERFONTSIZE: '10',
-        LAYERFONTBOLD: 'true',
-        ITEMFONTSIZE: '11',
-        ICONLABELSPACE: '3'
       }
-      this.legendUrl = createUrl(opts.url, legendParams)
+      this.legendUrl = createUrl(opts.legendUrl ?? opts.url, legendParams)
       this.setVisibleLayers(opts.visibleLayers || [])
     }
 
@@ -189,7 +182,7 @@ export function createQgisLayer (config) {
       source: new WebgisTileImage({
         project: config.project,
         tilesUrl: config.mapcacheUrl,
-        legendUrl: config.legendUrl,
+        legendUrl: config.legendUrl ?? config.owsUrl,
         owsUrl: config.owsUrl,
         projection: config.projection,
         tileGrid: new TileGrid({
@@ -209,6 +202,7 @@ export function createQgisLayer (config) {
       extent: config.extent,
       source: new GisquickTileWMS({
         url: config.owsUrl,
+        legendUrl: config.owsUrl,
         params: {
           FORMAT: 'image/png',
           TRANSPARENT: 'true',

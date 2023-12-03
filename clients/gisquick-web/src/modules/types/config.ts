@@ -31,3 +31,10 @@ enum LayerType {
 interface Custom {
   note: string
 }
+
+export interface LegendItem {
+  name: string
+  en_name: string
+  image_url: string
+  desc: string
+}
