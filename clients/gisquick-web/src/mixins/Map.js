@@ -56,8 +56,8 @@ export default {
       this.$store.commit('visibleLayers', this.queryParams.overlays.split(','))
     }
 
-    if (this.queryParams.activeTab) {
-      this.$store.commit('activeTab', this.queryParams.activeTab)
+    if (this.queryParams.activetab) {
+      this.$store.commit('activeTab', this.queryParams.activetab)
     }
 
     const mapConfig = {
