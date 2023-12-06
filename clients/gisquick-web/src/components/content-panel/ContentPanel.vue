@@ -1,7 +1,7 @@
 <template>
   <div class="content-panel light">
-    <v-tabs-header :items="tabsItems" v-model="activeMainTab"/>
-    <v-tabs class="f-grow" :items="tabsItems" v-model="activeMainTab">
+    <v-tabs-header :items="tabsItems" v-model="activeTab"/>
+    <v-tabs class="f-grow" :items="tabsItems" v-model="activeTab">
       <template v-slot:topics>
         <scroll-area>
           <topics-list/>
@@ -67,7 +67,6 @@ export default {
   },
   data () {
     return {
-      activeMainTab: 'overlays',
       expandedOverlays: {},
       expandedBaseLayers: {}
     }
@@ -75,6 +74,14 @@ export default {
   computed: {
     ...mapState(['project']),
     ...mapGetters(['visibleBaseLayer', 'visibleLayers']),
+    activeTab: {
+      get() {
+        return this.$store.state.layersTab
+      },
+      set(value) {
+        this.$store.commit('layersTab', value)
+      },
+    },
     visibleBaseLayerName () {
       return this.visibleBaseLayer && this.visibleBaseLayer.name
     },

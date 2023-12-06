@@ -47,6 +47,7 @@ export default new Vuex.Store({
     identificationCursor: undefined,
 
     activeTab: 'info',
+    layersTab: 'overlays',
   },
   mutations: {
     app (state, app) {
@@ -118,6 +119,9 @@ export default new Vuex.Store({
     },
     activeTab(state, newValue) {
       state.activeTab = newValue
+    },
+    layersTab(state, newValue) {
+      state.layersTab = newValue
     },
   },
   getters: {
