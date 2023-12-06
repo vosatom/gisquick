@@ -402,7 +402,8 @@ export default {
     async loadPermalink (params) {
       const { extent: originalExtent, features: initialFeatureIds } = params
       if (!initialFeatureIds) return
-      const tasks = initialFeatureIds.split(',').map(fid => this.getFeatureById(fid))
+      const featuresArray = initialFeatureIds.split(',')
+      const tasks = [await this.getFeatureById(featuresArray.join(','))]
       const features = await this.fetchFeatures(tasks)
       this.setFeatures(features)
 
