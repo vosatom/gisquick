@@ -159,6 +159,7 @@ export default {
           baselayer: this.visibleBaseLayer?.name ?? '',
           ...toolParams
         }
+        return params
       },
       createPermalink: () => {
         return createPermalink(location.href, map.ext.getPermalinkQueryParams())
