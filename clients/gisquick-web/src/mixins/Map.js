@@ -70,11 +70,11 @@ export default {
       scales: config.scales,
       owsUrl: config.ows_url,
       legendUrl: config.legend_url,
-      mapcacheUrl: config.mapcache_url,
+      mapCache: config.use_mapcache,
       mapTiling: config.map_tiling,
       tiledOverlay: config.custom?.tiled_overlay,
     }
-    const map = createMap(mapConfig, { zoom: false, attribution: false, rotate: false })
+    const map = createMap(mapConfig, { zoom: false, attribution: false, rotate: false }, undefined, config)
     Vue.prototype.$map = map
     if (process.env.NODE_ENV === 'development') {
       window.olmap = map
@@ -202,10 +202,10 @@ export default {
       }
     },
     setVisibleLayers (layers) {
-      this.$map.overlay.getSource().setVisibleLayers(layers.filter(l => !l.clientLayer).map(l => l.name))
-      this.$map.clientOverlay?.getSource().setVisibleLayers(layers.filter(l => l.clientLayer === 'Vector').map(l => l.name))
+      this.$map.overlay.getSource().setVisibleLayers(layers.filter(l => !l.custom?.clientLayer).map(l => l.name))
+      this.$map.clientOverlay?.getSource().setVisibleLayers(layers.filter(l => l.custom?.clientLayer === 'Vector').map(l => l.name))
 
-      const clientLayers = layers.filter(l => l.clientLayer);
+      const clientLayers = layers.filter(l => l.custom?.clientLayer);
       this.$map.clientLayer.getLayers().forEach(mapLayer => {
         const layer = clientLayers.find(l => l.name === mapLayer.get('name'));
         mapLayer.setVisible(layer);
