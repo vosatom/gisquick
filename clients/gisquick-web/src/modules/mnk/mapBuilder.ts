@@ -16,7 +16,7 @@ import type { MapConfig } from '@/modules/types/config'
  */
 export async function createClientLayers(map: Map, config: MapConfig) {
   const newLayers: Layer[] = []
-  const layers = config.overlays.filter((l) => l.clientLayer)
+  const layers = config.overlays.filter((l) => l.custom?.clientLayer)
 
   for (let i = 0; i < layers.length; i += 1) {
     const layer = layers[i]

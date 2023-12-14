@@ -105,13 +105,13 @@ export function createQgisLayer (config, projectConfig) {
   })
 
   if (config.mapTiling) {
-    const url = config.owsUrl
+    const url = config.mapCache ?  config.owsUrl.replace('ows', 'cached_ows') : config.owsUrl
 
     return new TileLayer({
       visible: true,
       extent: config.extent,
       source: new GisquickTileWMS({
-        url: config.owsUrl,
+        url: url,
         legendUrl: config.owsUrl,
         params: {
           FORMAT: 'image/png',
