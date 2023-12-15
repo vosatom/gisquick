@@ -134,7 +134,7 @@ const AttributeFilters = {
 // </ogc:PropertyIsNull>
 // `
 
-export function formatLayerQuery (layer, geom, filters, propertyNames = [], Operator = AndOperator) {
+export function formatLayerQuery (layer, geom, filters, propertyNames = [], Operator = AndOperator, sortFilters = []) {
   const ogcFilters = []
   if (geom) {
     const gmlGeom = new GML3({
@@ -157,9 +157,18 @@ export function formatLayerQuery (layer, geom, filters, propertyNames = [], Oper
     rootFilter = ogcFilters.length > 1 ? Operator(ogcFilters) : ogcFilters[0]
     rootFilter = `<ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">${rootFilter}</ogc:Filter>`
   }
+  let sortFilter = ''
+  if (sortFilters.length) sortFilter = `<ogc:SortBy>
+${sortFilters.map(field => `
+<ogc:SortProperty>
+<ogc:PropertyName>${field.name}</ogc:PropertyName>
+<ogc:SortOrder>${field.order}</ogc:SortOrder>
+</ogc:SortProperty>
+`)}</ogc:SortBy>`
   // rootFilter = `<ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">${testQuery}</ogc:Filter>`
   return [
     `<gml:Query gml:typeName="${layer.name.replace(/ /g, '_')}">`,
+    sortFilter,
     propertyNames.map(n => `<ogc:PropertyName>${n}</ogc:PropertyName>`).join('\n'),
     rootFilter,
     '</gml:Query>'
@@ -185,8 +194,8 @@ export function getFeatureQuery (...queries) {
   ].join('\n')
 }
 
-export function layerFeaturesQuery (layer, geom, filters, propertyNames = []) {
-  return getFeatureQuery(formatLayerQuery(layer, geom, filters, propertyNames))
+export function layerFeaturesQuery (layer, geom, filters, propertyNames = [], sortFilters = []) {
+  return getFeatureQuery(formatLayerQuery(layer, geom, filters, propertyNames, undefined, sortFilters))
 }
 
 export function layersFeaturesQuery (layers, geomFilter, filters) {

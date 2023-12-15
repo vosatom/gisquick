@@ -414,7 +414,9 @@ export default {
         const mapProjection = this.$map.getView().getProjection().getCode()
         geom = fromExtent(this.$map.ext.visibleAreaExtent()).transform(mapProjection, this.layer.projection)
       }
-      return { geom, filters }
+      const firstAttributeName = this.layer.attributes?.[0]?.name
+      const sortFilters = firstAttributeName ? [{ name: firstAttributeName, order: 'ASC' }] : []
+      return { geom, filters, sortFilters }
     },
     /**
      * If the page is -1, the last page will be set
@@ -426,15 +428,15 @@ export default {
         query = this.pagination.query
       } else {
         this.lastQueryParams = this.getFeaturesQueryParams()
-        const { geom, filters } = this.lastQueryParams
-        query = layerFeaturesQuery(this.layer, geom, filters)
+        const { geom, filters, sortFilters } = this.lastQueryParams
+        query = layerFeaturesQuery(this.layer, geom, filters, undefined, sortFilters)
       }
 
       const baseParams = {
-        VERSION: '1.1.0',
+        VERSION: '1.3.0',
         SERVICE: 'WFS',
         REQUEST: 'GetFeature',
-        OUTPUTFORMAT: 'GeoJSON'
+        OUTPUTFORMAT: 'GeoJSON',
       }
 
       const headers = { 'Content-Type': 'text/xml' }
