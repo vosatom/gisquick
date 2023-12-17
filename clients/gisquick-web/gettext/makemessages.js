@@ -4,15 +4,9 @@ let extractor = new GettextExtractor()
 
 extractor
   .createJsParser([
-    JsExtractors.callExpression('[this].$gettext', {
+    JsExtractors.callExpression(['[this].$gettext', '$gettext'], {
       arguments: {
         text: 0
-      }
-    }),
-    JsExtractors.callExpression('[this].$pgettext', {
-      arguments: {
-        context: 0,
-        text: 1
       }
     }),
     JsExtractors.callExpression('[this].$ngettext', {
@@ -21,9 +15,15 @@ extractor
         textPlural: 1,
         context: 3
       }
+    }),
+    JsExtractors.callExpression('[this].$pgettext', {
+      arguments: {
+        text: 1,
+        context: 0
+      }
     })
   ])
-  .parseFilesGlob('./src/**/*.@(js|vue)')
+  .parseFilesGlob('./src/**/*.@(js|ts|vue)')
 
 extractor
   .createHtmlParser([
