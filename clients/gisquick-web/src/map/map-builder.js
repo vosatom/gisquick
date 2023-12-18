@@ -253,6 +253,7 @@ export function createQgisLayer (config) {
 export async function createBaseLayer (layerConfig, projectConfig = {}) {
   const { source, type, provider_type } = layerConfig
   const attributions = layerConfig.attribution ? [createAttribution(layerConfig.attribution)] : null
+  const className = layerConfig.filter ? `ol-layerfilter-${layerConfig.filter}` : undefined
 
   if (type === 'blank') {
     return new ImageLayer({
@@ -261,6 +262,7 @@ export async function createBaseLayer (layerConfig, projectConfig = {}) {
   }
   if (type === 'osm') {
     return new TileLayer({
+      className,
       source: new OSM()
     })
   }
@@ -270,6 +272,7 @@ export async function createBaseLayer (layerConfig, projectConfig = {}) {
   }
   if (type === 'xyz' || source?.type === 'xyz') {
     return new TileLayer({
+      className,
       source: new XYZ({
         url: layerConfig.url,
         attributions
@@ -280,6 +283,7 @@ export async function createBaseLayer (layerConfig, projectConfig = {}) {
     // for cached tiles, check https://stackoverflow.com/questions/71393178/openlayers-tilearcgisrest-vs-xyz
     const { url, ...params } = layerConfig.source
     return new TileLayer({
+      className,
       source: new TileArcGISRest({
         url,
         attributions,
@@ -312,6 +316,7 @@ export async function createBaseLayer (layerConfig, projectConfig = {}) {
       })
     }
     return new TileLayer({
+      className,
       source: olSource,
       extent: layerConfig.extent
     })
@@ -329,6 +334,7 @@ export async function createBaseLayer (layerConfig, projectConfig = {}) {
   } */
   // fallback to render layer by qgis server
   return new ImageLayer({
+    className,
     extent: layerConfig.extent,
     source: new GisquickImageWMS({
       resolutions: layerConfig.resolutions || projectConfig.resolutions,
