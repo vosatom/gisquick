@@ -1,11 +1,11 @@
 
 import GML3 from 'ol/format/GML3'
 
-function OrOperator (filters) {
+export function OrOperator (filters) {
   return '<ogc:Or>' + filters.join('\n') + '</ogc:Or>'
 }
 
-function AndOperator (filters) {
+export function AndOperator (filters) {
   return '<ogc:And>' + filters.join('\n') + '</ogc:And>'
 }
 
@@ -134,7 +134,7 @@ const AttributeFilters = {
 // </ogc:PropertyIsNull>
 // `
 
-export function formatLayerQuery (layer, geom, filters, propertyNames = []) {
+export function formatLayerQuery (layer, geom, filters, propertyNames = [], Operator = AndOperator) {
   const ogcFilters = []
   if (geom) {
     const gmlGeom = new GML3({
@@ -154,7 +154,7 @@ export function formatLayerQuery (layer, geom, filters, propertyNames = []) {
   }
   let rootFilter = ''
   if (ogcFilters.length > 0) {
-    rootFilter = ogcFilters.length > 1 ? AndOperator(ogcFilters) : ogcFilters[0]
+    rootFilter = ogcFilters.length > 1 ? Operator(ogcFilters) : ogcFilters[0]
     rootFilter = `<ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">${rootFilter}</ogc:Filter>`
   }
   // rootFilter = `<ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">${testQuery}</ogc:Filter>`
