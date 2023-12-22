@@ -42,7 +42,8 @@ export default new Vuex.Store({
     activeTool: null,
     showLogin: false,
     baseLayerName: null,
-    location: null
+    location: null,
+    identificationCursor: undefined,
   },
   mutations: {
     app (state, app) {
@@ -107,7 +108,10 @@ export default new Vuex.Store({
     },
     location (state, location) {
       state.location = location
-    }
+    },
+    identificationCursor (state, identificationCursor) {
+      state.identificationCursor = identificationCursor
+    },
   },
   getters: {
     visibleBaseLayer: state => {

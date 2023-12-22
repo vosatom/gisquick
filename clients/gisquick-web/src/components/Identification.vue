@@ -89,25 +89,13 @@ import { ShallowArray } from '@/utils'
 import { formatFeatures } from '@/formatters'
 import { TaskState, watchTask } from '@/tasks'
 import { extend } from 'ol/extent'
+import IdentifyPointer from './IdentifyPointer.vue'
 
 const SelectedStyle = simpleStyle({
   fill: [3, 169, 244, 0.4],
   stroke: [3, 169, 244, 0.9],
   strokeWidth: 3
 })
-
-const IdentifyPointer = {
-  mounted () {
-    const map = this.$map
-    map.getViewport().style.cursor = 'crosshair'
-    const key = map.on('singleclick', evt => this.$emit('click', evt))
-    this.$once('hook:beforeDestroy', () => {
-      unByKey(key)
-      map.getViewport().style.cursor = ''
-    })
-  },
-  render: () => null
-}
 
 export default {
   name: 'identification',

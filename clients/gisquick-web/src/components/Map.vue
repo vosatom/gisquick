@@ -1,5 +1,6 @@
 <template>
   <div class="map-container">
+    <CurrentCursor />
     <div ref="mapEl" class="map"/>
     <app-menu class="app-menu" align="rr;tb,bt">
       <template v-slot:activator="{ toggle }">
@@ -108,12 +109,13 @@ import ScaleLine from '@/components/ol/ScaleLine.vue'
 import MapTools from '@/components/MapTools.vue'
 import AppMenu from '@/components/AppMenu.vue'
 import SearchTool from '@/components/SearchTool.vue'
+import CurrentCursor from '@/components/CurrentCursor.vue'
 
 export default {
   name: 'Map',
   mixins: [Map],
   components: {
-    ContentPanel, BottomToolbar, ScaleLine, MapAttributions, ToolsMenu, MapControl, MapTools, AppMenu, SearchTool
+    ContentPanel, BottomToolbar, ScaleLine, MapAttributions, ToolsMenu, MapControl, MapTools, AppMenu, SearchTool, CurrentCursor
   },
   refs: ['tools'],
   data () {
