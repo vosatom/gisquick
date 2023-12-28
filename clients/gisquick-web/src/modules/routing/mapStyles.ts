@@ -1,13 +1,15 @@
+import type { Feature } from 'ol'
 import { Style, Stroke, Fill, Circle, Icon } from 'ol/style'
 import CircleStyle from 'ol/style/Circle'
 import type { StyleFunction } from 'ol/style/Style'
 
 import { QueryPointType, type QueryPoint } from './store'
 
-import poiIcon from '@/assets/poi.svg?url'
-import poiIconFrom from '@/assets/poi_from.svg?url'
-import poiIconTo from '@/assets/poi_to.svg?url'
-import { hexToRgb } from '@/ui/utils/colors'
+import poiIcon from '@/assets/mnk/poi.png?url'
+import poiIconFrom from '@/assets/mnk/poi_from.png?url'
+import poiIconTo from '@/assets/mnk/poi_to.png?url'
+import poiIconWaypoint from '@/assets/mnk/poi_waypoint.png?url'
+import { cssColor, hexToRgb } from '@/ui/utils/colors'
 
 export const queryPointsStyle: StyleFunction = (feature) => {
   let color = '#000'
@@ -18,7 +20,7 @@ export const queryPointsStyle: StyleFunction = (feature) => {
     })
   }
 
-  let icon = poiIcon
+  let icon = poiIconWaypoint
   if (data.type === QueryPointType.Start) {
     color = 'rgb(19 195 43)'
     icon = poiIconFrom
@@ -39,15 +41,8 @@ export const selectedPathStyle = (color = '#0a58ca') => [
   new Style({
     zIndex: 1,
     stroke: new Stroke({
-      color: 'rgba(255,255,255,1)',
+      color: cssColor(hexToRgb(color, 0.6)),
       width: 10,
-    }),
-  }),
-  new Style({
-    zIndex: 1,
-    stroke: new Stroke({
-      color: cssColor(hexToRgb(color, 1)),
-      width: 8,
     }),
   }),
 ]
@@ -55,8 +50,8 @@ export const selectedPathStyle = (color = '#0a58ca') => [
 export const otherPathStyle = (color = '#000') =>
   new Style({
     stroke: new Stroke({
-      color: cssColor(hexToRgb(color, 0.6)),
-      width: 8,
+      color: cssColor(hexToRgb(color, 0.5)),
+      width: 6,
       lineCap: 'round',
       lineJoin: 'round',
     }),
@@ -104,7 +99,12 @@ export const poiStyle = new Style({
     src: poiIcon,
   }),
 })
-export const pathCursorStyle = poiStyle
+export const pathCursorStyle = new Style({
+  image: new Icon({
+    anchor: [0.3, 1],
+    src: poiIconWaypoint,
+  }),
+})
 
 export const elevationProfileCursorStyle = pathCursorStyle
 
