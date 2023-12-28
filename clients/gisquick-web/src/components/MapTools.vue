@@ -50,7 +50,7 @@ export default {
     return {
       identificationSettings: {
         identificationLayer: '',
-        displayMode: 'both'
+        displayMode: 'info-panel'
       },
       measureSettings: {
         type: 'location',
