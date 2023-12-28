@@ -40,6 +40,9 @@
                   <v-icon name="delete_forever"/>
                 </v-btn>
               </div>
+              <div v-if="location.items.length === 0" class="f-col-ac m-2 my-4 empty-message">
+                <translate>No measurements yet</translate>
+              </div>
             </scroll-area>
           </div>
         </template>
@@ -85,6 +88,9 @@
                 <v-btn class="icon" @click="distance.remove(i)">
                   <v-icon name="delete_forever"/>
                 </v-btn>
+              </div>
+              <div v-if="distance.items.length === 0" class="f-col-ac m-2 my-4 empty-message">
+                <translate>No measurements yet</translate>
               </div>
             </scroll-area>
           </div>
@@ -133,6 +139,9 @@
                 <v-btn class="icon" @click="area.remove(i)">
                   <v-icon name="delete_forever"/>
                 </v-btn>
+              </div>
+              <div v-if="area.items.length === 0" class="f-col-ac m-2 my-4 empty-message">
+                <translate>No measurements yet</translate>
               </div>
             </scroll-area>
           </div>
@@ -456,5 +465,10 @@ export default {
     font-size: 15px;
     padding-top: 6px;
   }
+}
+
+.empty-message {
+  font-size: 18px;
+  opacity: 0.7;
 }
 </style>

@@ -15,6 +15,7 @@ import Collection from 'ol/Collection.js'
 import throttle from 'lodash/throttle'
 import { simpleStyle } from '@/map/styles'
 
+const THROTTLE_INTERVAL = 30
 
 const font = 'bold 13px Calibri,sans-serif'
 
@@ -270,7 +271,7 @@ export function DistanceMeasure (map) {
     base.items.push(base.current)
     evt.feature.set('data', base.current)
     measure(evt.feature)
-    moveListener = base.map.on('pointermove', throttle(() => measure(evt.feature), 30))
+    moveListener = evt.feature.getGeometry().on('change', throttle(() => measure(evt.feature), THROTTLE_INTERVAL))
   })
 
   base.draw.on('drawend', evt => {
@@ -427,7 +428,7 @@ export function AreaMeasure (map) {
     }
     base.items.push(base.current)
     evt.feature.set('data', base.current)
-    moveListener = base.map.on('pointermove', throttle(() => measure(evt.feature), 30))
+    moveListener = evt.feature.getGeometry().on('change', throttle(() => measure(evt.feature), THROTTLE_INTERVAL))
   })
 
   base.draw.on('drawend', evt => {
