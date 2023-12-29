@@ -78,6 +78,12 @@
         @modifyend="nodeModifyEnd"
       />
     </template>
+    
+    <div class="f-row-ac" v-if="selected.length > 0" :title="tr.AddedGeometries"><div class="geometry-editor-count">{{ selected.length }}</div></div>
+
+    <popup-content :open="drawingEnabled && selected.length < 1">
+      <translate class="geometry-editor-help">Geometry can be added by clicking into map</translate>
+    </popup-content>
   </div>
 </template>
 
@@ -94,6 +100,7 @@ import DrawInteraction from '@/components/ol/DrawInteraction.vue'
 import ModifyInteraction from '@/components/ol/ModifyInteraction.vue'
 import { simpleStyle, highlightedStyle } from '@/map/styles'
 import { ShallowObj, ShallowArray } from '@/utils'
+import PopupContent from '@/ui/PopupContent2.vue'
 
 
 const MultiGeomClasses = {
@@ -170,7 +177,7 @@ function NodesHandler (feature) {
 }
 
 export default {
-  components: { VectorLayer, SelectInteraction, DrawInteraction, ModifyInteraction },
+  components: { VectorLayer, SelectInteraction, DrawInteraction, ModifyInteraction, PopupContent },
   props: {
     feature: Object,
     geometryType: String,
@@ -198,6 +205,7 @@ export default {
       return {
         AddGeometry: this.$gettext('Add geometry'),
         NodeTool: this.$gettext('Node tool'),
+        AddedGeometries: this.$gettext('Added geometries'),
       }
     },
     geomType () {
@@ -338,3 +346,28 @@ export default {
   }
 }
 </script>
+
+<style>
+.geometry-editor-help {
+  display: flex;
+  padding: 4px;
+  position: relative;
+  border-radius: 3px;
+  font-size: 14px;
+  white-space: pre-line;
+  background-color: var(--tooltip-bg);
+  color: var(--tooltip-color);
+}
+
+.geometry-editor-count {
+  font-size: 11px;
+  display: inline-block;
+  padding: .3em;
+  border-radius: 50%;
+  min-width: 1.6em;
+  line-height: 1em;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  text-align: center;
+}
+</style>
