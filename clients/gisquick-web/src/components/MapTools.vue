@@ -1,6 +1,6 @@
 <template>
   <div>
-    <portal to="main-panel-top">
+    <portal to="main-panel-top" v-if="activeToolPanelVisible">
       <collapse-transition class="collapsible">
         <div v-if="activeToolPanelVisible" class="f-col">
           <div v-if="showHeader" class="panel-header f-row-ac dark">
@@ -62,6 +62,7 @@ export default {
     ...mapState(['project', 'activeTool']),
     identificationTool () {
       return {
+        type: 'tool',
         name: 'identification',
         title: this.$pgettext('noun', 'Identification'),
         icon: 'identification',
@@ -86,6 +87,7 @@ export default {
     },
     measureTool () {
       return {
+        type: 'tool',
         name: 'measure',
         title: this.$pgettext('noun', 'Measure'),
         icon: 'ruler',
@@ -95,6 +97,7 @@ export default {
     },
     printTool () {
       return {
+        type: 'tool',
         name: 'print',
         title: this.$pgettext('noun', 'Print'),
         icon: 'printer',
@@ -108,6 +111,7 @@ export default {
     attributeTableTool () {
       if (this.mobile) {
         return {
+          type: 'tool',
           name: 'attribute-table',
           title: this.$gettext('Attributes Table'),
           icon: 'attribute-table2',
@@ -116,6 +120,7 @@ export default {
         }
       }
       return {
+        type: 'tool',
         name: 'attribute-table',
         component: {
           render () {

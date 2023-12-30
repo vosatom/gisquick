@@ -7,7 +7,7 @@ export default {
     items: {
       immediate: true,
       handler (items) {
-        this.$menu.setItems(items)
+        this.$menu?.setItems(items)
       }
     }
   },

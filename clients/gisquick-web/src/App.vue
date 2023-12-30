@@ -66,7 +66,7 @@ import { set, get } from 'idb-keyval'
 import IntroPage from '@/IntroPage.vue'
 import ProjectNotFound from '@/ProjectNotFound.vue'
 import DesktopMap from '@/components/Map.vue'
-import MobileMap from '@/components/MobileMap.vue'
+import MobileMap from '@/modules/mnk/MobileMap.vue'
 import LoginDialog from '@/components/LoginDialog.vue'
 import EmbedMap from '@/components/EmbedMap.vue'
 import PopupLayer from '@/ui/PopupLayer.vue'
@@ -228,10 +228,6 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
-}
-body {
-  overscroll-behavior-x: none;
-  touch-action: none;
 }
 </style>
 
