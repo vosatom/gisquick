@@ -168,6 +168,8 @@ export interface LayerList {
   legend_url?: string
   attribution?: Attribution
   relations: Relation[]
+  provider_type?: 'wms' | 'xyz'
+  custom?: any
 }
 
 export interface Relation {
