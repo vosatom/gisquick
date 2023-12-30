@@ -158,52 +158,53 @@
           </div>
         </transition> -->
 
-        <div v-if="mode === 'edit' || mode === 'add'" class="bottom-bar f-row-ac">
-          <portal-target name="mat-toolbar" class="f-grow"/>
-          <v-btn @click="mode = 'view'">
-            <translate>Cancel</translate>
-          </v-btn>
-        </div>
+        <portal to="mobile-bottom-panel" >
+          <div v-if="mode === 'edit' || mode === 'add'" class="bottom-bar f-row-ac">
+            <portal-target name="mat-toolbar" class="f-grow"/>
+            <v-btn @click="mode = 'view'">
+              <translate>Cancel</translate>
+            </v-btn>
+          </div>
 
-        <div v-if="mode === 'view' && layer && pagination" class="bottom-bar f-row-ac px-1">
-          <v-btn
-            class="icon"
-            :disabled="pagination.page === 1"
-            @click="setPage(1)"
-          >
-            <v-icon name="first_page"/>
-          </v-btn>
-          <v-btn
-            class="icon"
-            :disabled="pagination.page === 1"
-            @click="setPage(pagination.page - 1)"
-          >
-            <!-- <v-icon name="arrow-left"/> -->
-            <v-icon name="navigate_before"/>
-          </v-btn>
-          <span v-text="paginationRangeText" class="mx-1 f-grow text-center"/>
-          <v-btn
-            class="icon"
-            :disabled="pagination.page === lastPage"
-            @click="setPage(pagination.page + 1)"
-          >
-            <v-icon name="navigate_next"/>
-          </v-btn>
-          <v-btn
-            class="icon"
-            :disabled="pagination.page === lastPage"
-            @click="setPage(lastPage)"
-          >
-            <v-icon name="last_page"/>
-          </v-btn>
-        </div>
+          <div v-if="mode === 'view' && layer && pagination" class="bottom-bar f-row-ac px-1">
+            <v-btn
+              class="icon"
+              :disabled="pagination.page === 1"
+              @click="setPage(1)"
+            >
+              <v-icon name="first_page"/>
+            </v-btn>
+            <v-btn
+              class="icon"
+              :disabled="pagination.page === 1"
+              @click="setPage(pagination.page - 1)"
+            >
+              <!-- <v-icon name="arrow-left"/> -->
+              <v-icon name="navigate_before"/>
+            </v-btn>
+            <span v-text="paginationRangeText" class="mx-1 f-grow text-center"/>
+            <v-btn
+              class="icon"
+              :disabled="pagination.page === lastPage"
+              @click="setPage(pagination.page + 1)"
+            >
+              <v-icon name="navigate_next"/>
+            </v-btn>
+            <v-btn
+              class="icon"
+              :disabled="pagination.page === lastPage"
+              @click="setPage(lastPage)"
+            >
+              <v-icon name="last_page"/>
+            </v-btn>
+          </div>
+        </portal>
       </div>
     </portal>
     <features-viewer :features="features"/>
     <portal to="right-panel">
       <info-panel
         v-if="showInfoPanel"
-        class="mx-1 mb-2 shadow-2"
         :features="features"
         :layer="layer"
         :selected="infoPanelSelection"
@@ -381,15 +382,9 @@ export default {
 
 <style lang="scss" scoped>
 .attributes-panel {
-  display: grid;
-  grid-template-rows: 1fr auto;
-  // height: calc(100vh - 44px);
-  height: calc(var(--vh, 1vh) * 100 - 44px);
-  // max-height: calc(var(--vh, 1vh) * 100 - 44px);
-  overflow: hidden;
   font-size: 15px;
   .scroll-area {
-    overflow: auto;
+    // overflow: auto;
     min-height: 0;
     grid-area: 1 / 1 / 2 / 2;
     z-index: 1;

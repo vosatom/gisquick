@@ -35,10 +35,10 @@ export default {
     }
   },
   computed: {
-    ...mapState(['project', 'activeTool']),
+    ...mapState(['project', 'activeTool', 'routing']),
     ...mapGetters(['visibleBaseLayer', 'visibleLayers']),
     isLoading () {
-      return this.status.overlays.loading || this.status.baseLayer.loading
+      return this.status.overlays.loading || this.status.baseLayer.loading || this.routing.isLoading
     }
   },
   watch: {
@@ -102,7 +102,16 @@ export default {
     map.ext = {
       visibleAreaPadding: () => {
         const { top, right, bottom, left } = this.$refs.mapViewport.getBoundingClientRect()
-        return [top, window.innerWidth - right, window.innerHeight - bottom, left]
+        let _right = window.innerWidth - right
+        let _bottom = window.innerHeight - bottom
+        if (this.$refs.mobileMapViewport) {
+          if (window.innerWidth > 501) {
+            _right = window.innerWidth / 2
+          } else {
+            _bottom = window.innerHeight - bottom + this.$refs.mobileMapViewport.scrollTop + 70
+          }
+        }
+        return [top, _right, _bottom, left]
       },
       visibleAreaExtent: () => {
         const { top, right, bottom, left } = this.$refs.mapViewport.getBoundingClientRect()

@@ -167,10 +167,6 @@ export default {
   border: 1px solid #aaa;
   background-color: #fff;
   overflow: hidden;
-  @media (max-width: 500px) {
-    width: calc(100vw - 26px);
-    max-width: calc(100vw - 26px);
-  }
   @media (min-width: 501px) {
     .generic-infopanel, .edit-form {
       width: 400px;
@@ -232,6 +228,14 @@ export default {
       border-top: 1px solid #bbb;
       align-self: end;
     }
+  }
+}
+
+
+@media (max-width: 500px) {
+  .info-panel {
+    box-shadow: none;
+    border-radius: 0;
   }
 }
 </style>

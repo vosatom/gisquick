@@ -75,7 +75,11 @@ export default {
       border-width: 0 0 1px 0;
       &[disabled] {
         // background-color: #EAEAEA;
-        border-style: dashed;
+        border-style: none;
+
+        .toggle {
+          opacity: 0.5;
+        }
       }
     }
   }
