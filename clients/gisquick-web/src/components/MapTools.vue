@@ -16,7 +16,7 @@
               </v-btn>
             </div>
           </div>
-          <portal-target name="main-panel" transition="switch-transition"/>
+          <portal-target name="main-panel"/>
         </div>
       </collapse-transition>
     </portal>

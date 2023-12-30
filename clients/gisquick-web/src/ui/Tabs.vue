@@ -55,8 +55,6 @@ export default {
         this.animation = true
 
         if (this.heightTransition) {
-          const sTab = this.$refs.swiper.children[prev + 1]
-          this.height = sTab.clientHeight + 'px'
           // this.$refs.swiper.style.height = sTab.clientHeight + 'px'
         }
       }
@@ -68,23 +66,6 @@ export default {
     this.placeholderVisible = true
   },
   methods: {
-    onTransitionStart (e) {
-      if (this.heightTransition) {
-        const height = this.$refs.swiper.children[this.index + 1].children[0]?.clientHeight ?? 0
-        this.height = height + 'px'
-      }
-    },
-    onTransitionEnd (e) {
-      if (e.propertyName === 'transform') {
-        this.visible = this.items.map((item, i) => i === this.index)
-        this.transform = -1
-        this.animation = false
-        this.placeholderVisible = true
-        if (this.heightTransition) {
-          this.height = ''
-        }
-      }
-    },
     swipeHandler (dir, e) {
       if (dir === 'right' && this.index > 0) {
         this.$emit('input', this.items[this.index - 1].key)
