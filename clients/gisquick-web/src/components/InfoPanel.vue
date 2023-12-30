@@ -33,7 +33,7 @@
 
     <div class="content-layout">
       <scroll-area>
-        <switch-transition>
+        <div>
           <feature-editor
             v-if="editMode"
             class="edit-form"
@@ -53,7 +53,7 @@
             :layer="layer"
             :project="$store.state.project.config"
           />
-        </switch-transition>
+        </div>
       </scroll-area>
 
       <div class="toolbar tools dark f-row-ac">
@@ -72,7 +72,6 @@
       <portal-target
         name="infopanel-tool"
         class="toolbar-portal toolbar left"
-        transition="collapse-transition"
       />
     </div>
   </div>
