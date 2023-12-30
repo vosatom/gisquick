@@ -5,6 +5,13 @@ import type { App, AttributeTable, Location, Project, User } from './interfaces'
 
 export const baseUseStore = () => untypedStore
 
+export interface GlobalQuery {
+  PROJECT?: string
+  features?: string
+  activetab?: string
+  tool?: string
+}
+
 export interface GlobalState {
   app: App
   user: User

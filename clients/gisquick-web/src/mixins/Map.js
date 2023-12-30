@@ -51,6 +51,10 @@ export default {
       this.$store.commit('visibleLayers', this.queryParams.overlays.split(','))
     }
 
+    if (this.queryParams.activeTab) {
+      this.$store.commit('activeTab', this.queryParams.activeTab)
+    }
+
     const mapConfig = {
       project: config.ows_project,
       baseLayers: this.project.baseLayers.list,

@@ -44,6 +44,8 @@ export default new Vuex.Store({
     baseLayerName: null,
     location: null,
     identificationCursor: undefined,
+
+    activeTab: 'info',
   },
   mutations: {
     app (state, app) {
@@ -111,6 +113,9 @@ export default new Vuex.Store({
     },
     identificationCursor (state, identificationCursor) {
       state.identificationCursor = identificationCursor
+    },
+    activeTab(state, newValue) {
+      state.activeTab = newValue
     },
   },
   getters: {
