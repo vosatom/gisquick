@@ -82,6 +82,16 @@
           <v-btn @click="showEmbed = !showEmbed" :title="tr.Embed">
             <v-icon name="code" />
           </v-btn>
+
+          <div class="f-row-ac gap-2">
+            <v-btn @click="handleLink" :title="tr.Link">
+              <v-icon name="link" />
+            </v-btn>
+
+            <span v-if="copied" style="color: var(--color-green)">
+              <translate>Link copied.</translate>
+            </span>
+          </div>
         </div>
 
         <QRCode :content="featureUrl" v-if="showQRCode" />
@@ -128,6 +138,7 @@ import EmbedCode from '@/modules/embed/EmbedCode.vue'
 import PoiImageGroup from './PoiImageGroup.vue'
 import mapValues from 'lodash/mapValues'
 import { useStore } from '@/store/typed'
+import { useClipboard } from '@vueuse/core'
 
 const { $gettext } = useGettext()
 
@@ -148,6 +159,7 @@ const tr = computed(() => {
     ShowQRCode: $gettext('Show QR code'),
     Embed: $gettext('Embed'),
     Comment: $gettext('Comment'),
+    Link: $gettext('Link'),
   }
 })
 
@@ -229,6 +241,20 @@ watch(
   },
   { immediate: true },
 )
+
+const {
+  copy: copyPermalink,
+  copied,
+  isSupported: isCopySupported,
+} = useClipboard({ copiedDuring: 2500 })
+function handleLink() {
+  if (typeof window === 'undefined') return
+  window.history.replaceState({}, '', featureUrl.value)
+
+  if (isCopySupported) {
+    copyPermalink(featureUrl.value)
+  }
+}
 </script>
 <style lang="scss" scoped>
 .panel {
