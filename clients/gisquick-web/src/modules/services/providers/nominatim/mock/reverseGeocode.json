@@ -1,0 +1,37 @@
+{
+  "type": "FeatureCollection",
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "place_id": 116680696,
+        "osm_type": "relation",
+        "osm_id": 8295016,
+        "place_rank": 30,
+        "category": "leisure",
+        "type": "garden",
+        "importance": 9.99999999995449e-6,
+        "addresstype": "leisure",
+        "name": "",
+        "display_name": "Na Pernikářce, Hanspaulka, Dejvice, Hlavní město Praha, Praha, 160 00, Česko",
+        "address": {
+          "road": "Na Pernikářce",
+          "quarter": "Hanspaulka",
+          "suburb": "Dejvice",
+          "city": "Hlavní město Praha",
+          "ISO3166-2-lvl6": "CZ-10",
+          "state": "Praha",
+          "postcode": "160 00",
+          "country": "Česko",
+          "country_code": "cz"
+        }
+      },
+      "bbox": [14.3667069, 50.1002199, 14.3691066, 50.1023551],
+      "geometry": {
+        "type": "Point",
+        "coordinates": [14.368381548849953, 50.1013029]
+      }
+    }
+  ]
+}

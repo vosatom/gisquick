@@ -1,0 +1,54 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [14.381354, 50.106934]
+      },
+      "properties": {
+        "country_code": "cz",
+        "housenumber": "2658/2",
+        "street": "Hanzelkova",
+        "country": "Czechia",
+        "datasource": {
+          "sourcename": "openaddresses",
+          "attribution": "© OpenAddresses contributors",
+          "license": "BSD-3-Clause License"
+        },
+        "postcode": "16000",
+        "state": "Prague",
+        "city": "Prague",
+        "suburb": "Podhoí",
+        "lon": 14.381354,
+        "lat": 50.106934,
+        "distance": 89.36217170871579,
+        "result_type": "building",
+        "formatted": "Hanzelkova 2658/2, 160 00 Prague, Czechia",
+        "address_line1": "Hanzelkova 2658/2",
+        "address_line2": "160 00 Prague, Czechia",
+        "timezone": {
+          "name": "Europe/Prague",
+          "offset_STD": "+01:00",
+          "offset_STD_seconds": 3600,
+          "offset_DST": "+02:00",
+          "offset_DST_seconds": 7200,
+          "abbreviation_STD": "CET",
+          "abbreviation_DST": "CEST"
+        },
+        "plus_code": "9F2P494J+QG",
+        "plus_code_short": "494J+QG Prague, Czechia",
+        "rank": {
+          "popularity": 7.266849395645285
+        },
+        "place_id": "51c765dcd440c32c40594d6a6803b00d4940c00203e2034b6f70656e6164647265737365733a616464726573733a637a2f636f756e747279776964652d6164647265737365732d636f756e7472792e6373763a36313032343033386135363465363561"
+      }
+    }
+  ],
+  "query": {
+    "lat": 50.1061499219648,
+    "lon": 14.381628869666873,
+    "plus_code": "9F2P494J+FM"
+  }
+}

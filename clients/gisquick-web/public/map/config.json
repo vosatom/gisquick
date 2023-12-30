@@ -1,0 +1,153 @@
+{
+  "$schema": "./schema.json",
+  "languages": [
+    {
+      "id": "en",
+      "code": "en-us",
+      "name": "English"
+    },
+    {
+      "id": "cs-cz",
+      "code": "cs-cz",
+      "name": "Čeština"
+    },
+    {
+      "id": "sk",
+      "code": "sk-sk",
+      "name": "Slovenčina"
+    }
+  ],
+  "providers": {
+    "wfs": {
+      "id": "wfs",
+      "label": "Gisquick project",
+      "features": { "autocomplete": {}, "search": {} }
+    },
+    "graphhopper": {
+      "id": "graphhopper",
+      "label": "Graphhopper",
+      "features": { "route": {}, "isoline": {} }
+    },
+    "here": {
+      "id": "here",
+      "label": "Here",
+      "features": { "autocomplete": {}, "search": {}, "reverseGeocode": {} }
+    },
+    "geoapify": {
+      "id": "geoapify",
+      "label": "Geoapify",
+      "features": { "autocomplete": {}, "reverseGeocode": {}, "search": {} }
+    },
+    "cyclestreets": {
+      "id": "cyclestreets",
+      "label": "Cyclestreets",
+      "features": { "route": {} }
+    },
+    "osrm": {
+      "id": "osrm",
+      "label": "OSRM",
+      "features": { "route": {} }
+    },
+    "nominatim": {
+      "id": "nominatim",
+      "label": "Nominatim",
+      "features": { "autocomplete": {}, "reverseGeocode": {} }
+    },
+    "valhalla": {
+      "id": "valhalla",
+      "label": "Valhalla",
+      "features": { "route": {}, "isoline": {} }
+    },
+    "cusdis": {
+      "id": "cusdis",
+      "label": "Cusdis",
+      "features": { "comments": {} }
+    }
+  },
+  "features": {
+    "route": {
+      "id": "route",
+      "label": "Route",
+      "settings": [
+        {
+          "id": "alternatives",
+          "type": "boolean",
+          "label": "Alternatives",
+          "description": ""
+        },
+        {
+          "id": "autoUpdate",
+          "type": "boolean",
+          "label": "Auto update",
+          "description": ""
+        },
+        {
+          "id": "elevation",
+          "type": "boolean",
+          "label": "Elevation",
+          "description": ""
+        },
+        {
+          "id": "instructions",
+          "type": "boolean",
+          "label": "Instructions",
+          "description": ""
+        },
+        {
+          "id": "instructionsSigns",
+          "type": "boolean",
+          "label": "Instructions signs"
+        },
+        { "id": "roundtrip", "type": "boolean", "label": "Roundtrip" },
+        {
+          "id": "details",
+          "type": "select",
+          "label": "Details",
+          "description": "",
+          "props": {
+            "items": [{ "id": "road_class", "label": "Road class" }],
+            "multiple": true,
+            "placeholder": "None"
+          }
+        }
+      ]
+    },
+    "autocomplete": {
+      "id": "autocomplete",
+      "label": "Autocomplete",
+      "settings": [
+        { "id": "autoUpdate", "type": "boolean", "label": "Auto update" },
+        {
+          "id": "biasToMapView",
+          "type": "boolean",
+          "label": "Bias results to current map view"
+        }
+      ]
+    },
+    "search": {
+      "id": "search",
+      "label": "Search",
+      "multipleProviders": true,
+      "settings": [
+        { "id": "autoUpdate", "type": "boolean", "label": "Auto update" },
+        {
+          "id": "biasToMapView",
+          "type": "boolean",
+          "label": "Bias results to current map view"
+        }
+      ]
+    },
+    "isoline": {
+      "id": "isoline",
+      "label": "Isoline"
+    },
+    "reverseGeocode": {
+      "id": "reverseGeocode",
+      "label": "Reverse geocoding"
+    },
+    "comments": {
+      "id": "comments",
+      "label": "Comments"
+    }
+  }
+}

@@ -1,0 +1,322 @@
+{
+  "items": [
+    {
+      "title": "Strahovský Klášter",
+      "id": "here:pds:place:203u2fhz-4a354ecf87c4409e9626f723366b06af",
+      "resultType": "place",
+      "address": {
+        "label": "Strahovský Klášter, Strahovské nádvoří 132/1, 118 00 Praha, Česko"
+      },
+      "position": {
+        "lat": 50.08671,
+        "lng": 14.38967
+      },
+      "access": [
+        {
+          "lat": 50.08679,
+          "lng": 14.3895
+        }
+      ],
+      "distance": 4003,
+      "categories": [
+        {
+          "id": "300-3200-0030",
+          "name": "Kostel/chrám",
+          "primary": true
+        },
+        {
+          "id": "300-3000-0023",
+          "name": "Turistická atrakce"
+        },
+        {
+          "id": "300-3000-0024",
+          "name": "Galerie"
+        },
+        {
+          "id": "300-3000-0025",
+          "name": "Historická pamětihodnost"
+        },
+        {
+          "id": "300-3100-0028",
+          "name": "Muzeum historie"
+        },
+        {
+          "id": "300-3200-0000",
+          "name": "Náboženské místo"
+        },
+        {
+          "id": "700-7400-0133",
+          "name": "Cestovní kancelář a prodej jízdenek"
+        },
+        {
+          "id": "800-8300-0175",
+          "name": "Knihovna"
+        },
+        {
+          "id": "900-9300-0221",
+          "name": "Bytový dům"
+        }
+      ],
+      "references": [
+        {
+          "supplier": {
+            "id": "core"
+          },
+          "id": "1001051172"
+        },
+        {
+          "supplier": {
+            "id": "core"
+          },
+          "id": "545981479"
+        },
+        {
+          "supplier": {
+            "id": "core"
+          },
+          "id": "801804094"
+        },
+        {
+          "supplier": {
+            "id": "tripadvisor"
+          },
+          "id": "313662"
+        }
+      ],
+      "highlights": {
+        "title": [
+          {
+            "start": 0,
+            "end": 8
+          }
+        ],
+        "address": {
+          "label": [
+            {
+              "start": 0,
+              "end": 8
+            }
+          ]
+        }
+      }
+    },
+    {
+      "title": "Strahovska knihovna",
+      "id": "here:pds:place:203u2fhz-1a0da68d469847389f9624ffd8c3e5e7",
+      "resultType": "place",
+      "address": {
+        "label": "Strahovska knihovna, Strahovské nádvoří 132/1, 118 00 Praha, Česko"
+      },
+      "position": {
+        "lat": 50.08671,
+        "lng": 14.38967
+      },
+      "access": [
+        {
+          "lat": 50.08679,
+          "lng": 14.3895
+        }
+      ],
+      "distance": 4003,
+      "categories": [
+        {
+          "id": "800-8300-0175",
+          "name": "Knihovna",
+          "primary": true
+        },
+        {
+          "id": "300-3000-0023",
+          "name": "Turistická atrakce"
+        },
+        {
+          "id": "300-3000-0024",
+          "name": "Galerie"
+        },
+        {
+          "id": "300-3000-0025",
+          "name": "Historická pamětihodnost"
+        },
+        {
+          "id": "300-3100-0000",
+          "name": "Muzeum"
+        }
+      ],
+      "references": [
+        {
+          "supplier": {
+            "id": "core"
+          },
+          "id": "1004989762"
+        },
+        {
+          "supplier": {
+            "id": "yelp"
+          },
+          "id": "wZ-XLoMggVFHikUKRMGOIQ"
+        }
+      ],
+      "highlights": {
+        "title": [
+          {
+            "start": 0,
+            "end": 8
+          }
+        ],
+        "address": {
+          "label": [
+            {
+              "start": 0,
+              "end": 8
+            }
+          ]
+        }
+      }
+    },
+    {
+      "title": "Klášterní pivovar Strahov (Strahovský klášterní pivovar)",
+      "id": "here:pds:place:203u2fhz-36f8b5a0e01e41508fdac40f30562fc5",
+      "resultType": "place",
+      "address": {
+        "label": "Klášterní pivovar Strahov, Strahovské nádvoří 301/10, 118 00 Praha, Česko"
+      },
+      "position": {
+        "lat": 50.08688,
+        "lng": 14.38851
+      },
+      "access": [
+        {
+          "lat": 50.08667,
+          "lng": 14.3886
+        }
+      ],
+      "distance": 4048,
+      "categories": [
+        {
+          "id": "100-1000-0000",
+          "name": "Restaurace",
+          "primary": true
+        },
+        {
+          "id": "100-1000-0001",
+          "name": "Neformální restaurace"
+        },
+        {
+          "id": "200-2000-0011",
+          "name": "Bar nebo hospoda"
+        },
+        {
+          "id": "300-3000-0023",
+          "name": "Turistická atrakce"
+        },
+        {
+          "id": "300-3000-0350",
+          "name": "Pivovar"
+        }
+      ],
+      "references": [
+        {
+          "supplier": {
+            "id": "core"
+          },
+          "id": "998260125"
+        },
+        {
+          "supplier": {
+            "id": "tripadvisor"
+          },
+          "id": "2309248"
+        },
+        {
+          "supplier": {
+            "id": "tripadvisor"
+          },
+          "id": "634219"
+        },
+        {
+          "supplier": {
+            "id": "yelp"
+          },
+          "id": "hEysFeCURww3JdNh4GmXMg"
+        },
+        {
+          "supplier": {
+            "id": "yelp"
+          },
+          "id": "rwdp34YhCYCHmLZzrUYVSw"
+        }
+      ],
+      "highlights": {
+        "title": [
+          {
+            "start": 27,
+            "end": 35
+          }
+        ],
+        "address": {
+          "label": []
+        }
+      }
+    },
+    {
+      "title": "Strahovsky tunel, Praha, Česko",
+      "id": "here:af:street:PPi3qhK5rlfRRcE.dUl5PC",
+      "resultType": "street",
+      "address": {
+        "label": "Strahovský tunel, Praha, Česko"
+      },
+      "position": {
+        "lat": 50.07891,
+        "lng": 14.38883
+      },
+      "distance": 4701,
+      "mapView": {
+        "west": 14.38092,
+        "south": 50.07291,
+        "east": 14.3981,
+        "north": 50.08675
+      },
+      "highlights": {
+        "title": [
+          {
+            "start": 0,
+            "end": 8
+          }
+        ],
+        "address": {
+          "label": []
+        }
+      }
+    },
+    {
+      "title": "Strahovska, 118 00 Praha, Česko",
+      "id": "here:af:street:Rf--hw4e7PczgZbvyNXTQB",
+      "resultType": "street",
+      "address": {
+        "label": "Strahovská, 118 00 Praha, Česko"
+      },
+      "position": {
+        "lat": 50.08272,
+        "lng": 14.39351
+      },
+      "distance": 4161,
+      "mapView": {
+        "west": 14.38733,
+        "south": 50.08073,
+        "east": 14.40056,
+        "north": 50.08661
+      },
+      "highlights": {
+        "title": [
+          {
+            "start": 0,
+            "end": 8
+          }
+        ],
+        "address": {
+          "label": []
+        }
+      }
+    }
+  ],
+  "queryTerms": []
+}

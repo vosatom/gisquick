@@ -1,0 +1,50 @@
+[
+  {
+    "place_id": 115143389,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "way",
+    "osm_id": 10626503,
+    "lat": "50.1028966",
+    "lon": "14.3686125",
+    "category": "highway",
+    "type": "living_street",
+    "place_rank": 26,
+    "importance": 0.10000999999999993,
+    "addresstype": "road",
+    "name": "Na Pernikářce",
+    "display_name": "Na Pernikářce, Hanspaulka, Dejvice, Prague, 160 00, Czechia",
+    "boundingbox": ["50.1024319", "50.1028966", "14.3681153", "14.3686125"]
+  },
+  {
+    "place_id": 115493492,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "way",
+    "osm_id": 490710922,
+    "lat": "50.1019473",
+    "lon": "14.3686503",
+    "category": "highway",
+    "type": "residential",
+    "place_rank": 26,
+    "importance": 0.10000999999999993,
+    "addresstype": "road",
+    "name": "Na Pernikářce",
+    "display_name": "Na Pernikářce, Hanspaulka, Dejvice, Prague, 160 00, Czechia",
+    "boundingbox": ["50.1017961", "50.1022499", "14.3683463", "14.3687526"]
+  },
+  {
+    "place_id": 116140744,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "way",
+    "osm_id": 355999437,
+    "lat": "50.0998408",
+    "lon": "14.3709392",
+    "category": "highway",
+    "type": "footway",
+    "place_rank": 27,
+    "importance": 0.07500999999999991,
+    "addresstype": "road",
+    "name": "Na Pernikářce",
+    "display_name": "Na Pernikářce, Hanspaulka, Dejvice, Prague, 160 00, Czechia",
+    "boundingbox": ["50.0997834", "50.1002686", "14.3700062", "14.3710672"]
+  }
+]

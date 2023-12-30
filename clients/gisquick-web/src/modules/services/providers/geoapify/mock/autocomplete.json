@@ -1,0 +1,207 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "datasource": {
+          "sourcename": "openstreetmap",
+          "attribution": "© OpenStreetMap contributors",
+          "license": "Open Database License",
+          "url": "https://www.openstreetmap.org/copyright"
+        },
+        "name": "Dukla – Juliska",
+        "country": "Česko",
+        "country_code": "cz",
+        "state": "Praha",
+        "city": "Hlavní město Praha",
+        "postcode": "160 00",
+        "suburb": "Dejvice",
+        "quarter": "Baba",
+        "street": "Na Šťáhlavce",
+        "lon": 14.3861471,
+        "lat": 50.1100509,
+        "district": "Dejvice",
+        "distance": 235.80514896354748,
+        "formatted": "Dukla – Juliska, Na Šťáhlavce, 160 00 Hlavní město Praha, Česko",
+        "address_line1": "Dukla – Juliska",
+        "address_line2": "Na Šťáhlavce, 160 00 Hlavní město Praha, Česko",
+        "category": "public_transport.bus",
+        "timezone": {
+          "name": "Europe/Prague",
+          "offset_STD": "+01:00",
+          "offset_STD_seconds": 3600,
+          "offset_DST": "+02:00",
+          "offset_DST_seconds": 7200,
+          "abbreviation_STD": "CET",
+          "abbreviation_DST": "CEST"
+        },
+        "plus_code": "9F2P496P+2F",
+        "result_type": "amenity",
+        "rank": {
+          "importance": 0.00000999999999995449,
+          "confidence": 1,
+          "match_type": "full_match"
+        },
+        "place_id": "51f7e39b12b5c52c40599b32dc25160e4940f00103f901e4bcbf7200000000c0020192031144756b6c6120e28093204a756c69736b61"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [14.3861471, 50.1100509]
+      },
+      "bbox": [14.3860971, 50.1100009, 14.3861971, 50.1101009]
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "datasource": {
+          "sourcename": "openstreetmap",
+          "attribution": "© OpenStreetMap contributors",
+          "license": "Open Database License",
+          "url": "https://www.openstreetmap.org/copyright"
+        },
+        "name": "Dukla Praha, Juliska",
+        "country": "Česko",
+        "country_code": "cz",
+        "state": "Praha",
+        "city": "Hlavní město Praha",
+        "postcode": "160 00",
+        "suburb": "Dejvice",
+        "quarter": "Baba",
+        "street": "Na Šťáhlavce",
+        "lon": 14.387421796505599,
+        "lat": 50.11202715,
+        "district": "Dejvice",
+        "distance": 451.23182602827234,
+        "formatted": "Dukla Praha, Juliska, Na Šťáhlavce, 160 00 Hlavní město Praha, Česko",
+        "address_line1": "Dukla Praha, Juliska",
+        "address_line2": "Na Šťáhlavce, 160 00 Hlavní město Praha, Česko",
+        "category": "sport.sports_centre",
+        "timezone": {
+          "name": "Europe/Prague",
+          "offset_STD": "+01:00",
+          "offset_STD_seconds": 3600,
+          "offset_DST": "+02:00",
+          "offset_DST_seconds": 7200,
+          "abbreviation_STD": "CET",
+          "abbreviation_DST": "CEST"
+        },
+        "plus_code": "9F2P496P+RX",
+        "result_type": "amenity",
+        "rank": {
+          "importance": 0.3505019363834119,
+          "confidence": 1,
+          "match_type": "full_match"
+        },
+        "place_id": "518c7f53265cc62c4059cec1d8e7560e4940f00102f901c416f41200000000c0020192031444756b6c612050726168612c204a756c69736b61"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [14.387421796505599, 50.11202715]
+      },
+      "bbox": [14.3858211, 50.1102135, 14.3890571, 50.1137519]
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "datasource": {
+          "sourcename": "openstreetmap",
+          "attribution": "© OpenStreetMap contributors",
+          "license": "Open Database License",
+          "url": "https://www.openstreetmap.org/copyright"
+        },
+        "name": "Pod Juliskou",
+        "country": "Česko",
+        "country_code": "cz",
+        "state": "Praha",
+        "city": "Hlavní město Praha",
+        "postcode": "160 00",
+        "suburb": "Dejvice",
+        "quarter": "Baba",
+        "street": "Pod Juliskou",
+        "lon": 14.3916502,
+        "lat": 50.1102606,
+        "district": "Dejvice",
+        "distance": 610.4793085648264,
+        "formatted": "Pod Juliskou, 160 00 Hlavní město Praha, Česko",
+        "address_line1": "Pod Juliskou",
+        "address_line2": "160 00 Hlavní město Praha, Česko",
+        "timezone": {
+          "name": "Europe/Prague",
+          "offset_STD": "+01:00",
+          "offset_STD_seconds": 3600,
+          "offset_DST": "+02:00",
+          "offset_DST_seconds": 7200,
+          "abbreviation_STD": "CET",
+          "abbreviation_DST": "CEST"
+        },
+        "plus_code": "9F2P496R+4M",
+        "result_type": "street",
+        "rank": {
+          "importance": 0.10000999999999993,
+          "confidence": 1,
+          "match_type": "full_match"
+        },
+        "place_id": "5198f1006086c82c4059c784f3041d0e4940f00102f901c984a10000000000c0020492030c506f64204a756c69736b6f75"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [14.3916502, 50.1102606]
+      },
+      "bbox": [14.3891349, 50.1101491, 14.39432, 50.1104129]
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "datasource": {
+          "sourcename": "openstreetmap",
+          "attribution": "© OpenStreetMap contributors",
+          "license": "Open Database License",
+          "url": "https://www.openstreetmap.org/copyright"
+        },
+        "name": "Bar Juliska",
+        "country": "Německo",
+        "country_code": "de",
+        "state": "Bavorsko",
+        "city": "Řezno",
+        "postcode": "93059",
+        "suburb": "Reinhausen",
+        "street": "Reinhausen",
+        "housenumber": "5",
+        "lon": 12.1039248,
+        "lat": 49.0306929,
+        "district": "Reinhausen",
+        "distance": 203438.83289696637,
+        "formatted": "Bar Juliska, Reinhausen 5, 93059 Řezno, Německo",
+        "address_line1": "Bar Juliska",
+        "address_line2": "Reinhausen 5, 93059 Řezno, Německo",
+        "category": "catering.bar",
+        "timezone": {
+          "name": "Europe/Berlin",
+          "offset_STD": "+01:00",
+          "offset_STD_seconds": 3600,
+          "offset_DST": "+02:00",
+          "offset_DST_seconds": 7200,
+          "abbreviation_STD": "CET",
+          "abbreviation_DST": "CEST"
+        },
+        "plus_code": "8FXJ24J3+7H",
+        "result_type": "amenity",
+        "rank": {
+          "importance": 0.00000999999999995449,
+          "confidence": 1,
+          "match_type": "full_match"
+        },
+        "place_id": "51977ca2a1353528405915dcb4beed834840f00103f901c730552e01000000c0020192030b426172204a756c69736b61"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [12.1039248, 49.0306929]
+      },
+      "bbox": [12.1038748, 49.0306429, 12.1039748, 49.0307429]
+    }
+  ],
+  "query": {
+    "text": "julisk"
+  }
+}

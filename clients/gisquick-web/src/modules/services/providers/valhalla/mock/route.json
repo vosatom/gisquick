@@ -1,0 +1,201 @@
+{
+  "trip": {
+    "locations": [
+      {
+        "type": "break",
+        "lat": 50.108922,
+        "lon": 14.383347,
+        "side_of_street": "left",
+        "original_index": 0
+      },
+      {
+        "type": "break",
+        "lat": 50.101439,
+        "lon": 14.37157,
+        "side_of_street": "left",
+        "original_index": 1
+      }
+    ],
+    "legs": [
+      {
+        "maneuvers": [
+          {
+            "type": 3,
+            "instruction": "Drive northwest on Zengrova.",
+            "verbal_succinct_transition_instruction": "Drive northwest. Then Turn right onto Na Míčánce.",
+            "verbal_pre_transition_instruction": "Drive northwest on Zengrova. Then Turn right onto Na Míčánce.",
+            "verbal_post_transition_instruction": "Continue for 60 meters.",
+            "street_names": ["Zengrova"],
+            "time": 6.833,
+            "length": 0.056,
+            "cost": 7.517,
+            "begin_shape_index": 0,
+            "end_shape_index": 1,
+            "verbal_multi_cue": true,
+            "travel_mode": "drive",
+            "travel_type": "car"
+          },
+          {
+            "type": 10,
+            "instruction": "Turn right onto Na Míčánce.",
+            "verbal_transition_alert_instruction": "Turn right onto Na Míčánce.",
+            "verbal_succinct_transition_instruction": "Turn right.",
+            "verbal_pre_transition_instruction": "Turn right onto Na Míčánce.",
+            "verbal_post_transition_instruction": "Continue for 600 meters.",
+            "street_names": ["Na Míčánce"],
+            "time": 77.632,
+            "length": 0.626,
+            "cost": 106.46,
+            "begin_shape_index": 1,
+            "end_shape_index": 18,
+            "travel_mode": "drive",
+            "travel_type": "car"
+          },
+          {
+            "type": 10,
+            "instruction": "Turn right onto Na Fišerce.",
+            "verbal_transition_alert_instruction": "Turn right onto Na Fišerce.",
+            "verbal_succinct_transition_instruction": "Turn right. Then Turn left onto Na Šťáhlavce.",
+            "verbal_pre_transition_instruction": "Turn right onto Na Fišerce. Then Turn left onto Na Šťáhlavce.",
+            "verbal_post_transition_instruction": "Continue for 30 meters.",
+            "street_names": ["Na Fišerce"],
+            "time": 3.292,
+            "length": 0.03,
+            "cost": 12.44,
+            "begin_shape_index": 18,
+            "end_shape_index": 20,
+            "verbal_multi_cue": true,
+            "travel_mode": "drive",
+            "travel_type": "car"
+          },
+          {
+            "type": 15,
+            "instruction": "Turn left onto Na Šťáhlavce.",
+            "verbal_transition_alert_instruction": "Turn left onto Na Šťáhlavce.",
+            "verbal_succinct_transition_instruction": "Turn left. Then Bear left onto Šárecká.",
+            "verbal_pre_transition_instruction": "Turn left onto Na Šťáhlavce. Then Bear left onto Šárecká.",
+            "verbal_post_transition_instruction": "Continue for 60 meters.",
+            "street_names": ["Na Šťáhlavce"],
+            "time": 5.22,
+            "length": 0.055,
+            "cost": 24.557,
+            "begin_shape_index": 20,
+            "end_shape_index": 23,
+            "verbal_multi_cue": true,
+            "travel_mode": "drive",
+            "travel_type": "car"
+          },
+          {
+            "type": 16,
+            "instruction": "Bear left onto Šárecká.",
+            "verbal_transition_alert_instruction": "Bear left onto Šárecká.",
+            "verbal_succinct_transition_instruction": "Bear left.",
+            "verbal_pre_transition_instruction": "Bear left onto Šárecká.",
+            "verbal_post_transition_instruction": "Continue for 300 meters.",
+            "street_names": ["Šárecká"],
+            "time": 25.563,
+            "length": 0.305,
+            "cost": 51.446,
+            "begin_shape_index": 23,
+            "end_shape_index": 35,
+            "travel_mode": "drive",
+            "travel_type": "car"
+          },
+          {
+            "type": 10,
+            "instruction": "Turn right onto Na Pískách.",
+            "verbal_transition_alert_instruction": "Turn right onto Na Pískách.",
+            "verbal_succinct_transition_instruction": "Turn right.",
+            "verbal_pre_transition_instruction": "Turn right onto Na Pískách.",
+            "verbal_post_transition_instruction": "Continue for 1.5 kilometers.",
+            "street_names": ["Na Pískách"],
+            "time": 118.885,
+            "length": 1.5,
+            "cost": 252.604,
+            "begin_shape_index": 35,
+            "end_shape_index": 98,
+            "travel_mode": "drive",
+            "travel_type": "car"
+          },
+          {
+            "type": 10,
+            "instruction": "Turn right onto Evropská/7.",
+            "verbal_transition_alert_instruction": "Turn right onto Evropská.",
+            "verbal_succinct_transition_instruction": "Turn right.",
+            "verbal_pre_transition_instruction": "Turn right onto Evropská, 7.",
+            "verbal_post_transition_instruction": "Continue for 200 meters.",
+            "street_names": ["Evropská", "7"],
+            "time": 13.804,
+            "length": 0.175,
+            "cost": 30.175,
+            "begin_shape_index": 98,
+            "end_shape_index": 101,
+            "travel_mode": "drive",
+            "travel_type": "car"
+          },
+          {
+            "type": 10,
+            "instruction": "Turn right onto Vilímovská.",
+            "verbal_transition_alert_instruction": "Turn right onto Vilímovská.",
+            "verbal_succinct_transition_instruction": "Turn right.",
+            "verbal_pre_transition_instruction": "Turn right onto Vilímovská.",
+            "verbal_post_transition_instruction": "Continue for 400 meters.",
+            "street_names": ["Vilímovská"],
+            "time": 51.297,
+            "length": 0.411,
+            "cost": 98.07,
+            "begin_shape_index": 101,
+            "end_shape_index": 115,
+            "travel_mode": "drive",
+            "travel_type": "car"
+          },
+          {
+            "type": 6,
+            "instruction": "Your destination is on the left.",
+            "verbal_transition_alert_instruction": "Your destination will be on the left.",
+            "verbal_pre_transition_instruction": "Your destination is on the left.",
+            "time": 0.0,
+            "length": 0.0,
+            "cost": 0.0,
+            "begin_shape_index": 115,
+            "end_shape_index": 115,
+            "travel_mode": "drive",
+            "travel_type": "car"
+          }
+        ],
+        "summary": {
+          "has_time_restrictions": false,
+          "has_toll": false,
+          "has_highway": false,
+          "has_ferry": false,
+          "min_lat": 50.098883,
+          "min_lon": 14.367605,
+          "max_lat": 50.112686,
+          "max_lon": 14.385187,
+          "time": 302.53,
+          "length": 3.16,
+          "cost": 583.27
+        },
+        "shape": "oilq~Aa}{lZaTnd@aLuQsWw`@wO_Ni]yLib@eL}KiGyd@{^kFwAgEGsCf@qDvDwC|FqAvFk@tHNfKtM~dCz@jYmH`MqB`BJjPBnMVlO`@`EfC|LlGnMtI~NfFlIjE~GfW|[nQxPtS`NdYpL~A`AtChBhA~Br@`FsBb[ApGl@tGdEbNjHjUnHpS`KdTrBnDrBnDnIfMxPhSbTxP`ZdOzZhPh[fPnWzNpUfLvDpB|RjK|i@|YhDrAvCrA~HnDdRnEdF`A~F`@lDRjMe@fAGtBWzGkAhJkAjJeApBK~HOdPSdOh@~Mx@b]rC`BVnFv@nJpAvP|CdIzApObGrUpLdVtPbJbIdT~YxU`_@fJhRfI|SxBpHx@zBrAtDt@dAt@b@pA\\p@?~@@zBBbAxRz@`WbH~jBiBPYB}Ee@}HgFiF}FkDuFeJ_QqFkPea@syAaOob@m@cBoOc^}T{`@eEiI"
+      }
+    ],
+    "summary": {
+      "has_time_restrictions": false,
+      "has_toll": false,
+      "has_highway": false,
+      "has_ferry": false,
+      "min_lat": 50.098883,
+      "min_lon": 14.367605,
+      "max_lat": 50.112686,
+      "max_lon": 14.385187,
+      "time": 302.53,
+      "length": 3.16,
+      "cost": 583.27
+    },
+    "status_message": "Found route between points",
+    "status": 0,
+    "units": "kilometers",
+    "language": "en-US"
+  },
+  "id": "valhalla_directions"
+}

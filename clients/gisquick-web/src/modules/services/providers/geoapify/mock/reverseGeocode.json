@@ -1,0 +1,54 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [14.427361, 50.113268]
+      },
+      "properties": {
+        "country_code": "cz",
+        "housenumber": "355",
+        "street": "Povltavská",
+        "country": "Czechia",
+        "datasource": {
+          "sourcename": "openaddresses",
+          "attribution": "© OpenAddresses contributors",
+          "license": "BSD-3-Clause License"
+        },
+        "postcode": "17100",
+        "state": "Prague",
+        "city": "Prague",
+        "suburb": "Troja",
+        "lon": 14.427361,
+        "lat": 50.113268,
+        "distance": 54.61511149759722,
+        "result_type": "building",
+        "formatted": "Povltavská 355, 171 00 Prague, Czechia",
+        "address_line1": "Povltavská 355",
+        "address_line2": "171 00 Prague, Czechia",
+        "timezone": {
+          "name": "Europe/Prague",
+          "offset_STD": "+01:00",
+          "offset_STD_seconds": 3600,
+          "offset_DST": "+02:00",
+          "offset_DST_seconds": 7200,
+          "abbreviation_STD": "CET",
+          "abbreviation_DST": "CEST"
+        },
+        "plus_code": "9F2P4C7G+8W",
+        "plus_code_short": "4C7G+8W Prague, Czechia",
+        "rank": {
+          "popularity": 7.334581728083183
+        },
+        "place_id": "51f52b9d0fcfda2c405977d7d9907f0e4940c00203e2034b6f70656e6164647265737365733a616464726573733a637a2f636f756e747279776964652d6164647265737365732d636f756e7472792e6373763a65303866353536353132653466356565"
+      }
+    }
+  ],
+  "query": {
+    "lat": 50.11279575366757,
+    "lon": 14.4275715254678,
+    "plus_code": "9F2P4C7H+42"
+  }
+}
