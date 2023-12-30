@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import attributeTable from './attribute-table'
+import { transformProject } from '@/transformProject'
 
 Vue.use(Vuex)
 
@@ -54,7 +55,8 @@ export default new Vuex.Store({
     user (state, user) {
       state.user = user
     },
-    project (state, project) {
+    project (state, _project) {
+      const project = transformProject(_project)
       if (!project) {
         state.project = null
         return
