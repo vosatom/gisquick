@@ -90,6 +90,7 @@ import { formatFeatures } from '@/formatters'
 import { TaskState, watchTask } from '@/tasks'
 import { extend } from 'ol/extent'
 import IdentifyPointer from './IdentifyPointer.vue'
+import { debounce } from 'lodash'
 
 const SelectedStyle = simpleStyle({
   fill: [3, 169, 244, 0.4],
@@ -97,28 +98,34 @@ const SelectedStyle = simpleStyle({
   strokeWidth: 3
 })
 
+const defaultDisplayMode = 'info-panel'
+
 export default {
   name: 'identification',
   components: { InfoPanel, FeaturesTable, PointMarker, FeaturesViewer, IdentifyPointer },
+  inject: ['history'],
   props: {
     identificationLayer: {
       type: String,
       default: ''
     },
+    /** 'none' | 'table' | 'info-panel' | 'both' */
     displayMode: {
       type: String,
-      default: 'info-panel'
+      default: defaultDisplayMode
     }
   },
   data () {
     return {
       mapCoords: null,
       layersFeatures: [],
+      features: [],
       selection: null,
       editMode: false,
       tasks: {
         fetchFeatures: TaskState()
-      }
+      },
+      shouldFitToFeatures: true,
     }
   },
   computed: {
@@ -139,6 +146,7 @@ export default {
       return [allVisible].concat(this.queryableLayers)
     },
     displayModes () {
+      // `none` is not listed
       const options = [
         { value: 'table', text: this.$gettext('Table') },
         { value: 'info-panel', text: this.$gettext('Info Panel') },
@@ -179,6 +187,8 @@ export default {
       if (feature) {
         feature.setStyle(SelectedStyle)
       }
+
+      this.updateUrl()
     },
     queryLayers (layers, old) {
       if (this.identificationLayer && !layers.find(l => l.name === this.identificationLayer)) {
@@ -191,6 +201,31 @@ export default {
     }
   },
   methods: {
+    updateUrl() {
+      const parsedUrl = new URL(window.location.href)
+      const params = this.getPermalinkParams()
+      if (!params) return
+
+      if (params.features !== parsedUrl.searchParams.get('features')) {
+        if (params.features) {
+          parsedUrl.searchParams.set('features', params.features)
+        } else {
+          parsedUrl.searchParams.delete('features')
+        }
+      }
+      if (params.selectedFeature !== parsedUrl.searchParams.get('selectedFeature')) {
+        if (params.selectedFeature) {
+          parsedUrl.searchParams.set('selectedFeature', params.selectedFeature)
+        } else {
+          parsedUrl.searchParams.delete('selectedFeature')
+        }
+      }
+
+      const url = parsedUrl.toString()
+      if (window.location.href !== url) {
+        this.history.push(url)
+      }
+    },
     readFeatures (data) {
       const parser = new GeoJSON()
       return parser.readFeatures(data, { featureProjection: this.mapProjection })
@@ -301,22 +336,53 @@ export default {
       const features = [].concat(...res.filter(i => i.value).map(i => i.value))
       return features
     },
-    setFeatures (features) {
+    setFeatures (features, selectedFid) {
       const categorizedFeatures = this.categorize(features)
       const items = this.tableData(categorizedFeatures)
       this.layersFeatures = items
+      this.features = features
+
+      // sort this.features by fid to match order of items (using localeCompare)
+      if (this.features) {
+        this.features.sort((a, b) => a.getId().localeCompare(b.getId()))
+      }
+
       if (items.length) {
-        const selectedLayer = this.selection?.layer
-        const index = selectedLayer ? Math.max(0, items.findIndex(i => i.layer.name === selectedLayer)) : 0
+        let selectedLayer = this.selection?.layer
+        let index = selectedLayer ? Math.max(0, items.findIndex(i => i.layer.name === selectedLayer)) : 0
+        let featureIndex = 0
+
+        if (selectedFid) {
+          const parsedFid = selectedFid.split('.')
+          selectedLayer = parsedFid[0]
+          index = selectedLayer ? Math.max(0, items.findIndex(i => i.layer.name === selectedLayer)) : 0
+          featureIndex = items[index].features.findIndex(f => f.getId() === selectedFid)
+        }
+
         this.selection = {
           layer: items[index].layer.name,
-          featureIndex: 0
+          featureIndex
         }
-        return features
       } else {
         this.selection = null
       }
+
+      if (this.shouldFitToFeatures) {
+        this.fitToFeatures(features)
+        this.shouldFitToFeatures = false
+      }
+
+      return features
     },
+    fitToFeatures: debounce(function fitToFeatures(features) {
+      if (features.length === 1) {
+        this.$map.ext.zoomToFeature(features[0], { duration: 0 })
+      } else if (features.length > 1) {
+        const extents = features.map(f => f.getGeometry().getExtent())
+        const finalExtent = extents.reduce((prev, current) => extend(prev, current), extents[0])
+        this.$map.ext.fitToExtent(finalExtent, { duration: 0 })
+      }
+    }),
     clearResults () {
       this.selection = null
       this.mapCoords = null
@@ -394,27 +460,32 @@ export default {
     },
     getPermalinkParams () {
       if (this.selection) {
-        return {
-          features: this.displayedFeatures[this.selection.featureIndex].getId()
+        const features = this.features.map(f => f.getId())
+        const selectedFeature = this.displayedFeatures[this.selection.featureIndex].getId()
+        const params = {
+          features: features.join(','),
+          selectedFeature: selectedFeature === features[0] ? undefined : selectedFeature,
+          displayMode: this.displayMode !== defaultDisplayMode ? this.displayMode : undefined,
         }
+      
+        return params
       }
     },
     async loadPermalink (params) {
-      const { extent: originalExtent, features: initialFeatureIds } = params
-      if (!initialFeatureIds) return
+      const { extent: originalExtent, features: initialFeatureIds, selectedfeature, displaymode: displayMode } = params
+      this.editMode = false
+      if (!initialFeatureIds) {
+        this.selection = null
+        this.layersFeatures = []
+        return
+      }
+      if (displayMode) {
+        this.$emit('update:displayMode', displayMode)
+      }
       const featuresArray = initialFeatureIds.split(',')
       const tasks = [await this.getFeatureById(featuresArray.join(','))]
       const features = await this.fetchFeatures(tasks)
-      this.setFeatures(features)
-
-      if (originalExtent) return
-      if (features.length === 1) {
-        this.$map.ext.zoomToFeature(features[0], { duration: 0 })
-      } else if (features.length > 1) {
-        const extents = features.map(f => f.getGeometry().getExtent())
-        const finalExtent = extents.reduce((prev, current) => extend(prev, current), extents[0])
-        this.$map.ext.fitToExtent(finalExtent, { duration: 0 })
-      }
+      this.setFeatures(features, selectedfeature)
     }
   }
 }

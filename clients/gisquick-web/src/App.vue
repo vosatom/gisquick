@@ -77,9 +77,10 @@ import projectsHistory from '@/projects-history'
 import Update from '@/mixins/update'
 import { parseColor } from '@/ui/utils/colors'
 import { MutationKey } from '@/modules/routing/store'
+import History from '@/mixins/History'
 
 export default {
-  mixins: [ Update ],
+  mixins: [ Update, History ],
   components: {
     PopupLayer,
     ProjectNotFound,
@@ -199,6 +200,11 @@ export default {
 
     },
     onLogin (user) {
+      const url = this.$map.ext.createPermalink()
+      if (url) {
+        this.history.replace(url)
+      }
+
       this.$store.commit('user', user)
       this.$store.commit('showLogin', false)
       this.loadProject()
