@@ -12,7 +12,7 @@
         <translate>Size</translate>: {{ newFileInfo.size }}
       </span>
 
-      <v-btn class="icon small flat m-0" @click="$emit('reset')">
+      <v-btn class="icon small flat m-0" @click="$emit('reset')" :aria-label="tr.DiscardFile">
         <v-icon name="x"/>
       </v-btn>
     </div>
@@ -25,10 +25,10 @@
         <span class="ext" v-text="link.ext"/>
       </a>
       <div class="tools f-row-ac">
-        <v-btn class="icon small mx-2" @click="download">
+        <v-btn class="icon small mx-2" @click="download" :aria-label="tr.Download">
           <v-icon name="download"/>
         </v-btn>
-        <v-btn class="icon small" :disabled="disabled" @click="$emit('delete')">
+        <v-btn class="icon small" :disabled="disabled" @click="$emit('delete')" :aria-label="tr.RemoveFile">
           <v-icon name="delete_forever"/>
         </v-btn>
       </div>
@@ -56,6 +56,13 @@ export default {
     options: Object
   },
   computed: {
+    tr () {
+      return {
+        DiscardFile: this.$gettext('Discard file'),
+        Download: this.$gettext('Download file'),
+        RemoveFile: this.$gettext('Remove file'),
+      }
+    },
     link () {
       if (this.value) {
         // value can be a function, so it's needed to use toString()

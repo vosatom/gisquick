@@ -39,6 +39,7 @@
             class="edit-form"
             toolbar-target="infopanel-tool"
             :feature="feature"
+            :relationsData="relationsData"
             :layer="layer"
             :project="$store.state.project.config"
             @edit="$emit('edit', $event)"
@@ -48,6 +49,7 @@
             v-else
             :is="formComponent"
             :feature="feature"
+            :relationsData="relationsData"
             :layer="layer"
             :project="$store.state.project.config"
           />
@@ -80,6 +82,7 @@
 import GenericInfopanel from '@/components/GenericInfopanel.vue'
 import FeatureEditor from '@/components/feature-editor/FeatureEditor.vue'
 import { externalComponent } from '@/components-loader'
+import { fetchRelationsData } from './fetchRelationsData'
 
 export default {
   name: 'info-panel',
@@ -90,6 +93,11 @@ export default {
     features: Array,
     layers: Array,
     editMode: Boolean
+  },
+  data() {
+    return {
+      relationsData: null,
+    }
   },
   computed: {
     layersOptions () {
@@ -121,6 +129,20 @@ export default {
       return permissions.update || permissions.delete
     }
   },
+  watch: {
+    feature: {
+      immediate: true,
+      async handler (f) {
+        if (this.layer.relations) {
+          delete f._relationsData
+          this.relationsData = null
+          this.relationsData = await this.fetchRelationsData(this.layer, f)
+        } else {
+          this.relationsData = null
+        }
+      }
+    },
+  },
   methods: {
     setActiveLayer (layer) {
       this.$emit('selection-change', { layer, featureIndex: 0 })
@@ -130,6 +152,9 @@ export default {
     },
     zoomToFeature () {
       this.$map.ext.zoomToFeature(this.feature)
+    },
+    fetchRelationsData (layer, feature) {
+      return fetchRelationsData(this.$http, this.$store.state.project, layer, feature)
     }
   }
 }

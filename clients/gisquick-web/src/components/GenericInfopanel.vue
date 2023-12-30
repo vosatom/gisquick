@@ -48,14 +48,20 @@ import round from 'lodash/round'
 import format from 'date-fns/format'
 import parse from 'date-fns/parse'
 import path from 'path'
-import GeoJSON from 'ol/format/GeoJSON'
 
 import { valueMapItems } from '@/adapters/attributes'
-import { layerFeaturesQuery } from '@/map/featureinfo'
 import { externalComponent } from '@/components-loader'
-import { formatFeatures } from '@/formatters'
-import { ShallowArray } from '@/utils'
 
+function getThumbUrl(src, projectName, service) {
+  if (projectName && service) {
+    const url = new URL('/api/project/media_file/' + projectName, window.location.href)
+    url.searchParams.append('thumbnail', 'true')
+    url.searchParams.append('src', src)
+    url.searchParams.append('provider_id', service?.id)
+    return url.toString()
+  }
+  return src
+}
 
 function isAbsoluteUrl (val) {
   return /(https?:\/\/.*\.)/i.test(val)
@@ -102,23 +108,31 @@ export const ImageWidget = Widget((h, ctx) => {
   ]
 })
 
-export function mediaUrl (project, layer, attr) {
+export function getFileService(attr, services) {
+  return services.find((service) => service.id === attr.config?.provider_id)
+}
+
+export function mediaUrl (project, layer, attr, service) {
   let location = attr.config?.directory || `web/${layer.name}`
-  let baseDir = ''
-  const relativeDepth = attr.config?.relative_depth ?? 0
-  if (relativeDepth) {
-    const parts = location.split('/')
-    baseDir = parts.slice(0, relativeDepth).join('/')
-    location = parts.slice(relativeDepth).join('/')
+  let base = ''
+  if (!service) {
+    let baseDir = ''
+    const relativeDepth = attr.config?.relative_depth ?? 0
+    if (relativeDepth) {
+      const parts = location.split('/')
+      baseDir = parts.slice(0, relativeDepth).join('/')
+      location = parts.slice(relativeDepth).join('/')
+    }
+    base = path.join('/api/project/media_file/', project, baseDir)
   }
   return {
-    base: path.join('/api/project/media/', project, baseDir),
+    base,
     location
   }
 }
 
-export function mediaUrlFormat (project, layer, attr) {
-  const { base } = mediaUrl(project, layer, attr)
+export function mediaUrlFormat (project, layer, attr, service) {
+  const { base } = mediaUrl(project, layer, attr, service)
   return value => path.join(base, value)
 }
 
@@ -135,7 +149,7 @@ export function createImageTableWidget (createUrl) {
           <v-btn class="icon flat m-0">
             <v-icon name="photo" onClick={props.openViewer}/>
             <v-tooltip slot="tooltip" align="ll,rr,c;tt,bb" content-class="tooltip dark image">
-              <img style="width:100%; max-width: 300px; max-height:300px" src={`${url}?thumbnail=true`}/>
+              <img style="width:100%; max-width: 300px; max-height:300px" src={getThumbUrl(url)}/>
             </v-tooltip>
           </v-btn>
           <a class="value ml-2" href={url} target="_blank">{src}</a>
@@ -200,7 +214,7 @@ export function createMediaImageWidget (project, layer, attr) {
       return <span class="value"></span>
     }
     const url = path.join(base, value)
-    const thumbnailUrl = `${url}?thumbnail=true`
+    const thumbnailUrl = getThumbUrl(url)
     const srcset = window.devicePixelRatio > 1 ? `${thumbnailUrl} ${Math.min(2, window.devicePixelRatio)}x` : null
     return [
       <a class="value" href={url} target="_blank">{value}</a>,
@@ -212,17 +226,17 @@ export function createMediaImageWidget (project, layer, attr) {
 const RasterImageExtensions = ['.png', '.jpg', '.jpeg', '.gif', '.tif', '.tiff', '.webp']
 const ImageExtensions = [...RasterImageExtensions, '.svg']
 
-export function createMediaFileWidget (project, layer, attr) {
-  const { base } = mediaUrl(project, layer, attr)
+export function createMediaFileWidget (project, layer, attr, service) {
+  const { base } = mediaUrl(project, layer, attr, service)
   return Widget((h, ctx) => {
     const { value } = ctx.props
     if (!value) {
       return <span class="value"></span>
     }
-    const url = path.join(base, value)
+    const url = base ? path.join(base, value) : value
     const ext = path.extname(value).toLowerCase()
     if (ImageExtensions.includes(ext)) {
-      const thumbnailUrl = RasterImageExtensions.includes(ext) ? `${url}?thumbnail=true` : url
+      const thumbnailUrl = RasterImageExtensions.includes(ext) ? getThumbUrl(url, project.name, service) : url
       const srcset = window.devicePixelRatio > 1 ? `${thumbnailUrl} ${Math.min(2, window.devicePixelRatio)}x` : null
       return [
         <a class="value" href={url} target="_blank">{value}</a>,
@@ -242,7 +256,7 @@ export function createMediaFileTableWidget (createUrl) {
     const url = createUrl ? createUrl(src) : src
     const ext = path.extname(src).toLowerCase()
     if (ImageExtensions.includes(ext)) {
-      const thumbnailUrl = RasterImageExtensions.includes(ext) ? `${url}?thumbnail=true` : url
+      const thumbnailUrl = RasterImageExtensions.includes(ext) ? getThumbUrl(url) : url
       return <v-image class="image" src={url} scopedSlots={{
         default: props => (
           <div class="f-row-ac">
@@ -271,11 +285,11 @@ const GenericInfoPanel = {
   props: {
     feature: Object,
     layer: Object,
-    project: Object
+    project: Object,
+    relationsData: Object
   },
   data () {
     return {
-      relationsData: null,
       expanded: {}
     }
   },
@@ -307,7 +321,8 @@ const GenericInfoPanel = {
         } else if (attr.widget === 'Image') {
           return ImageWidget
         } else if (attr.widget === 'MediaFile') {
-          return createMediaFileWidget(this.project.name, this.layer, attr)
+          const service = getFileService(attr, this.project.storage)
+          return createMediaFileWidget(this.project.name, this.layer, attr, service)
         } else if (attr.widget === 'MediaImage') {
           return createMediaImageWidget(this.project.name, this.layer, attr)
         }
@@ -357,15 +372,6 @@ const GenericInfoPanel = {
     }
   },
   watch: {
-    feature: {
-      immediate: true,
-      async handler (f) {
-        this.relationsData = null
-        if (this.layer.relations) {
-          this.relationsData = await this.fetchRelationsData(this.layer, f)
-        }
-      }
-    },
     layer: {
       immediate: true,
       handler () {
@@ -377,44 +383,6 @@ const GenericInfoPanel = {
       }
     }
   },
-  methods: {
-    async fetchRelationsData (layer, feature) {
-      if (feature._relationsData) {
-        return feature._relationsData
-      }
-      const mapProjection = this.$map.getView().getProjection().getCode()
-      const tasks = layer.relations.map(async rel => {
-        const filters = rel.referencing_fields.map((field, i) => ({
-          attribute: field,
-          operator: '=',
-          value: feature.get(rel.referenced_fields[i])
-        }))
-        const query = layerFeaturesQuery(rel.referencing_layer, null, filters)
-        const params = {
-          'VERSION': '1.1.0',
-          'SERVICE': 'WFS',
-          'REQUEST': 'GetFeature',
-          'OUTPUTFORMAT': 'GeoJSON',
-          'MAXFEATURES': 100
-        }
-        const headers = { 'Content-Type': 'text/xml' }
-        const { data } = await this.$http.post(this.project.ows_url, query, { params, headers })
-        const parser = new GeoJSON()
-        const features = parser.readFeatures(data, { featureProjection: mapProjection })
-        formatFeatures(this.$store.state.project, rel.referencing_layer, features)
-        return ShallowArray(features)
-        // return features
-      })
-      const results = await Promise.all(tasks)
-      let relationsData = {}
-      layer.relations.map((r, i) => {
-        relationsData[r.name] = results[i]
-      })
-      // relationsData = Object.freeze(relationsData)
-      feature._relationsData = relationsData
-      return relationsData
-    }
-  }
 }
 export default GenericInfoPanel
 </script>

@@ -42,7 +42,7 @@ export function wfsTransaction (owsUrl, layername, { inserts = [], updates = [],
               // reject(new Error('Data update error'))
             }
           })
-        resolve()
+        resolve(respXML)
       })
       .catch(err => {
         if (err.response) {
