@@ -102,6 +102,18 @@ export interface ProjectConfig {
   zoom_extent: number[]
 
   description: string
+  bookmarks: Record<string, Record<string, Bookmark>>
+}
+
+export interface Bookmark {
+  id: string
+  name: string
+  /** Rotation in degrees */
+  rotation: number
+  /** Extent in project's projection */
+  extent: number[]
+  /** Users content */
+  content?: string
 }
 
 export interface Topic {
