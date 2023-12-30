@@ -49,8 +49,7 @@
             :active="activeTool === 'attribute-table' && attributeTable.layer === item"
             class="icon flat small"
             :color="activeTool === 'attribute-table' && attributeTable.layer === item ? 'primary' : ''"
-            :disabled="!item.visible && item.drawing_order > -1"
-            @click="showAttributesTable(item)"
+            @click="toggleAttributesTable(item, group)"
           >
             <v-icon name="attribute-table" size="12"/>
           </v-btn>
@@ -196,9 +195,18 @@ export default {
     groupContentAttributes (item) {
       return { class: { disabled: !item.visible } }
     },
-    showAttributesTable (layer) {
-      this.$store.commit('attributeTable/layer', layer)
-      this.$store.commit('activeTool', 'attribute-table')
+    toggleAttributesTable (layer, group) {
+      if (!layer.visible && layer.drawing_order > -1) {
+        this.setLayerVisibility(layer, group, true)
+      }
+      const isActive = this.activeTool === 'attribute-table' && this.attributeTable.layer === layer
+      if (isActive) {
+        // this.$store.commit('attributeTable/layer', null)
+        this.$store.commit('activeTool', null)
+      } else {
+        this.$store.commit('attributeTable/layer', layer)
+        this.$store.commit('activeTool', 'attribute-table')
+      }
     }
   }
 }

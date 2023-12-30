@@ -3,7 +3,7 @@
     class="file-field"
     :class="{focused}"
     :label="label"
-    :error="error || ''"
+    :error="error || validationError || ''"
   >
     <input
       ref="input"
@@ -36,6 +36,7 @@
         @update:file="updateNewFile"
         @handle-error="widgetError = true"
         @error="error = $event"
+        :allow-tuning="allowTuning"
       >
         <template v-slot:input>
           <div v-if="uploading" class="upload">
@@ -78,6 +79,16 @@ import Focusable from '@/ui/mixins/Focusable'
 import ImageInput from './ImageInput.vue'
 import SimpleFileInput from './SimpleFileInput.vue'
 
+function stringifyUrl({ url, query, }) {
+  const parsedUrl = new URL(url, window.location.origin)
+  Object.entries(query).forEach(([key, value]) => {
+    if (value !== undefined) {
+      parsedUrl.searchParams.set(key, String(value))
+    }
+  })
+  return parsedUrl.toString()
+}
+
 export default {
   name: 'MediaFileField',
   mixins: [ Focusable ],
@@ -90,7 +101,11 @@ export default {
     initial: String,
     value: [String, Function],
     disabled: Boolean,
-    options: Object
+    options: Object,
+    allowTuning: Boolean,
+    uploadUrl: String,
+    service: [Object, Boolean],
+    validator: Function,
   },
   data () {
     return {
@@ -108,7 +123,10 @@ export default {
     },
     valueUrl () {
       if (this.value && typeof this.value === 'string') {
-        return Path.join(this.url, this.value)
+        if (this.url) {
+          return Path.join(this.url, this.value)
+        }
+        return this.value
       }
       return null
     },
@@ -127,6 +145,9 @@ export default {
         }
       }
       return SimpleFileInput
+    },
+    validationError () {
+      return this.validator ? this.validator(this.value) : ''
     }
   },
   watch: {
@@ -208,7 +229,14 @@ export default {
         this.uploading = true
         try {
           // const { data } = await this.$http.post(this.url, form, {
-          const { data } = await this.$http.post(Path.join(this.url, this.location), form, {
+          const url = stringifyUrl({
+            url: this.uploadUrl,
+            query: {
+              directory: this.location,
+              provider_id: this.service?.id ?? 'local'
+            }
+          })
+          const { data } = await this.$http.post(url, form, {
             onUploadProgress: evt => {
               this.progress = 100 * (evt.loaded / evt.total)
             },
@@ -217,6 +245,11 @@ export default {
               // layer: this.location
             }
           })
+
+          if (this.service) {
+            return this.service.store_url + Path.join(this.location, data.filename)
+          }
+
           return Path.join(this.location, data.filename)
         } catch (err) {
           if (!this.$http.isCancel(err)) {
@@ -250,16 +283,26 @@ export default {
         this.setNewFile(file)
       }
     },
+    delete() {
+      const query = { path: this.initial }
+      if (this.service) {
+        query.provider_type = this.service.type
+        query.service = this.service.id
+      }
+      const url = stringifyUrl({
+        url: this.uploadUrl ?? this.url,
+        query,
+      })
+      this.$http.delete(url)
+    },
     afterFeatureDeleted () {
       if (this.initial) {
-        const url = Path.join(this.url, this.initial)
-        this.$http.delete(url)
+        this.delete()
       }
     },
     async afterFeatureUpdated (f) {
       if (this.initial && this.initial !== this.value) {
-        const url = Path.join(this.url, this.initial)
-        this.$http.delete(url) // not returning promise, so error will not cause save failure
+        this.delete() // not returning promise, so error will not cause save failure
       }
     }
   }

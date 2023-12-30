@@ -13,7 +13,16 @@
         :initial="initialFields"
         :fields="fields"
         :project="project"
+        :feature="feature"
         :status.sync="formStatus"
+        :attributeKeys="layer.info_panel_fields"
+      />
+
+      <generic-edit-form-relations
+        v-if="layer.relations"
+        ref="relationsForm"
+        :relationsData="relationsData"
+        :layer="layer"
       />
       <!-- <v-radio-btn val="loading" v-model="status" label="Loading"/>
       <v-radio-btn val="success" v-model="status" label="Success"/>
@@ -23,6 +32,7 @@
     <portal :to="toolbarTarget">
       <div class="toolbar f-row-ac">
         <v-btn
+          :aria-label="tr.EditGeometry"
           class="icon flat"
           :disabled="!permissions.edit_geom"
           :color="editGeometry ? 'primary' : ''"
@@ -45,7 +55,7 @@
         </v-btn> -->
 
         <v-btn
-          aria-label="Delete object"
+          :aria-label="tr.DeleteObject"
           class="icon"
           :disabled="!permissions.delete || status === 'loading'"
           @click="showConfirmDelete = true"
@@ -56,6 +66,7 @@
           </v-tooltip>
         </v-btn>
         <v-btn
+          :aria-label="tr.DiscardChanges"
           class="icon"
           :disabled="!permissions.update || !isModified || !!status"
           @click="restore"
@@ -66,6 +77,7 @@
           <v-icon color="orange" name="restore"/>
         </v-btn>
         <v-btn
+          :aria-label="tr.SaveChanges"
           class="icon"
           :disabled="!isModified || !!status || formStatus === 'error'"
           @click="save"
@@ -115,40 +127,34 @@
 import omit from 'lodash/omit'
 import isEqual from 'lodash/isEqual'
 import Style from 'ol/style/Style'
-import Feature from 'ol/Feature'
-import format from 'date-fns/format'
 
 import { wfsTransaction } from '@/map/wfs'
 import { queuedUpdater } from '@/utils'
 import GeometryEditor from './GeometryEditor.vue'
 import GenericEditForm from './GenericEditForm.vue'
 import ProgressAction from '@/components/ProgressAction.vue'
+import GenericEditFormRelations from './GenericEditFormRelations.vue'
+
+import { resolveFields } from './resolveFields'
+import { createFeature } from './createFeature'
+import { difference } from './difference'
 
 function getFeatureFields (feature) {
   return feature ? omit(feature.getProperties(), feature.getGeometryName()) : {}
-}
-
-function difference (obj1, obj2) {
-  const diff = {}
-  Object.keys(obj1).forEach(key => {
-    if (!isEqual(obj1[key], obj2[key])) {
-      diff[key] = obj1[key]
-    }
-  })
-  return diff
 }
 
 const HiddenStyle = new Style()
 
 export default {
   name: 'FeatureEditor',
-  components: { GeometryEditor, GenericEditForm, ProgressAction },
-  refs: ['geometryEditor'],
+  components: { GeometryEditor, GenericEditForm, ProgressAction, GenericEditFormRelations },
+  refs: ['geometryEditor', 'relationsForm'],
   props: {
     layer: Object,
     feature: Object,
     project: Object,
-    toolbarTarget: String
+    toolbarTarget: String,
+    relationsData: Object
   },
   data () {
     return {
@@ -162,6 +168,14 @@ export default {
     }
   },
   computed: {
+    tr () {
+      return {
+        EditGeometry: this.$gettext("Edit geometry"),
+        DeleteObject: this.$gettext("Delete object"),
+        DiscardChanges: this.$gettext("Discard changes"),
+        SaveChanges: this.$gettext("Save changes"),
+      }
+    },
     geomType () {
       const geom = this.feature && this.feature.getGeometry()
       if (geom) {
@@ -176,12 +190,16 @@ export default {
     fieldsModified () {
       return !isEqual(this.fields, this.initialFields)
     },
+    relationsModified () {
+      const editor = this.$refs.relationsForm
+      return editor && editor.modified
+    },
     geomModified () {
       const editor = this.$refs.geometryEditor
       return editor && editor.geomModified
     },
     isModified () {
-      return this.fieldsModified || this.geomModified
+      return this.fieldsModified || this.geomModified || this.relationsModified
     },
     editGeometryFeature () {
       return this.editGeometry && this.feature
@@ -224,78 +242,47 @@ export default {
     restore () {
       this.fields = getFeatureFields(this.feature)
       this.editGeometry = false
+
+      const form = this.$refs.relationsForm
+      if (form) {
+        form.restore()
+      }
     },
-    showError (msg) {
-      this.errorMsg = msg || this.$gettext('Error')
+    showError (err) {
+      console.error(err)
+      this.errorMsg = err.message || this.$gettext('Error')
       this.statusController.set('error', 3000)
       this.statusController.set(null, 100)
     },
     async wfsTransaction (operations) {
       this.statusController.set('loading', 1000)
-      try {
-        const { updates = [], deletes = [] } = operations
-        await wfsTransaction(this.project.ows_url, this.layer.name, operations)
-        for (const f of updates) {
-          await this.$refs.editForm.afterFeatureUpdated?.(f)
-        }
-        for (const f of deletes) {
-          await this.$refs.editForm.afterFeatureDeleted?.(f)
-        }
-        await this.statusController.set('success', 1500)
-        this.statusController.set(null, 100)
-        updates.forEach(f => this.$emit('edit', f))
-        deletes.forEach(f => this.$emit('delete', f))
-      } catch (err) {
-        this.showError(err.message)
+      const { updates = [], deletes = [] } = operations
+      await wfsTransaction(this.project.ows_url, this.layer.name, operations)
+      for (const f of updates) {
+        await this.$refs.editForm.afterFeatureUpdated?.(f)
       }
-    },
-    createFeature (fields) {
-      const properties = { ...fields }
-      Object.entries(properties).forEach(([name, value]) => {
-        if (typeof value === 'boolean') {
-          properties[name] = value ? '1' : '0'
-        }
-      })
-      const f = new Feature()
-      f.setProperties(properties)
-      return f
-    },
-    async resolveFields (operation) {
-      const resolvedFields = {}
-      for (const name in this.fields) {
-        let value = this.fields[name]
-        if (typeof value === 'function') {
-          value = await value()
-          this.fields[name] = value // important for MediaFileField for check in afterFeatureUpdated
-        }
-        resolvedFields[name] = value
+      for (const f of deletes) {
+        await this.$refs.editForm.afterFeatureDeleted?.(f)
       }
-      this.layer.attributes.filter(a => a.widget === 'Autofill').forEach(a => {
-        if (a.config.operations?.includes(operation)) {
-          let value
-          if (a.config.value === 'user') {
-            value = this.$store.state.user.username
-          } else if (a.config.value === 'current_datetime') {
-            value = new Date().toISOString()
-          } else if (a.config.value === 'current_date') {
-            value = format(new Date(), a.config?.field_format || 'yyyy-MM-dd')
-          } else {
-            return
-          }
-          resolvedFields[a.name] = value
-        }
-      })
-      return resolvedFields
+      await this.statusController.set('success', 1500)
+      this.statusController.set(null, 100)
+      updates.forEach(f => this.$emit('edit', f))
+      deletes.forEach(f => this.$emit('delete', f))
     },
+
     async save () {
+      const options = { username: this.$store.state.user.username }
+
+      let resolvedFields
       try {
-        var resolvedFields = await this.resolveFields('update')
+        resolvedFields = await resolveFields('update', this.layer, this.fields, options)
       } catch (err) {
-        this.showError(err.message)
+        this.showError(err)
         return
       }
       const changedFields = difference(resolvedFields, this.initialFields)
-      const f = this.createFeature(changedFields)
+      const f = createFeature(changedFields)
+      f._relationsData = this.feature._relationsData
       if (this.geomModified) {
         let newGeom = this.$refs.geometryEditor.getGeometry()
         const mapProjection = this.$map.getView().getProjection().getCode()
@@ -306,13 +293,35 @@ export default {
         f.setGeometry(newGeom)
       }
       f.setId(this.feature.getId())
-      await this.$refs.editForm.beforeFeatureUpdated?.(f)
-      this.wfsTransaction({ updates: [f] })
+
+      try {
+        const relationsModified = this.relationsModified
+        if (relationsModified) {
+          const form = this.$refs.relationsForm
+          
+          this.statusController.set('loading', 1000)
+          await form.resolveRelations(this.feature.getId(), options)
+        }
+
+        if (Object.keys(changedFields).length || this.geomModified) {
+          await this.$refs.editForm.beforeFeatureUpdated?.(f)
+          await this.wfsTransaction({ updates: [f] })
+        } else {
+          await this.statusController.set('success', 1500)
+          this.statusController.set(null, 100)
+        }
+      } catch (err) {
+        this.showError(err)
+      }
     },
     async deleteFeature () {
-      await this.$refs.editForm.beforeFeatureDeleted?.(this.feature)
-      this.wfsTransaction({ deletes: [this.feature] })
-      this.showConfirmDelete = false
+      try {
+        await this.$refs.editForm.beforeFeatureDeleted?.(this.feature)
+        await this.wfsTransaction({ deletes: [this.feature] })
+        this.showConfirmDelete = false
+      } catch (err) {
+        this.showError(err)
+      }
     }
   }
 }

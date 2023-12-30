@@ -210,7 +210,7 @@ import NewFeatureEditor from '@/components/feature-editor/NewFeatureEditor.vue'
 import InfoPanel from '@/components/InfoPanel.vue'
 import {
   DateWidget, ValueMapWidget, BoolWidget, UrlWidget,
-  createImageTableWidget, createMediaFileTableWidget, mediaUrlFormat
+  createImageTableWidget, createMediaFileTableWidget, mediaUrlFormat, getFileService
 } from '@/components/GenericInfopanel.vue'
 import { simpleStyle } from '@/map/styles'
 import { layerFeaturesQuery } from '@/map/featureinfo'
@@ -353,7 +353,8 @@ export default {
         } else if (attr.widget === 'Image') {
           widget = createImageTableWidget()
         } else if (attr.widget === 'MediaFile' || attr.widget === 'MediaImage') {
-          widget = createMediaFileTableWidget(mediaUrlFormat(this.project.config.name, this.layer, attr))
+          const service = getFileService(attr, this.project.config.storage)
+          widget = createMediaFileTableWidget(mediaUrlFormat(this.project.config.name, this.layer, attr, service))
         } else if (attr.type === 'date') { // and also attr.widget === 'DateTime' ?
           widget = DateWidget
         } else if (attr.type === 'bool') {

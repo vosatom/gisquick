@@ -167,6 +167,15 @@ export interface LayerList {
   clientLayer?: boolean
   legend_url?: string
   attribution?: Attribution
+  relations: Relation[]
+}
+
+export interface Relation {
+  name: string
+  referencing_layer: string
+  strength: 0
+  referencing_fields: string[]
+  referenced_fields: string[]
 }
 
 export interface Attribute {
@@ -187,6 +196,9 @@ export interface AttributeConfig {
   Precision?: number
   Step?: number
   Style?: Style
+  operations?: string[]
+  value?: 'user' | 'current_datetime' | 'current_date'
+  field_format?: string
 }
 
 export enum Style {
@@ -218,6 +230,7 @@ export enum Widget {
   TextEdit = 'TextEdit',
   TextField = 'TextField',
   ValueMap = 'ValueMap',
+  Autofill = 'Autofill',
 }
 
 export interface ListLayer {

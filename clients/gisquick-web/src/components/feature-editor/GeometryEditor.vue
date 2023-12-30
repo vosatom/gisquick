@@ -2,6 +2,7 @@
   <div class="f-row">
     <!-- Toolbar UI -->
     <v-btn
+      :aria-label="tr.AddGeometry"
       class="icon flat"
       :color="drawingEnabled ? 'primary' : ''"
       @click="drawingEnabled = !drawingEnabled"
@@ -12,7 +13,8 @@
       <v-icon name="add-geometry"/>
     </v-btn>
     <v-btn
-      v-if="drawGeomType !== 'Point'"
+    v-if="drawGeomType !== 'Point'"
+      :aria-label="tr.NodeTool"
       :disabled="nodeToolDisabled"
       class="icon flat"
       :color="nodeToolEnabled ? 'primary' : ''"
@@ -192,6 +194,12 @@ export default {
     }
   },
   computed: {
+    tr() {
+      return {
+        AddGeometry: this.$gettext('Add geometry'),
+        NodeTool: this.$gettext('Node tool'),
+      }
+    },
     geomType () {
       return this.geometryType || this.feature.getGeometry().getType()
     },

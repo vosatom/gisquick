@@ -11,6 +11,12 @@
         :layer="layer"
         :fields="fields"
         :project="project.config"
+        :attributeKeys="layer.info_panel_fields"
+      />
+      <generic-edit-form-relations
+        v-if="layer.relations"
+        ref="relationsForm"
+        :layer="layer"
       />
     </slot>
     <portal
@@ -24,10 +30,14 @@
         />
         <div class="v-separator"/>
         <v-btn
+          :aria-label="tr.SaveChanges"
           class="icon"
-          :disabled=" status === 'loading'"
+          :disabled="status === 'loading'"
           @click="save"
         >
+          <v-tooltip slot="tooltip">
+            <translate>Save changes</translate>
+          </v-tooltip>
           <v-icon color="green" name="save"/>
         </v-btn>
       </div>
@@ -50,18 +60,20 @@
 
 <script lang="js">
 import { mapState } from 'vuex'
-import Feature from 'ol/Feature'
-import format from 'date-fns/format'
 
 import { queuedUpdater, ShallowObj } from '@/utils'
 import { wfsTransaction } from '@/map/wfs'
 import GeometryEditor from './GeometryEditor.vue'
 import GenericEditForm from './GenericEditForm.vue'
 import ProgressAction from '@/components/ProgressAction.vue'
+import { resolveFields } from './resolveFields'
+import { createFeature } from './createFeature'
+import GenericEditFormRelations from './GenericEditFormRelations.vue'
 
 export default {
   name: 'NewFeatureEditor',
-  components: { GeometryEditor, GenericEditForm, ProgressAction },
+  components: { GeometryEditor, GenericEditForm, ProgressAction, GenericEditFormRelations },
+  refs: ['relationsForm'],
   props: {
     layer: Object,
     toolbarTarget: String
@@ -78,13 +90,22 @@ export default {
   },
   computed: {
     ...mapState(['project']),
+    tr () {
+      return {
+        SaveChanges: this.$gettext("Save changes"),
+      }
+    },
     geomType () {
       return this.layer.wkb_type || {
         POINT: 'MultiPoint',
         LINE: 'MultiLineString',
         POLYGON: 'MultiPolygon'
       }[this.layer.geom_type]
-    }
+    },
+    relationsModified () {
+      const editor = this.$refs.relationsForm
+      return editor?.modified
+    },
   },
   watch: {
     layer: {
@@ -92,8 +113,13 @@ export default {
       handler (layer) {
         const fields = {}
         layer.attributes.forEach(attr => {
-          fields[attr.name] = null
+          let defaultValue = null
+          if (attr.name === 'status_id') {
+            defaultValue = 4
+          }
+          fields[attr.name] = defaultValue
         })
+
         this.fields = fields
       }
     }
@@ -102,57 +128,23 @@ export default {
     this.statusController = queuedUpdater(v => { this.status = v })
   },
   methods: {
-    createFeature (fields) {
-      const properties = { ...fields }
-      Object.entries(properties).forEach(([name, value]) => {
-        if (typeof value === 'boolean') {
-          properties[name] = value ? '1' : '0'
-        }
-      })
-      const f = new Feature()
-      f.setProperties(properties)
-      return f
-    },
-    showError (msg) {
-      this.errorMsg = msg || this.$gettext('Error')
+    showError (err) {
+      console.error(err);
+      this.errorMsg = err.message || this.$gettext('Error')
       this.statusController.set('error', 3000)
       this.statusController.set(null, 100)
     },
-    async resolveFields (operation) {
-      const resolvedFields = {}
-      for (const name in this.fields) {
-        let value = this.fields[name]
-        if (typeof value === 'function') {
-          value = await value()
-          this.fields[name] = value
-        }
-        resolvedFields[name] = value
-      }
-      this.layer.attributes.filter(a => a.widget === 'Autofill').forEach(a => {
-        if (a.config.operations?.includes(operation)) {
-          let value
-          if (a.config.value === 'user') {
-            value = this.$store.state.user.username
-          } else if (a.config.value === 'current_datetime') {
-            value = new Date().toISOString()
-          } else if (a.config.value === 'current_date') {
-            value = format(new Date(), a.config?.field_format || 'yyyy-MM-dd')
-          } else {
-            return
-          }
-          resolvedFields[a.name] = value
-        }
-      })
-      return resolvedFields
-    },
     async save () {
+      const options = { username: this.$store.state.user.username }
+
+      let resolvedFields
       try {
-        var resolvedFields = await this.resolveFields('insert')
+        resolvedFields = await resolveFields('insert', this.layer, this.fields, options)
       } catch (err) {
-        this.showError(err.message)
+        this.showError(err)
         return
       }
-      const f = this.createFeature(resolvedFields)
+      const f = createFeature(resolvedFields)
       const geom = this.references.geometryEditor.getGeometry()
       // Transform to projection of project
       let newGeom = geom
@@ -163,16 +155,30 @@ export default {
       }
       f.setGeometry(newGeom)
 
-      this.statusController.set('loading', 1000)
-      wfsTransaction(this.project.config.ows_url, this.layer.name, { inserts: [f] })
-        .then(async () => {
-          await this.statusController.set('success', 1500)
-          this.statusController.set(null, 100)
-          this.$emit('edit')
-        })
-        .catch(err => {
-          this.showError(err.message)
-        })
+      try {
+        this.statusController.set('loading', 1000)
+        const respXML = await wfsTransaction(this.project.config.ows_url, this.layer.name, { inserts: [f] })
+
+        const fid = respXML?.querySelector('Feature')?.firstElementChild?.getAttribute('fid')
+        if (this.layer.relations) {
+          if (fid) {
+            const relationsModified = this.relationsModified
+            if (relationsModified) {
+              const form = this.$refs.relationsForm
+              if (form) {
+                await form.resolveRelations(fid, options)
+              }
+            }
+          }
+        }
+        
+        this.$emit('edit', { respXML, fid })
+        await this.statusController.set('success', 1500)
+        this.statusController.set(null, 100)
+      } catch (err) {
+        this.showError(err)
+        return
+      }
     }
   }
 }

@@ -4,7 +4,7 @@
       <v-image class="preview" :src="newImage.src"/>
       <div class="detail new f-col">
         <div class="toolbox f-row-ac f-justify-end">
-          <v-btn class="icon small" @click="openEditor(newImage)">
+          <v-btn class="icon small" @click="openEditor(newImage)" v-if="allowTuning" :aria-label="tr.Tune">
             <v-icon name="tune"/>
           </v-btn>
           <v-btn class="icon small" @click="resetImage">
@@ -33,7 +33,7 @@
       <v-image
         class="preview"
         :src="valueUrl"
-        :xsrcset="`${valueUrl}?width=400 400w, ${valueUrl}?width=1200 1200w`"
+        :srcset="`${valueUrl}?width=400 400w, ${valueUrl}?width=1200 1200w`"
         xsizes="(min-width: 600px) 400px, 100vw"
         @error="onImageLoadError"
         @load="onImageLoad"
@@ -60,10 +60,10 @@
               </div>
             </template>
           </v-menu>
-          <v-btn class="icon small" :disabled="disabled || !!error" @click="openEditor()">
+          <v-btn class="icon small" :disabled="disabled || !!error" @click="openEditor()" v-if="allowTuning" :aria-label="tr.Tune">
             <v-icon name="tune"/>
           </v-btn>
-          <v-btn class="icon small" :disabled="disabled" @click="$emit('delete')">
+          <v-btn class="icon small" :disabled="disabled" @click="$emit('delete')" :aria-label="tr.RemoveFile">
             <v-icon name="delete_forever"/>
           </v-btn>
         </div>
@@ -128,11 +128,11 @@
                     </div>
                   </template>
                 </v-menu>
-                <v-btn class="icon small" :color="crop ? 'primary' : ''" @click="toggleCrop">
+                <v-btn class="icon small" :color="crop ? 'primary' : ''" @click="toggleCrop" :aria-label="tr.Crop">
                   <v-icon name="crop"/>
                 </v-btn>
                 <div class="v-separator"/>
-                <v-btn class="icon small" @click="editor.resetView()">
+                <v-btn class="icon small" @click="editor.resetView()" :aria-label="tr.ResetZoom">
                   <v-icon name="magnifier"/>
                 </v-btn>
                 <span class="zoom-text">{{ Math.round(editor.zoom * 100) }}%</span>
@@ -184,7 +184,8 @@ export default {
     disabled: Boolean,
     value: [String, Function],
     valueUrl: String,
-    inputFile: [File, Blob]
+    inputFile: [File, Blob],
+    allowTuning: Boolean
   },
   data () {
     return {
@@ -201,6 +202,14 @@ export default {
     }
   },
   computed: {
+    tr () {
+      return {
+        Tune: this.$gettext('Edit file'),
+        RemoveFile: this.$gettext('Remove file'),
+        Crop: this.$gettext('Crop'),
+        ResetZoom: this.$gettext('Reset zoom'),
+      }
+    },
     empty () {
       return !this.value && !this.inputFile
     },
