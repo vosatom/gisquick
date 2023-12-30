@@ -1,0 +1,629 @@
+{
+  "code": "Ok",
+  "routes": [
+    {
+      "legs": [
+        {
+          "steps": [
+            {
+              "geometry": "{|ypHmhxvAzAcDJQ",
+              "maneuver": {
+                "bearing_after": 131,
+                "bearing_before": 0,
+                "location": [14.383585, 50.109096],
+                "modifier": "right",
+                "type": "depart"
+              },
+              "mode": "cycling",
+              "driving_side": "right",
+              "name": "Zengrova",
+              "intersections": [
+                {
+                  "out": 0,
+                  "entry": [true],
+                  "bearings": [131],
+                  "location": [14.383585, 50.109096]
+                }
+              ],
+              "weight": 35.8,
+              "duration": 35.8,
+              "distance": 86.9
+            },
+            {
+              "geometry": "syypHcnxvANVBF?FApAAfACvDCnCC^",
+              "maneuver": {
+                "bearing_after": 223,
+                "bearing_before": 130,
+                "location": [14.384496, 50.108579],
+                "modifier": "right",
+                "type": "turn"
+              },
+              "mode": "cycling",
+              "driving_side": "right",
+              "name": "Na Klimentce",
+              "intersections": [
+                {
+                  "out": 2,
+                  "in": 3,
+                  "entry": [true, true, true, false],
+                  "bearings": [45, 135, 225, 315],
+                  "location": [14.384496, 50.108579]
+                },
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true],
+                  "bearings": [90, 150, 270],
+                  "location": [14.383894, 50.108486]
+                },
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true],
+                  "bearings": [90, 180, 270],
+                  "location": [14.383531, 50.108495]
+                },
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true],
+                  "bearings": [90, 195, 270],
+                  "location": [14.382611, 50.108523]
+                }
+              ],
+              "weight": 73.4,
+              "duration": 73.4,
+              "distance": 202.3
+            },
+            {
+              "geometry": "oyypHy|wvAL@x@Nd@P\\X^d@P`@JVFPD^Fb@HlD",
+              "maneuver": {
+                "bearing_after": 185,
+                "bearing_before": 272,
+                "location": [14.381732, 50.108558],
+                "modifier": "left",
+                "type": "turn"
+              },
+              "mode": "cycling",
+              "driving_side": "right",
+              "name": "Na Míčánce",
+              "intersections": [
+                {
+                  "out": 2,
+                  "in": 1,
+                  "entry": [true, false, true, true],
+                  "bearings": [15, 90, 180, 285],
+                  "location": [14.381732, 50.108558]
+                },
+                {
+                  "out": 1,
+                  "in": 0,
+                  "entry": [false, true, true],
+                  "bearings": [60, 240, 330],
+                  "location": [14.380936, 50.107546]
+                },
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true],
+                  "bearings": [60, 150, 255],
+                  "location": [14.380847, 50.10751]
+                }
+              ],
+              "weight": 61.9,
+              "duration": 61.9,
+              "distance": 226.3
+            },
+            {
+              "geometry": "erypHwowvAhBCd@AzBOTGx@Qh@Ob@S\\W",
+              "maneuver": {
+                "bearing_after": 177,
+                "bearing_before": 262,
+                "location": [14.37964, 50.107387],
+                "modifier": "left",
+                "type": "end of road"
+              },
+              "mode": "cycling",
+              "driving_side": "right",
+              "name": "Šárecká",
+              "intersections": [
+                {
+                  "out": 2,
+                  "in": 1,
+                  "entry": [true, false, true],
+                  "bearings": [0, 90, 180],
+                  "location": [14.37964, 50.107387]
+                },
+                {
+                  "out": 1,
+                  "in": 0,
+                  "entry": [false, true, true],
+                  "bearings": [0, 180, 270],
+                  "location": [14.379663, 50.106859]
+                },
+                {
+                  "out": 1,
+                  "in": 0,
+                  "entry": [false, true, true],
+                  "bearings": [0, 180, 270],
+                  "location": [14.379672, 50.106668]
+                }
+              ],
+              "weight": 68.8,
+              "duration": 68.8,
+              "distance": 258.2
+            },
+            {
+              "geometry": "}cypHcswvA?VVtE?JF|@HvAVjEP`D",
+              "maneuver": {
+                "bearing_after": 265,
+                "bearing_before": 150,
+                "location": [14.380181, 50.105113],
+                "modifier": "right",
+                "type": "turn"
+              },
+              "mode": "cycling",
+              "driving_side": "right",
+              "name": "Na Hanspaulce",
+              "intersections": [
+                {
+                  "out": 2,
+                  "in": 3,
+                  "entry": [true, true, true, false],
+                  "bearings": [60, 135, 270, 330],
+                  "location": [14.380181, 50.105113]
+                },
+                {
+                  "out": 3,
+                  "in": 1,
+                  "entry": [true, false, true, true],
+                  "bearings": [0, 75, 165, 255],
+                  "location": [14.378928, 50.104985]
+                }
+              ],
+              "weight": 75.3,
+              "duration": 75.3,
+              "distance": 278
+            },
+            {
+              "geometry": "iaypHe{vvAZIXGtCy@t@Ut@Ef@D^N^XV^Vf@V|@BPLfBP|BNtB@PHv@PbAZjABL@J@T",
+              "maneuver": {
+                "bearing_after": 167,
+                "bearing_before": 258,
+                "location": [14.376351, 50.104686],
+                "modifier": "left",
+                "type": "turn"
+              },
+              "mode": "cycling",
+              "driving_side": "right",
+              "name": "Sušická",
+              "intersections": [
+                {
+                  "out": 1,
+                  "in": 0,
+                  "entry": [false, true, true, true],
+                  "bearings": [75, 165, 240, 345],
+                  "location": [14.376351, 50.104686]
+                },
+                {
+                  "out": 1,
+                  "in": 3,
+                  "entry": [true, true, true, false],
+                  "bearings": [105, 165, 285, 345],
+                  "location": [14.376436, 50.104422]
+                },
+                {
+                  "out": 1,
+                  "in": 3,
+                  "entry": [true, true, true, false],
+                  "bearings": [90, 165, 270, 345],
+                  "location": [14.376725, 50.103672]
+                },
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true],
+                  "bearings": [45, 165, 240],
+                  "location": [14.376273, 50.102371]
+                },
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true],
+                  "bearings": [60, 165, 255],
+                  "location": [14.375964, 50.102247]
+                },
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true],
+                  "bearings": [75, 165, 255],
+                  "location": [14.374038, 50.101982]
+                }
+              ],
+              "weight": 129.5,
+              "duration": 129.5,
+              "distance": 538.1
+            },
+            {
+              "geometry": "knxpH_evvA?PBPDNVt@\\|@NX",
+              "maneuver": {
+                "bearing_after": 262,
+                "bearing_before": 255,
+                "location": [14.372804, 50.101663],
+                "modifier": "straight",
+                "type": "notification"
+              },
+              "mode": "pushing bike",
+              "driving_side": "right",
+              "name": "Vilímovská",
+              "intersections": [
+                {
+                  "out": 3,
+                  "in": 1,
+                  "entry": [true, false, true, true],
+                  "bearings": [15, 75, 195, 270],
+                  "location": [14.372804, 50.101663]
+                }
+              ],
+              "weight": 75.8,
+              "duration": 75.8,
+              "distance": 84.3
+            },
+            {
+              "geometry": "{kxpH}~uvA",
+              "maneuver": {
+                "bearing_after": 0,
+                "bearing_before": 227,
+                "location": [14.371829, 50.101263],
+                "modifier": "right",
+                "type": "arrive"
+              },
+              "mode": "pushing bike",
+              "driving_side": "right",
+              "name": "Vilímovská",
+              "intersections": [
+                {
+                  "in": 0,
+                  "entry": [true],
+                  "bearings": [47],
+                  "location": [14.371829, 50.101263]
+                }
+              ],
+              "weight": 0,
+              "duration": 0,
+              "distance": 0
+            }
+          ],
+          "summary": "Sušická, Vilímovská",
+          "weight": 520.5,
+          "duration": 520.5,
+          "distance": 1674.1
+        }
+      ],
+      "weight_name": "duration",
+      "weight": 520.5,
+      "duration": 520.5,
+      "distance": 1674.1
+    },
+    {
+      "legs": [
+        {
+          "steps": [
+            {
+              "geometry": "{|ypHmhxvAzAcDJQ",
+              "maneuver": {
+                "bearing_after": 131,
+                "bearing_before": 0,
+                "location": [14.383585, 50.109096],
+                "modifier": "right",
+                "type": "depart"
+              },
+              "mode": "cycling",
+              "driving_side": "right",
+              "name": "Zengrova",
+              "intersections": [
+                {
+                  "out": 0,
+                  "entry": [true],
+                  "bearings": [131],
+                  "location": [14.383585, 50.109096]
+                }
+              ],
+              "weight": 35.8,
+              "duration": 35.8,
+              "distance": 86.9
+            },
+            {
+              "geometry": "syypHcnxvANVBF?FApAAfACvDCnCC^",
+              "maneuver": {
+                "bearing_after": 223,
+                "bearing_before": 130,
+                "location": [14.384496, 50.108579],
+                "modifier": "right",
+                "type": "turn"
+              },
+              "mode": "cycling",
+              "driving_side": "right",
+              "name": "Na Klimentce",
+              "intersections": [
+                {
+                  "out": 2,
+                  "in": 3,
+                  "entry": [true, true, true, false],
+                  "bearings": [45, 135, 225, 315],
+                  "location": [14.384496, 50.108579]
+                },
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true],
+                  "bearings": [90, 150, 270],
+                  "location": [14.383894, 50.108486]
+                },
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true],
+                  "bearings": [90, 180, 270],
+                  "location": [14.383531, 50.108495]
+                },
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true],
+                  "bearings": [90, 195, 270],
+                  "location": [14.382611, 50.108523]
+                }
+              ],
+              "weight": 73.4,
+              "duration": 73.4,
+              "distance": 202.3
+            },
+            {
+              "geometry": "oyypHy|wvAL@x@Nd@P\\X^d@P`@JVFPD^Fb@HlD",
+              "maneuver": {
+                "bearing_after": 185,
+                "bearing_before": 272,
+                "location": [14.381732, 50.108558],
+                "modifier": "left",
+                "type": "turn"
+              },
+              "mode": "cycling",
+              "driving_side": "right",
+              "name": "Na Míčánce",
+              "intersections": [
+                {
+                  "out": 2,
+                  "in": 1,
+                  "entry": [true, false, true, true],
+                  "bearings": [15, 90, 180, 285],
+                  "location": [14.381732, 50.108558]
+                },
+                {
+                  "out": 1,
+                  "in": 0,
+                  "entry": [false, true, true],
+                  "bearings": [60, 240, 330],
+                  "location": [14.380936, 50.107546]
+                },
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true],
+                  "bearings": [60, 150, 255],
+                  "location": [14.380847, 50.10751]
+                }
+              ],
+              "weight": 61.9,
+              "duration": 61.9,
+              "distance": 226.3
+            },
+            {
+              "geometry": "erypHwowvAhBCd@AzBOTGx@Qh@Ob@S\\W",
+              "maneuver": {
+                "bearing_after": 177,
+                "bearing_before": 262,
+                "location": [14.37964, 50.107387],
+                "modifier": "left",
+                "type": "end of road"
+              },
+              "mode": "cycling",
+              "driving_side": "right",
+              "name": "Šárecká",
+              "intersections": [
+                {
+                  "out": 2,
+                  "in": 1,
+                  "entry": [true, false, true],
+                  "bearings": [0, 90, 180],
+                  "location": [14.37964, 50.107387]
+                },
+                {
+                  "out": 1,
+                  "in": 0,
+                  "entry": [false, true, true],
+                  "bearings": [0, 180, 270],
+                  "location": [14.379663, 50.106859]
+                },
+                {
+                  "out": 1,
+                  "in": 0,
+                  "entry": [false, true, true],
+                  "bearings": [0, 180, 270],
+                  "location": [14.379672, 50.106668]
+                }
+              ],
+              "weight": 68.8,
+              "duration": 68.8,
+              "distance": 258.2
+            },
+            {
+              "geometry": "}cypHcswvA?VVtE?JF|@HvAVjEP`DHXZlGd@|I@N",
+              "maneuver": {
+                "bearing_after": 265,
+                "bearing_before": 150,
+                "location": [14.380181, 50.105113],
+                "modifier": "right",
+                "type": "turn"
+              },
+              "mode": "cycling",
+              "driving_side": "right",
+              "name": "Na Hanspaulce",
+              "intersections": [
+                {
+                  "out": 2,
+                  "in": 3,
+                  "entry": [true, true, true, false],
+                  "bearings": [60, 135, 270, 330],
+                  "location": [14.380181, 50.105113]
+                },
+                {
+                  "out": 3,
+                  "in": 1,
+                  "entry": [true, false, true, true],
+                  "bearings": [0, 75, 165, 255],
+                  "location": [14.378928, 50.104985]
+                },
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true, true],
+                  "bearings": [75, 165, 240, 345],
+                  "location": [14.376351, 50.104686]
+                },
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true, true],
+                  "bearings": [75, 165, 255, 345],
+                  "location": [14.374868, 50.104495]
+                }
+              ],
+              "weight": 133.1,
+              "duration": 133.1,
+              "distance": 519.4
+            },
+            {
+              "geometry": "{~xpHofvvAb@Gb@EJA^?v@Ap@Bn@D`BLH@VDb@Fv@N`@H",
+              "maneuver": {
+                "bearing_after": 171,
+                "bearing_before": 260,
+                "location": [14.373037, 50.104299],
+                "modifier": "left",
+                "type": "end of road"
+              },
+              "mode": "cycling",
+              "driving_side": "right",
+              "name": "Na Pískách",
+              "intersections": [
+                {
+                  "out": 1,
+                  "in": 0,
+                  "entry": [false, true, true],
+                  "bearings": [75, 165, 345],
+                  "location": [14.373037, 50.104299]
+                },
+                {
+                  "out": 1,
+                  "in": 2,
+                  "entry": [true, true, false],
+                  "bearings": [75, 180, 345],
+                  "location": [14.373076, 50.104118]
+                },
+                {
+                  "out": 1,
+                  "in": 0,
+                  "entry": [false, true, true],
+                  "bearings": [0, 180, 270],
+                  "location": [14.373116, 50.103879]
+                },
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true, true],
+                  "bearings": [0, 90, 180, 255],
+                  "location": [14.373134, 50.103444]
+                }
+              ],
+              "weight": 73.5,
+              "duration": 73.5,
+              "distance": 295.2
+            },
+            {
+              "geometry": "knxpH_evvA?PBPDNVt@\\|@NX",
+              "maneuver": {
+                "bearing_after": 262,
+                "bearing_before": 189,
+                "location": [14.372804, 50.101663],
+                "modifier": "right",
+                "type": "turn"
+              },
+              "mode": "pushing bike",
+              "driving_side": "right",
+              "name": "Vilímovská",
+              "intersections": [
+                {
+                  "out": 3,
+                  "in": 0,
+                  "entry": [false, true, true, true],
+                  "bearings": [15, 75, 195, 270],
+                  "location": [14.372804, 50.101663]
+                }
+              ],
+              "weight": 75.8,
+              "duration": 75.8,
+              "distance": 84.3
+            },
+            {
+              "geometry": "{kxpH}~uvA",
+              "maneuver": {
+                "bearing_after": 0,
+                "bearing_before": 227,
+                "location": [14.371829, 50.101263],
+                "modifier": "right",
+                "type": "arrive"
+              },
+              "mode": "pushing bike",
+              "driving_side": "right",
+              "name": "Vilímovská",
+              "intersections": [
+                {
+                  "in": 0,
+                  "entry": [true],
+                  "bearings": [47],
+                  "location": [14.371829, 50.101263]
+                }
+              ],
+              "weight": 0,
+              "duration": 0,
+              "distance": 0
+            }
+          ],
+          "summary": "Na Hanspaulce, Vilímovská",
+          "weight": 522.3,
+          "duration": 522.3,
+          "distance": 1672.6
+        }
+      ],
+      "weight_name": "duration",
+      "weight": 522.3,
+      "duration": 522.3,
+      "distance": 1672.6
+    }
+  ],
+  "waypoints": [
+    {
+      "hint": "droRgHy6EYDNAAAAGAEAAAAAAAAhAAAAW-VjQl6lm0IAAAAAtF0RQc0AAAAYAQAAAAAAACEAAABxEAAA4XnbAKia_AL0eNsA-pn8AgAAPwgDVsWH",
+      "distance": 25.725781114,
+      "name": "Zengrova",
+      "location": [14.383585, 50.109096]
+    },
+    {
+      "hint": "i1IWgLswPoZxAAAAJwAAAIUCAAD-AAAASZFIQYsdgUHbdI9CiyLTQnEAAAAnAAAAhQIAAP4AAABxEAAA9UvbAA98_ALyStsAwHz8AgUALw4DVsWH",
+      "distance": 27.030427063,
+      "name": "Vilímovská",
+      "location": [14.371829, 50.101263]
+    }
+  ]
+}

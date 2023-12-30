@@ -1,0 +1,455 @@
+{
+  "hints": {
+    "visited_nodes.sum": 394,
+    "visited_nodes.average": 394.0
+  },
+  "info": {
+    "copyrights": ["GraphHopper", "OpenStreetMap contributors"],
+    "took": 6
+  },
+  "paths": [
+    {
+      "distance": 2109.046,
+      "weight": 381.804347,
+      "time": 466468,
+      "transfers": 0,
+      "points_encoded": true,
+      "bbox": [14.370006, 50.099783, 14.384496, 50.109094],
+      "points": "y|ypHkhxvAcbq@fBuDjz@LV?DN?AnA?MnLwuBdAPvQd@R?^V?\\f@wj@d@jA?LbAwj@JjDwj@nCE?xBOfpAxBi@fEd@S?ZW?XzFwj@z@`OwuBFX?dA|Rod@b@G?n@G?tAC?bBHf^~ALoK~Ch@f^t@Xnd@fAj@?hAv@vj@b@^?bAvA?fAdBvj@_BrEgpAs@qBvQy@mBgpAyAkC~W",
+      "instructions": [
+        {
+          "distance": 87.169,
+          "heading": 131.41,
+          "sign": 0,
+          "interval": [0, 1],
+          "text": "Pokračujte směr Zengrova",
+          "time": 31381,
+          "street_name": "Zengrova"
+        },
+        {
+          "distance": 202.906,
+          "sign": 2,
+          "interval": [1, 5],
+          "text": "Odbočte vpravo na Na Klimentce",
+          "time": 56258,
+          "street_name": "Na Klimentce"
+        },
+        {
+          "distance": 228.401,
+          "sign": -2,
+          "interval": [5, 12],
+          "text": "Odbočte vlevo na Na Míčánce",
+          "time": 45680,
+          "street_name": "Na Míčánce"
+        },
+        {
+          "distance": 259.343,
+          "sign": -2,
+          "interval": [12, 17],
+          "text": "Odbočte vlevo na Šárecká",
+          "time": 51869,
+          "street_name": "Šárecká"
+        },
+        {
+          "distance": 519.424,
+          "sign": 3,
+          "interval": [17, 21],
+          "text": "Odbočte ostře vpravo na Na Hanspaulce",
+          "time": 103884,
+          "street_name": "Na Hanspaulce"
+        },
+        {
+          "distance": 544.913,
+          "sign": -2,
+          "interval": [21, 33],
+          "text": "Odbočte vlevo na Na Pískách",
+          "time": 108983,
+          "street_name": "Na Pískách"
+        },
+        {
+          "distance": 93.968,
+          "sign": 2,
+          "interval": [33, 34],
+          "text": "Odbočte vpravo na Na Pernikářce",
+          "time": 33829,
+          "street_name": "Na Pernikářce"
+        },
+        {
+          "distance": 172.922,
+          "sign": 3,
+          "interval": [34, 37],
+          "text": "Odbočte ostře vpravo na Vilímovská",
+          "time": 34584,
+          "street_name": "Vilímovská"
+        },
+        {
+          "distance": 0.0,
+          "sign": 4,
+          "last_heading": 46.92524342121442,
+          "interval": [37, 37],
+          "text": "Příjezd do cíle",
+          "time": 0,
+          "street_name": ""
+        }
+      ],
+      "legs": [],
+      "details": {
+        "road_environment": [[0, 37, "road"]],
+        "road_class": [
+          [0, 1, "residential"],
+          [1, 4, "pedestrian"],
+          [4, 12, "residential"],
+          [12, 17, "tertiary"],
+          [17, 21, "residential"],
+          [21, 33, "tertiary"],
+          [33, 34, "footway"],
+          [34, 37, "residential"]
+        ],
+        "max_speed": [
+          [0, 1, 30.0],
+          [1, 4, null],
+          [4, 18, 30.0],
+          [18, 19, 40.0],
+          [19, 22, 50.0],
+          [22, 23, 30.0],
+          [23, 24, 50.0],
+          [24, 25, 40.0],
+          [25, 33, 50.0],
+          [33, 34, null],
+          [34, 37, 30.0]
+        ],
+        "average_speed": [
+          [0, 1, 10.0],
+          [1, 4, 8.0],
+          [4, 5, 16.0],
+          [5, 33, 18.0],
+          [33, 34, 10.0],
+          [34, 37, 18.0]
+        ]
+      },
+      "ascend": 100.0,
+      "descend": 63.5,
+      "snapped_waypoints": "y|ypHkhxvAcbq@|o@nhAccF"
+    },
+    {
+      "distance": 2111.984,
+      "weight": 385.640347,
+      "time": 467056,
+      "transfers": 0,
+      "points_encoded": true,
+      "bbox": [14.370006, 50.099783, 14.384496, 50.109094],
+      "points": "y|ypHkhxvAcbq@fBuDjz@LV?DN?AnA?MnLwuBdAPvQd@R?^V?\\f@wj@d@jA?LbAwj@JjDwj@nCE?xBOfpAxBi@fEd@S?ZW?XzFwj@z@`OwuBr@Of^lEoAgEt@E~Wf@D?\\L?^X?X`@?Td@vj@X|@?r@`K_XZxB_X\\lA?DXg^?R?t@Xnd@fAj@?hAv@vj@b@^?bAvA?fAdBvj@_BrEgpAs@qBvQy@mBgpAyAkC~W",
+      "instructions": [
+        {
+          "distance": 87.169,
+          "heading": 131.41,
+          "sign": 0,
+          "interval": [0, 1],
+          "text": "Pokračujte směr Zengrova",
+          "time": 31381,
+          "street_name": "Zengrova"
+        },
+        {
+          "distance": 202.906,
+          "sign": 2,
+          "interval": [1, 5],
+          "text": "Odbočte vpravo na Na Klimentce",
+          "time": 56258,
+          "street_name": "Na Klimentce"
+        },
+        {
+          "distance": 228.401,
+          "sign": -2,
+          "interval": [5, 12],
+          "text": "Odbočte vlevo na Na Míčánce",
+          "time": 45680,
+          "street_name": "Na Míčánce"
+        },
+        {
+          "distance": 259.343,
+          "sign": -2,
+          "interval": [12, 17],
+          "text": "Odbočte vlevo na Šárecká",
+          "time": 51869,
+          "street_name": "Šárecká"
+        },
+        {
+          "distance": 278.617,
+          "sign": 3,
+          "interval": [17, 19],
+          "text": "Odbočte ostře vpravo na Na Hanspaulce",
+          "time": 55723,
+          "street_name": "Na Hanspaulce"
+        },
+        {
+          "distance": 540.979,
+          "sign": -2,
+          "interval": [19, 33],
+          "text": "Odbočte vlevo na Sušická",
+          "time": 108196,
+          "street_name": "Sušická"
+        },
+        {
+          "distance": 247.679,
+          "sign": -2,
+          "interval": [33, 39],
+          "text": "Odbočte vlevo na Na Pískách",
+          "time": 49536,
+          "street_name": "Na Pískách"
+        },
+        {
+          "distance": 93.968,
+          "sign": 2,
+          "interval": [39, 40],
+          "text": "Odbočte vpravo na Na Pernikářce",
+          "time": 33829,
+          "street_name": "Na Pernikářce"
+        },
+        {
+          "distance": 172.922,
+          "sign": 3,
+          "interval": [40, 43],
+          "text": "Odbočte ostře vpravo na Vilímovská",
+          "time": 34584,
+          "street_name": "Vilímovská"
+        },
+        {
+          "distance": 0.0,
+          "sign": 4,
+          "last_heading": 46.92524342121442,
+          "interval": [43, 43],
+          "text": "Příjezd do cíle",
+          "time": 0,
+          "street_name": ""
+        }
+      ],
+      "legs": [],
+      "details": {
+        "road_environment": [[0, 43, "road"]],
+        "road_class": [
+          [0, 1, "residential"],
+          [1, 4, "pedestrian"],
+          [4, 12, "residential"],
+          [12, 17, "tertiary"],
+          [17, 33, "residential"],
+          [33, 39, "tertiary"],
+          [39, 40, "footway"],
+          [40, 43, "residential"]
+        ],
+        "max_speed": [
+          [0, 1, 30.0],
+          [1, 4, null],
+          [4, 18, 30.0],
+          [18, 19, 40.0],
+          [19, 39, 50.0],
+          [39, 40, null],
+          [40, 43, 30.0]
+        ],
+        "average_speed": [
+          [0, 1, 10.0],
+          [1, 4, 8.0],
+          [4, 5, 16.0],
+          [5, 39, 18.0],
+          [39, 40, 10.0],
+          [40, 43, 18.0]
+        ]
+      },
+      "ascend": 106.0,
+      "descend": 69.5,
+      "snapped_waypoints": "y|ypHkhxvAcbq@|o@nhAccF"
+    },
+    {
+      "distance": 2307.565,
+      "weight": 422.246147,
+      "time": 518025,
+      "transfers": 0,
+      "points_encoded": true,
+      "bbox": [14.368115, 50.100874, 14.384496, 50.109094],
+      "points": "y|ypHkhxvAcbq@fBuDjz@LV?DN?AnA?MnLwuBdAPvQd@R?^V?\\f@wj@d@jA?LbAwj@JjDwj@nCE?xBOfpAxBi@fEd@S?ZW?XzFwj@z@`OwuBFX?dA|Rod@i@HoKRhEoKUH?eB`GwQ|@lA?VlC?V|A?t@jBoK\\^oK`Fo@_XDA?zAbB?Xq@nKJB?z@}@?\\S?|@Q~p@v@WvQ`Ak@?aAgE~WD{AvQ@kE~WS_@?",
+      "instructions": [
+        {
+          "distance": 87.169,
+          "heading": 131.41,
+          "sign": 0,
+          "interval": [0, 1],
+          "text": "Pokračujte směr Zengrova",
+          "time": 31381,
+          "street_name": "Zengrova"
+        },
+        {
+          "distance": 202.906,
+          "sign": 2,
+          "interval": [1, 5],
+          "text": "Odbočte vpravo na Na Klimentce",
+          "time": 56258,
+          "street_name": "Na Klimentce"
+        },
+        {
+          "distance": 228.401,
+          "sign": -2,
+          "interval": [5, 12],
+          "text": "Odbočte vlevo na Na Míčánce",
+          "time": 45680,
+          "street_name": "Na Míčánce"
+        },
+        {
+          "distance": 259.343,
+          "sign": -2,
+          "interval": [12, 17],
+          "text": "Odbočte vlevo na Šárecká",
+          "time": 51869,
+          "street_name": "Šárecká"
+        },
+        {
+          "distance": 519.424,
+          "sign": 3,
+          "interval": [17, 21],
+          "text": "Odbočte ostře vpravo na Na Hanspaulce",
+          "time": 103884,
+          "street_name": "Na Hanspaulce"
+        },
+        {
+          "distance": 22.795,
+          "sign": 2,
+          "interval": [21, 22],
+          "text": "Odbočte vpravo na Na Pískách",
+          "time": 4559,
+          "street_name": "Na Pískách"
+        },
+        {
+          "distance": 72.873,
+          "sign": -2,
+          "interval": [22, 23],
+          "text": "Odbočte vlevo na Na Hanspaulce",
+          "time": 14575,
+          "street_name": "Na Hanspaulce"
+        },
+        {
+          "distance": 121.421,
+          "sign": 2,
+          "interval": [23, 25],
+          "text": "Odbočte vpravo na Krocínovská",
+          "time": 24284,
+          "street_name": "Krocínovská"
+        },
+        {
+          "distance": 43.804,
+          "sign": -2,
+          "interval": [25, 26],
+          "text": "Odbočte vlevo na Nad Šárkou",
+          "time": 8761,
+          "street_name": "Nad Šárkou"
+        },
+        {
+          "distance": 158.356,
+          "sign": 1,
+          "interval": [26, 30],
+          "text": "Odbočte mírně vpravo na Nad Šárkou",
+          "time": 31672,
+          "street_name": "Nad Šárkou"
+        },
+        {
+          "distance": 129.924,
+          "sign": -7,
+          "interval": [30, 32],
+          "text": "Držte se vlevo na Na Pernikářce",
+          "time": 26578,
+          "street_name": "Na Pernikářce"
+        },
+        {
+          "distance": 62.67,
+          "sign": 7,
+          "interval": [32, 33],
+          "text": "Držte se vpravo na Na Pernikářce",
+          "time": 22561,
+          "street_name": "Na Pernikářce"
+        },
+        {
+          "distance": 22.89,
+          "sign": -2,
+          "interval": [33, 34],
+          "text": "Odbočte vlevo na Na Pernikářce",
+          "time": 8240,
+          "street_name": "Na Pernikářce"
+        },
+        {
+          "distance": 173.303,
+          "sign": 2,
+          "interval": [34, 40],
+          "text": "Odbočte vpravo na Na Pernikářce",
+          "time": 47267,
+          "street_name": "Na Pernikářce"
+        },
+        {
+          "distance": 80.409,
+          "sign": -2,
+          "interval": [40, 41],
+          "text": "Odbočte vlevo na Vostrovská",
+          "time": 16081,
+          "street_name": "Vostrovská"
+        },
+        {
+          "distance": 121.877,
+          "sign": 7,
+          "interval": [41, 44],
+          "text": "Držte se vpravo na Na Bartoňce",
+          "time": 24375,
+          "street_name": "Na Bartoňce"
+        },
+        {
+          "distance": 0.0,
+          "sign": 4,
+          "last_heading": 46.92524342121442,
+          "interval": [44, 44],
+          "text": "Příjezd do cíle",
+          "time": 0,
+          "street_name": ""
+        }
+      ],
+      "legs": [],
+      "details": {
+        "road_environment": [[0, 44, "road"]],
+        "road_class": [
+          [0, 1, "residential"],
+          [1, 4, "pedestrian"],
+          [4, 12, "residential"],
+          [12, 17, "tertiary"],
+          [17, 21, "residential"],
+          [21, 22, "tertiary"],
+          [22, 32, "residential"],
+          [32, 34, "living_street"],
+          [34, 38, "residential"],
+          [38, 40, "footway"],
+          [40, 44, "residential"]
+        ],
+        "max_speed": [
+          [0, 1, 30.0],
+          [1, 4, null],
+          [4, 18, 30.0],
+          [18, 19, 40.0],
+          [19, 22, 50.0],
+          [22, 31, 30.0],
+          [31, 35, 20.0],
+          [35, 38, 50.0],
+          [38, 40, null],
+          [40, 41, 30.0],
+          [41, 42, 50.0],
+          [42, 44, 30.0]
+        ],
+        "average_speed": [
+          [0, 1, 10.0],
+          [1, 4, 8.0],
+          [4, 5, 16.0],
+          [5, 31, 18.0],
+          [31, 35, 10.0],
+          [35, 38, 18.0],
+          [38, 40, 10.0],
+          [40, 44, 18.0]
+        ]
+      },
+      "ascend": 87.0,
+      "descend": 50.5,
+      "snapped_waypoints": "y|ypHkhxvAcbq@|o@nhAccF"
+    }
+  ]
+}

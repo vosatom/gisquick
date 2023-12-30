@@ -1,0 +1,32 @@
+{
+  "type": "FeatureCollection",
+  "bbox": [0, 0, 0, 0],
+  "features": [
+    {
+      "bbox": [14, 50, 14, 50],
+      "geometry": {
+        "coordinates": [[14, 50]],
+        "type": "MultiPoint"
+      },
+      "id": "c.1",
+      "properties": {
+        "id": 1,
+        "name": "Stojan"
+      },
+      "type": "Feature"
+    },
+    {
+      "bbox": [14, 51, 14, 51],
+      "geometry": {
+        "coordinates": [[15, 51]],
+        "type": "MultiPoint"
+      },
+      "id": "a.2",
+      "properties": {
+        "id": 2,
+        "name": "Restaurace"
+      },
+      "type": "Feature"
+    }
+  ]
+}

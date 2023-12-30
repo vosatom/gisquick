@@ -1,20 +1,19 @@
-import type { BaseLayer, ProjectConfig } from '@/store/interfaces'
+import type { ServicesConfig } from '@/modules/services/types'
+import type { BaseLayer, LayerList, ProjectConfig } from '@/store/interfaces'
 
 export interface MapConfig {
-  project: Config['ows_project']
+  project: ProjectConfig['ows_project']
   baseLayers: BaseLayer[]
-  overlays: OverlayLayer[]
-  extent: Config['project_extent']
-  projection: Config['projection']
-  resolutions: Config['tile_resolutions']
-  scales: Config['scales']
-  owsUrl: Config['ows_url']
-  legendUrl: Config['legend_url']
-  mapcacheUrl: Config['mapcache_url']
-}
+  overlays: LayerList[]
+  extent: ProjectConfig['project_extent']
+  projection: ProjectConfig['projection']
+  resolutions: ProjectConfig['tile_resolutions']
+  scales: ProjectConfig['scales']
+  owsUrl: ProjectConfig['ows_url']
+  legendUrl: ProjectConfig['legend_url']
+  mapcacheUrl: ProjectConfig['mapcache_url']
 
-interface ProjectConfig {
-  custom: Custom
+  services: ServicesConfig
 }
 
 export interface Topic {
@@ -31,16 +30,4 @@ enum LayerType {
 
 interface Custom {
   note: string
-  routing: Routing
-}
-
-interface Routing {
-  enabled: boolean
-  isochronesEnabled: boolean
-  services: Services
-}
-
-interface Services {
-  graphhopper: boolean
-  cyclestreets: boolean
 }

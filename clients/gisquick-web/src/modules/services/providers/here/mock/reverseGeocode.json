@@ -1,0 +1,31 @@
+{
+  "items": [
+    {
+      "title": "Bubene\u010Dsk\u00FD tunel, 171 00 Praha, \u010Cesko",
+      "id": "here:af:streetsection:HvrJas07Cy7Ljv-b63BPqC",
+      "resultType": "street",
+      "address": {
+        "label": "Bubene\u010Dsk\u00FD tunel, 171 00 Praha, \u010Cesko",
+        "countryCode": "CZE",
+        "countryName": "\u010Cesko",
+        "state": "Hlavn\u00ED m\u011Bsto Praha",
+        "county": "Hlavn\u00ED m\u011Bsto Praha",
+        "city": "Praha",
+        "district": "Praha 7",
+        "street": "Bubene\u010Dsk\u00FD tunel",
+        "postalCode": "171 00"
+      },
+      "position": {
+        "lat": 50.11359,
+        "lng": 14.42685
+      },
+      "distance": 12,
+      "mapView": {
+        "west": 14.42318,
+        "south": 50.11273,
+        "east": 14.43569,
+        "north": 50.11395
+      }
+    }
+  ]
+}

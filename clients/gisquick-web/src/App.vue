@@ -74,6 +74,7 @@ import AppNotifications from './AppNotifications.vue'
 import projectsHistory from '@/projects-history'
 import Update from '@/mixins/update'
 import { parseColor } from '@/ui/utils/colors'
+import { MutationKey } from '@/modules/routing/store'
 
 export default {
   mixins: [ Update ],
@@ -165,6 +166,9 @@ export default {
       }
 
       this.$store.commit('project', data)
+      if (data.services) {
+        this.$store.commit(MutationKey.init, { config: data.services })
+      }
       if (data.status === 200) {
         projectsHistory.push(this.user, this.projectName)
       }
