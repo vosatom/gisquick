@@ -99,7 +99,7 @@ test('cyclestreets route transformer', () => {
         time: 901,
         descend: 16,
         ascend: 66,
-        color: '#e44141',
+        color: '#ffe86f',
         waypoints: [
           [14.38581, 50.11095],
           [14.37183, 50.10126],
