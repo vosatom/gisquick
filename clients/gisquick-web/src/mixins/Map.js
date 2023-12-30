@@ -20,6 +20,7 @@ function round (num, precision) {
 }
 
 export default {
+  inject: ['history'],
   data () {
     return {
       status: {
@@ -173,6 +174,18 @@ export default {
       this.$store.commit('activeTool', this.queryParams.tool)
     }
     this.$nextTick(() => this.$refs.tools.getActiveComponent()?.loadPermalink?.(this.queryParams))
+
+    let unlisten = this.history.listen(({ location, action }) => {
+      if (action === 'POP') {
+        const params = mapKeys(Object.fromEntries(new URLSearchParams(location.search)), (_, k) => k.toLowerCase())
+        
+        this.$refs.tools.getActiveComponent()?.loadPermalink?.(params)
+      }
+    });
+
+    this.$once('hook:beforeDestroy', () => {
+      unlisten()
+    })
   },
   methods: {
     async setVisibleBaseLayer (layer) {
