@@ -213,6 +213,7 @@ a {
     position: relative;
     display: flex;
     align-items: center;
+    gap: 4px;
   }
   .loading-spinner {
     position: absolute;

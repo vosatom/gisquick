@@ -1,21 +1,22 @@
 <template>
-  <div
-    role="checkbox"
-    class="switch"
-    :class="{focused, checked}"
-    :disabled="disabled"
-    :aria-disabled="disabled"
-    :aria-checked="checked ? 'true' : 'false'"
-    :aria-label="label"
-    :style="colorVars"
-    :tabindex="disabled ? -1 : 0"
-    @focus="focused = !disabled"
-    @blur="focused = false"
-    @click="toggleValue"
-    @keydown.space.prevent="toggleValue"
-  >
-    <slot name="tooltip"/>
-    <div class="toggle"/>
+  <div class="switch" @click="toggleValue">
+    <div
+      class="knob"
+      role="checkbox"
+      :class="{focused, checked}"
+      :disabled="disabled"
+      :aria-disabled="disabled"
+      :aria-checked="checked ? 'true' : 'false'"
+      :aria-label="label"
+      :style="colorVars"
+      :tabindex="disabled ? -1 : 0"
+      @focus="focused = !disabled"
+      @blur="focused = false"
+      @keydown.space.prevent="toggleValue"
+    >
+      <slot name="tooltip"/>
+      <div class="toggle"/>
+    </div>
     <slot>
       <span v-text="label"/>
     </slot>
@@ -82,13 +83,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .switch {
+  cursor: pointer;
+}
+.knob {
   display: flex;
   position: relative;
   outline: none;
   user-select: none;
-  cursor: pointer;
   margin: 6px;
   background-color: #777;
   height: 15px;
@@ -114,7 +116,7 @@ export default {
     width: 13px;
     margin: 1px;
   }
-  &.round {
+  .round & {
     border-radius: 8px;
     .toggle {
       border-radius: 8px;

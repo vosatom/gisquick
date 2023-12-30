@@ -4,7 +4,7 @@
     :disabled="disabled"
     :value="value"
     :error="error"
-    :placeholder="value === null ? 'NULL' : ''"
+    :placeholder="value === null ? '(empty)' : ''"
     v-bind="$attrs"
     v-on="proxyListeners"
     @input="onInput"

@@ -189,6 +189,18 @@ $gutter-4: 12px;
   margin-bottom: 0!important;
 }
 
+.gap-1 {
+  gap: $gutter-1;
+}
+
+.gap-2 {
+  gap: $gutter-2;
+}
+
+.gap-4 {
+  gap: $gutter-4;
+}
+
 .scrollable {
   overflow: auto;
 }

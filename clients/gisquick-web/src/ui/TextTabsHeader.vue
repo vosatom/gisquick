@@ -2,12 +2,12 @@
   <div class="text-tabs-header f-row-ac">
     <div
       v-for="item in items"
-      :key="item.key"
+      :key="item[itemValue]"
       role="button"
       class="tab"
-      :class="{active: value === item.key}"
+      :class="{active: value === item[itemValue]}"
       :style="colorVars"
-      @click="$emit('input', item.key)"
+      @click="$emit('input', item[itemValue])"
     >
       <span v-text="item.label"/>
     </div>
@@ -24,7 +24,11 @@ export default {
       default: 'primary'
     },
     items: Array,
-    value: {}
+    value: {},
+    itemValue: {
+      type: String,
+      default: 'key'
+    },
   },
   computed: {
     colorVars () {

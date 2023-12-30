@@ -12,33 +12,20 @@
     role="combobox"
   >
     <div class="input f-row-ac" tabindex="-1" @click="focusInput">
-      <v-icon v-if="icon" :name="icon" class="mx-2" color="grey"/>
-      <span
-        v-if="value && !hideValue"
-        class="f-grow"
-        v-text="itemText ? value[itemText] : value"
-        @click="onValueClick"
-      />
+      <slot name="prepend"/>
       <input
-        v-show="!value || hideValue"
         ref="input"
         :placeholder="placeholder"
         autocomplete="off"
+        :disabled="disabled"
         :value="text"
         v-on="proxyListeners"
         @click="openPopup"
         @blur="onTextfieldBlur"
         @input="updateText"
       />
-      <v-spinner v-if="loading" class="ml-2" size="16" width="2"/>
-      <v-btn v-else-if="text" tabindex="-1" class="icon flat ml-2" @click.stop="clear">
-        <v-icon name="x" size="16"/>
-      </v-btn>
-      <slot name="append"/>
+      <slot name="append" :openPopup="openPopup"/>
     </div>
-    <template v-slot:error="scope">
-      <slot name="error" v-bind="scope"/>
-    </template>
     <popup-content
       backhandler
       :align="align"
@@ -69,8 +56,9 @@
         class="popup-content popup-list"
         :style="colorVars"
       >
-        <template v-for="(item, index) in renderItems">
+        <template>
           <div
+            v-for="(item, index) in renderItems"
             :key="index"
             ref="item"
             tabindex="0"
@@ -99,17 +87,16 @@
   </input-field>
 </template>
 
-<script>
+<script lang="js">
 import clamp from 'lodash/clamp'
 import pick from 'lodash/pick'
 import PopupContent from './PopupContent.vue'
 import InputField from './InputField.vue'
 import { elementBounds } from './utils/popup'
 import { colorVars } from './utils/colors'
-import Focusable from './mixins/Focusable'
-
 
 import { sanitize, escapeRegExp, removeDiacritics } from './utils/text'
+import get from 'lodash/get'
 
 function _highlight (orig, search, re) {
   const m = re.exec(search)
@@ -133,12 +120,15 @@ export function highlight (text, query) {
 
 export default {
   components: { PopupContent, InputField },
-  mixins: [Focusable],
   props: {
     align: String,
     color: {
       type: String,
       default: 'primary'
+    },
+    icon: {
+      type: String,
+      default: 'search'
     },
     error: String,
     label: String,
@@ -149,7 +139,6 @@ export default {
       default: 'slide-y'
     },
     placeholder: String,
-    icon: String,
     items: Array,
     itemText: {
       type: String,
@@ -162,7 +151,7 @@ export default {
     itemValue: String,
     minChars: {
       type: Number,
-      default: 1
+      default: 0
     },
     multi: Boolean,
     contentClass: {
@@ -170,17 +159,20 @@ export default {
       default: 'popup-autocomplete'
     },
     uniformWidth: Boolean,
-    loading: Boolean
+    filterItems: Boolean,
   },
   data () {
     return {
       text: '',
       open: false,
-      highlightIndex: -1,
-      hideValue: false
+      highlightIndex: -1
     }
   },
   computed: {
+    focused () {
+      const activeEl = this.$ui.activeEl
+      return this.$el && (this.$el.contains(activeEl) || this.$ui.isLinked(activeEl, this.$el))
+    },
     proxyListeners () {
       return pick(this.$listeners, ['focus', 'click', 'keydown'])
     },
@@ -188,7 +180,7 @@ export default {
       return colorVars(this.color)
     },
     showPopup () {
-      return !!(this.open && this.text.length >= this.minChars && this.items?.length)
+      return !!(this.open && this.text?.length >= this.minChars && this.items?.length)
     },
     bounds () {
       return this.showPopup ? elementBounds(this.$el) : null
@@ -209,24 +201,27 @@ export default {
       return this.text && new RegExp(escapeRegExp(sanitize(removeDiacritics(this.text))), 'i')
     },
     displayedItems () {
-      return this.items
-      /*
+      if (!this.filterItems) {
+        return this.items
+      }
       if (!this.text) {
         return this.items
       }
       // filter only matched items (with highlight)
       // return this.items.filter(i => i[this.itemText].match(this.regex))
       return this.items.filter(i => this.regex.test(removeDiacritics(i[this.itemText])))
-      */
     },
     renderItems () {
       return this.appendItem ? this.displayedItems.concat(this.appendItem) : this.displayedItems
     },
     highlights () {
+      if (!this.text) {
+        return []
+      }
       const fields = this.highlightFields?.split(',') || [this.itemText]
       return this.displayedItems.map(item => {
         return fields.reduce((obj, field) => {
-          const text = item[field]
+          const text = get(item, field)
           obj[field] = this.text.length > 1 ? highlight(text, this.text) : text
           return obj
         }, {})
@@ -240,27 +235,22 @@ export default {
     value: {
       immediate: true,
       handler (v) {
-        // this.text = v?.[this.itemText] || ''
-        // if (!v) {
-        //   this.text = ''
-        // } else if (!this.multi) {
-        //   this.text = v?.[this.itemText] || ''
-        // }
+        if (!v) {
+          this.text = ''
+        } else if (!this.multi) {
+          this.text = v?.[this.itemText] || ''
+        }
       }
     },
     focused (v) {
       if (!v) {
+        // console.log('Autocomplete:blur')
         // this.text = ''
         // this.onTextfieldBlur()
       }
     }
   },
   methods: {
-    focus () {
-      if (!this.disabled) {
-        this.$refs.input?.focus()
-      }
-    },
     cleanup () {
       if (!this.text && !this.multi && this.value) {
         this.$emit('input', null)
@@ -278,16 +268,11 @@ export default {
       }
     },
     onInput (item) {
-      this.hideValue = false
-      let value = this.itemValue ? item[this.itemValue] : item
+      let value = this.itemValue ? get(item, this.itemValue) : item
       if (this.multi) {
         value = Array.isArray(this.value) ? [...this.value, value] : [value]
       }
       this.$emit('input', value)
-    },
-    onValueClick () {
-      this.hideValue = true
-      this.openPopup()
     },
     selectItem (item) {
       if (item === this.appendItem) {
@@ -297,8 +282,10 @@ export default {
       }
       if (this.multi) {
         this.text = ''
+      } else {
+        this.text = item?.[this.itemText] || ''
       }
-      // this.text = ''
+      this.$emit('text:update', this.text)
       this.focusInput()
     },
     updateText (e) {
@@ -307,8 +294,12 @@ export default {
       this.open = true
       this.$emit('text:update', this.text)
     },
+    updateTextSilent (text) {
+      this.text = text
+    },
     openPopup () {
       this.open = true
+      this.$emit('open')
       // this.$refs.textField.focus()
     },
     closePopup () {
@@ -341,7 +332,7 @@ export default {
     },
     clear () {
       this.text = ''
-      if (!this.multi && this.value) {
+      if (!this.multi) {
         this.$emit('input', null)
       }
       this.$emit('clear')
@@ -360,25 +351,20 @@ export default {
       this.$emit('closed')
     },
     popupOpened (e) {
-      // console.log('popupOpened', e.target)
-    }
+      console.log('popupOpened', e.target)
+    },
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .autocomplete {
-  margin: var(--gutter);
   input {
     outline: none;
     border: none;
-    background-color: transparent;
-    font-size: inherit;
-    color: inherit;
-    text-align: inherit;
-    font-family: inherit;
     flex-grow: 1;
     font-size: 15px;
+    background: transparent;
   }
 }
 .popup-list {

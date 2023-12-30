@@ -54,6 +54,7 @@ export default {
   display: flex;
   position: relative;
   user-select: none;
+  text-align: center;
   .item {
     padding: 3px;
     cursor: pointer;
