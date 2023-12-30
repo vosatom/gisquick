@@ -1,30 +1,37 @@
 <template>
-  <v-menu
-    :items="items"
-    v-bind="$attrs"
-    align="rr;bb"
-  >
-    <template
-      v-for="(index, name) in $scopedSlots"
-      v-slot:[name]="slotData"
+  <div>
+    <v-menu
+      :items="items"
+      v-bind="$attrs"
+      align="rr;bb"
     >
-      <slot :name="name" v-bind="slotData"/>
-    </template>
-  </v-menu>
+      <template
+        v-for="(index, name) in $scopedSlots"
+        v-slot:[name]="slotData"
+      >
+        <slot :name="name" v-bind="slotData"/>
+      </template>
+    </v-menu>
+    
+    <EmbedCode v-if="embedOpen" @close="embedOpen = false" />
+  </div>
 </template>
 
 <script lang="js">
 import Vue from 'vue'
 import { mapState } from 'vuex'
 import FullscreenMixin from '@/mixins/Fullscreen'
+import EmbedCode from '@/modules/embed/EmbedCode.vue'
 
 export default {
   name: 'AppMenu',
   mixins: [FullscreenMixin],
+  components: { EmbedCode },
   data () {
     return {
       // extraItems: {}
-      extraItems: []
+      extraItems: [],
+      embedOpen: false,
     }
   },
   computed: {
@@ -65,6 +72,11 @@ export default {
           key: 'permalink',
           text: this.$gettext('Permalink'),
           action: this.createPermalink
+        },
+        {
+          key: 'embed',
+          text: this.$gettext('Embed code'),
+          action: this.openEmbed,
         }, {
           key: 'help',
           text: this.$gettext('Help'),
@@ -98,6 +110,9 @@ export default {
       const link = 'http://gisquick.readthedocs.io/en/latest/user-manual/user-interface.html'
       // const link = this.project.gislab_documentation
       window.open(link, 'Gisquick Documentation', params)
+    },
+    openEmbed () {
+      this.embedOpen = true
     },
     createPermalink () {
       const permalink = this.$map.ext.createPermalink()
