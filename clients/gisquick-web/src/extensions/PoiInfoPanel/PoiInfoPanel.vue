@@ -56,6 +56,15 @@
 
         <div class="f-row f-wrap btn-row">
           <v-btn
+            v-if="commentsEnabled"
+            @click="showComments = !showComments"
+            :title="tr.Comment"
+          >
+            <v-icon name="chat-dots" />
+            <template v-if="commentsCount > 0"> ({{ commentsCount }})</template>
+          </v-btn>
+
+          <v-btn
             tag="a"
             :href="mapsUrl"
             target="_blank"
@@ -76,6 +85,14 @@
         </div>
 
         <QRCode :content="featureUrl" v-if="showQRCode" />
+
+        <Comments
+          :id="`poi.${feature.getId()}`"
+          :title="feature.get('name')"
+          :show="showComments"
+          :pageUrl="featureUrl"
+          @update="commentsCount = $event"
+        />
 
         <EmbedCode
           :feature="feature"
@@ -105,9 +122,12 @@ import { useOlMap } from '@/composables/useOlMap'
 import GeoJSON from 'ol/format/GeoJSON'
 import { buffer, getCenter } from 'ol/extent'
 import { useGettext } from '@/modules/vue-gettext'
+import { getFeatureConfig } from '@/modules/routing/util/getFeatureConfig'
+import Comments from '@/modules/comments/Comments.vue'
 import EmbedCode from '@/modules/embed/EmbedCode.vue'
 import PoiImageGroup from './PoiImageGroup.vue'
 import mapValues from 'lodash/mapValues'
+import { useStore } from '@/store/typed'
 
 const { $gettext } = useGettext()
 
@@ -120,11 +140,14 @@ const props = defineProps<{
 
 const map = useOlMap()
 
+const store = useStore()
+
 const tr = computed(() => {
   return {
     OpenInGoogleMaps: $gettext('Open in Google Maps'),
     ShowQRCode: $gettext('Show QR code'),
     Embed: $gettext('Embed'),
+    Comment: $gettext('Comment'),
   }
 })
 
@@ -161,6 +184,16 @@ watch(
 
 const showQRCode = ref(false)
 const showEmbed = ref(false)
+const showComments = ref(false)
+const commentsCount = ref(0)
+
+const commentsEnabled = computed(() => {
+  const config = store.state.routing.config
+  const featureConfig = getFeatureConfig(config, 'comments')
+  if (!featureConfig) return false
+  const provider = config.providers[featureConfig.provider]
+  return featureConfig.enabled && provider.settings.appId
+})
 
 const geojson = new GeoJSON()
 const mapsUrl = computed(() => {
