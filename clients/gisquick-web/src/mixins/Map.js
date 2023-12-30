@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue, { provide } from 'vue'
 import { mapState, mapGetters } from 'vuex'
 import has from 'lodash/has'
 import mapKeys from 'lodash/mapKeys'
@@ -7,6 +7,7 @@ import { unByKey } from 'ol/Observable'
 import 'ol/ol.css'
 
 import { createMap, registerProjections } from '@/map/map-builder'
+import { mapKey } from '@/composables/useOlMap'
 
 function getTileKey (tile) {
   return tile.tileCoord.join('/')
@@ -67,6 +68,8 @@ export default {
     if (process.env.NODE_ENV === 'development') {
       window.olmap = map
     }
+
+    provide(mapKey, map)
 
     // base layer need to be initialized after ol map is created
     let visibleBaseLayer
