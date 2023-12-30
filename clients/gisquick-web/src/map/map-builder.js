@@ -19,6 +19,8 @@ import { defaults as defaultControls } from 'ol/control'
 import debounce from 'lodash/debounce'
 import omitBy from 'lodash/omitBy'
 import { wmtsSource } from './wmts'
+import { createClientLayer, createClientLayers } from '@/modules/mnk/mapBuilder'
+import LayerGroup from 'ol/layer/Group'
 
 
 const cleanParams = params => omitBy(params, v => v === undefined || v === null || v === '')
@@ -83,79 +85,6 @@ function GisquickWMSType (baseClass) {
 export const GisquickTileWMS = GisquickWMSType(TileWMS)
 export const GisquickImageWMS = GisquickWMSType(ImageWMS)
 
-export class WebgisTileImage extends TileImage {
-  constructor (opts) {
-    super(opts)
-    this.tilesUrl = opts.tilesUrl || ''
-    this.owsUrl = opts.owsUrl || ''
-    this.project = opts.project || ''
-    this.layersAttributions = opts.layersAttributions || {}
-    this.layersOrder = opts.layersOrder || {}
-    this.tileUrlFunction = this._tileUrlFunction
-    this.legendUrl = opts.legendUrl
-    this.setVisibleLayers(opts.visibleLayers || [])
-  }
-
-  _tileUrlFunction (tileCoord, pixelRatio, projection) {
-    if (this.visibleLayers.length === 0) {
-      return ''
-    }
-    const [z, x, y] = tileCoord
-    return this.tileUrlTemplate
-      .replace('{z}', z)
-      .replace('{x}', x)
-      .replace('{y}', y)
-  }
-
-  setVisibleLayers (layers) {
-    const orderedLayers = [].concat(layers)
-    orderedLayers.sort((l2, l1) => this.layersOrder[l1] - this.layersOrder[l2])
-    this.visibleLayers = orderedLayers
-    const layersNames = orderedLayers.join(',')
-    this.tileUrlTemplate = `${this.tilesUrl}${md5(layersNames)}/{z}/{x}/{y}?PROJECT=${this.project}&LAYERS=${layersNames}`
-    this.tileCache.clear()
-
-    // update attributions
-    if (this.layersAttributions) {
-      const attributions = orderedLayers.map(layername => this.layersAttributions[layername]).filter(v => v)
-      this.setAttributions(attributions)
-    }
-    this.changed()
-  }
-
-  /**
-   * Returns list of visible layers (names)
-   * @return {Array<String>}
-   */
-  getVisibleLayers () {
-    return this.visibleLayers
-  }
-
-  getLegendUrl (layername, view, opts = {}) {
-    var zoomLevel = this.getTileGrid().getZForResolution(view.getResolution())
-
-    const baseUrl = `${this.legendUrl}${md5(layername)}/${zoomLevel}.png`
-    const params = {
-      SERVICE: 'WMS',
-      VERSION: '1.1.1',
-      REQUEST: 'GetLegendGraphic',
-      EXCEPTIONS: 'application/vnd.ogc.se_xml',
-      FORMAT: 'image/png',
-      SYMBOLHEIGHT: 4,
-      SYMBOLWIDTH: 6,
-      LAYERFONTSIZE: 10,
-      LAYERFONTBOLD: 'true',
-      ITEMFONTSIZE: 11,
-      ICONLABELSPACE: 3,
-      PROJECT: this.project,
-      LAYER: layername,
-      SCALE: Math.round(view.getScale()),
-      ...opts
-    }
-    return createUrl(baseUrl, params).href
-  }
-}
-
 function createAttribution (config) {
   const html = config.url
     ? `<a href="${config.url}" target="_blank">${config.title}</a>`
@@ -163,8 +92,8 @@ function createAttribution (config) {
   return html
   // return new Attribution({ html })
 }
-export function createQgisLayer (config) {
-  const visibleLayers = config.overlays.filter(l => l.visible).map(l => l.name)
+export function createQgisLayer (config, projectConfig) {
+  const visibleLayers = config.overlays.filter(l => l.visible && !l.clientLayer).map(l => l.name)
   const layersOrder = {}
   const attributions = {}
 
@@ -175,28 +104,9 @@ export function createQgisLayer (config) {
     }
   })
 
-  if (config.mapcacheUrl) {
-    return new TileLayer({
-      visible: true,
-      extent: config.extent,
-      source: new WebgisTileImage({
-        project: config.project,
-        tilesUrl: config.mapcacheUrl,
-        legendUrl: config.legendUrl ?? config.owsUrl,
-        owsUrl: config.owsUrl,
-        projection: config.projection,
-        tileGrid: new TileGrid({
-          origin: getBottomLeft(config.extent),
-          resolutions: config.resolutions,
-          tileSize: 256
-        }),
-        visibleLayers: visibleLayers,
-        layersAttributions: attributions,
-        layersOrder: layersOrder,
-        interpolate: false
-      })
-    })
-  } else if (config.mapTiling) {
+  if (config.mapTiling) {
+    const url = config.owsUrl
+
     return new TileLayer({
       visible: true,
       extent: config.extent,
@@ -361,14 +271,14 @@ export async function createBaseLayer (layerConfig, projectConfig = {}) {
  * @param {Object} controlOpts ol control options
  * @returns {import('ol/Map').default}
  */
-export function createMap (config, controlOpts = {}) {
+export function createMap (config, controlOpts = {}, visibleLayers, projectConfig = {}) {
   const projection = getProj(config.projection)
   if (!projection) {
     throw new Error(`Invalid or unknown map projection: ${config.projection}`)
   }
 
-  const layers = []
-  const overlay = createQgisLayer(config)
+  let layers = []
+  const overlay = createQgisLayer(config, projectConfig)
   layers.push(overlay)
 
   const map = new Map({
@@ -386,6 +296,21 @@ export function createMap (config, controlOpts = {}) {
     controls: defaultControls(controlOpts),
     moveTolerance: 10
   })
+
+  
+  const clientLayer = new LayerGroup({
+    layers: [],
+  })
+  map.clientLayer = clientLayer
+  map.addLayer(map.clientLayer)
+  createClientLayers(map, config, visibleLayers)
+    .then((clientLayers) => {
+      clientLayers.forEach(layer => clientLayer.getLayers().push(layer))
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+
   map.overlay = overlay
 
   const baseLayers = {}

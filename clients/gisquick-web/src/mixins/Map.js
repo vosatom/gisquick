@@ -70,7 +70,9 @@ export default {
       scales: config.scales,
       owsUrl: config.ows_url,
       legendUrl: config.legend_url,
-      mapcacheUrl: config.mapcache_url
+      mapcacheUrl: config.mapcache_url,
+      mapTiling: config.map_tiling,
+      tiledOverlay: config.custom?.tiled_overlay,
     }
     const map = createMap(mapConfig, { zoom: false, attribution: false, rotate: false })
     Vue.prototype.$map = map
@@ -200,7 +202,14 @@ export default {
       }
     },
     setVisibleLayers (layers) {
-      this.$map.overlay.getSource().setVisibleLayers(layers.map(l => l.name))
+      this.$map.overlay.getSource().setVisibleLayers(layers.filter(l => !l.clientLayer).map(l => l.name))
+      this.$map.clientOverlay?.getSource().setVisibleLayers(layers.filter(l => l.clientLayer === 'Vector').map(l => l.name))
+
+      const clientLayers = layers.filter(l => l.clientLayer);
+      this.$map.clientLayer.getLayers().forEach(mapLayer => {
+        const layer = clientLayers.find(l => l.name === mapLayer.get('name'));
+        mapLayer.setVisible(layer);
+      });
     },
     registerStatusListener (olLayer, status) {
       const source = olLayer.getSource()

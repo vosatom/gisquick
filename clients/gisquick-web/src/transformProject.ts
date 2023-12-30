@@ -9,8 +9,11 @@ export function transformProject(data: ProjectConfig) {
   const overlayLayersList = layersList({ layers: data.layers })
   overlayLayersList.forEach((layer) => {
     if (layer.type === 'RasterLayer' && layer.source?.url.includes('geoserver1.prahounakole.cz/geoserver')) {
-      layer.custom.clientLayer = 'wms'
-      layer.tiled = true
+      layer.custom = {
+        ...layer.custom,
+        clientLayer: 'wms',
+        tiled: true,
+      }
       layer.source.url = layer.source.url.replace('wmts', 'wms')
     }
   })
