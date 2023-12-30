@@ -1,3 +1,4 @@
+import type { GlobalQuery } from '@/store/typed'
 import type { Feature, Map } from 'ol'
 import type { Extent } from 'ol/extent'
 import { inject, type InjectionKey } from 'vue'
@@ -11,7 +12,8 @@ export interface MapWithExt extends Map {
     fitToExtent: (extent: Extent, options?: { padding?: number[], maxZoom?: number }) => void;
     zoomToFeature: (feature: Feature, options?: { padding?: number[] }) => void;
     refreshOverlays: () => void;
-    createPermalink: () => void;
+    getPermalinkQueryParams: () => GlobalQuery;
+    createPermalink: () => string;
   };
 }
 

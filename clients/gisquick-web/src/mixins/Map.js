@@ -8,6 +8,7 @@ import 'ol/ol.css'
 
 import { createMap, registerProjections } from '@/map/map-builder'
 import { mapKey } from '@/composables/useOlMap'
+import { createPermalink } from '@/modules/permalink/createPermalink'
 
 function getTileKey (tile) {
   return tile.tileCoord.join('/')
@@ -139,7 +140,7 @@ export default {
       refreshOverlays () {
         map.overlay.getSource().refresh()
       },
-      createPermalink: () => {
+      getPermalinkQueryParams: () => {
         const toolParams = this.$refs.tools.getActiveComponent()?.getPermalinkParams?.()
         const extent = map.ext.visibleAreaExtent()
         const overlays = this.visibleLayers.filter(l => !l.hidden).map(l => l.name)
@@ -149,13 +150,10 @@ export default {
           baselayer: this.visibleBaseLayer?.name ?? '',
           ...toolParams
         }
-        const url = new URL(location.href)
-        Array.from(url.searchParams.keys()).filter(k => k !== 'PROJECT').forEach(k => url.searchParams.delete(k))
-        Object.keys(params).forEach(name => url.searchParams.set(name, params[name]))
-        return decodeURIComponent(url.toString()) // unescaped url
-        // return url.toString()
       },
-      formatCoordinate: v => round(v, precision)
+      createPermalink: () => {
+        return createPermalink(location.href, map.ext.getPermalinkQueryParams())
+      }
     }
     const extentParam = this.queryParams.extent?.split(',').map(parseFloat)
     const extent = extentParam || this.project.config.zoom_extent || this.project.config.project_extent

@@ -10,6 +10,12 @@ export interface GlobalQuery {
   features?: string
   activetab?: string
   tool?: string
+  embed?: string
+  extent?: string
+  overlays?: string
+  baselayer?: string
+  controls?: string
+  displayMode?: 'none' | 'table' | 'info-panel' | 'both'
 }
 
 export interface GlobalState {

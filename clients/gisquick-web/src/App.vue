@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="app f-col">
     <intro-page v-if="!projectName"/>
-    <map-app v-if="projectStatus === 200" :key="projectKey"/>
+    <component :is="MapApp" v-if="projectStatus === 200" :key="projectKey"/>
     <login-dialog
       :value="showLogin"
       :login-required="projectStatus !== 200"
@@ -68,6 +68,7 @@ import ProjectNotFound from '@/ProjectNotFound.vue'
 import DesktopMap from '@/components/Map.vue'
 import MobileMap from '@/components/MobileMap.vue'
 import LoginDialog from '@/components/LoginDialog.vue'
+import EmbedMap from '@/components/EmbedMap.vue'
 import PopupLayer from '@/ui/PopupLayer.vue'
 import ServerError from './ServerError.vue'
 import AppNotifications from './AppNotifications.vue'
@@ -85,7 +86,6 @@ export default {
     IntroPage,
     ServerError,
     AppNotifications,
-    MapApp: async () => window.env.mobile ? MobileMap : DesktopMap
   },
   data () {
     return {
@@ -95,6 +95,15 @@ export default {
   },
   computed: {
     ...mapState(['app', 'user', 'project', 'showLogin']),
+    isEmbed() {
+      return !!(new URLSearchParams(location.search).get('embed'))
+    },
+    MapApp () {
+      if (this.isEmbed) {
+        return EmbedMap;
+      }
+      return async () => window.env.mobile ? MobileMap : DesktopMap
+    },
     projectName () {
       return new URLSearchParams(location.search).get('PROJECT') || this.app.landing_project
     },
