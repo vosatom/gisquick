@@ -88,6 +88,7 @@ import { layersFeaturesQuery } from '@/map/featureinfo'
 import { ShallowArray } from '@/utils'
 import { formatFeatures } from '@/formatters'
 import { TaskState, watchTask } from '@/tasks'
+import { extend } from 'ol/extent'
 
 const SelectedStyle = simpleStyle({
   fill: [3, 169, 244, 0.4],
