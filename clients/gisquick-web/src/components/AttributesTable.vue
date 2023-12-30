@@ -220,6 +220,10 @@ import { formatFeatures } from '@/formatters'
 import { valueMapItems } from '@/adapters/attributes'
 import { downloadExcel } from '@/xlsx-export'
 
+function lastPage(pagination) {
+  const { rowsPerPage, totalItems } = pagination
+  return Math.ceil(totalItems / rowsPerPage)
+}
 
 const ActionsHeader = {
   text: '',
@@ -304,8 +308,7 @@ export default {
       }))
     },
     lastPage () {
-      const { rowsPerPage, totalItems } = this.pagination
-      return Math.ceil(totalItems / rowsPerPage)
+      return lastPage(this.pagination)
     },
     paginationRangeText () {
       const { page, rowsPerPage, totalItems } = this.pagination
@@ -413,6 +416,9 @@ export default {
       }
       return { geom, filters }
     },
+    /**
+     * If the page is -1, the last page will be set
+     */
     async fetchFeatures (page = 1, lastQuery = false) {
       const mapProjection = this.$map.getView().getProjection().getCode()
       let query
@@ -435,6 +441,14 @@ export default {
       let geojson, featuresCount
       this.loading = true
       this.loadingError = false
+
+      const newPagination = {
+        query,
+        page,
+        rowsPerPage: this.limit,
+        totalItems: featuresCount
+      }
+
       try {
         let params = { ...baseParams, resultType: 'hits' }
         let resp = await this.$http.post(this.project.config.ows_url, query, { params, headers })
@@ -445,9 +459,14 @@ export default {
           featuresCount = resp.data.numberOfFeatures
         }
 
+        newPagination.totalItems = featuresCount
+        if (newPagination.page === -1) {
+          newPagination.page = lastPage(newPagination)
+        }
+
         params = {
           ...baseParams,
-          STARTINDEX: (page - 1) * this.limit,
+          STARTINDEX: (newPagination.page - 1) * this.limit,
           MAXFEATURES: this.limit
         }
         resp = await this.$http.post(this.project.config.ows_url, query, { params, headers })
@@ -470,12 +489,7 @@ export default {
       this.selectedFeatureIndex = selectedIndex !== -1 ? selectedIndex : 0
       this.$store.commit('attributeTable/features', features)
 
-      this.pagination = {
-        query,
-        page,
-        rowsPerPage: this.limit,
-        totalItems: featuresCount
-      }
+      this.pagination = newPagination
     },
     setPage (page) {
       this.fetchFeatures(page, true)
@@ -483,12 +497,18 @@ export default {
     zoomToFeature (feature) {
       this.$map.ext.zoomToFeature(feature)
     },
-    newFeatureAdded () {
+    async newFeatureAdded (data) {
       setTimeout(() => {
         this.newFeatureMode = false
       }, 1500)
-      this.fetchFeatures(this.pagination.page, true)
       this.$map.ext.refreshOverlays()
+      await this.fetchFeatures(-1, true)
+
+      const selectedIndex = this.features.findIndex(f => f.getId() === data.fid)
+      if (selectedIndex !== -1) {
+        this.selectedFeatureIndex = selectedIndex
+        this.showInfoPanel = true
+      }
     },
     clearAllFilters () {
       Object.entries(this.layerFilters).forEach(([name, filter]) => {
