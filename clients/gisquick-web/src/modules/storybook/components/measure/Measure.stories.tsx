@@ -19,7 +19,7 @@ setup(() => {
 })
 
 export default {
-  title: 'Modules/Measure',
+  title: 'Tools/Measure',
   component: Preview,
   parameters: {
     layout: 'fullscreen',

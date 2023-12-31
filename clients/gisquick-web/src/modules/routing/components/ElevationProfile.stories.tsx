@@ -2,21 +2,18 @@ import type { Meta, StoryObj } from '@storybook/vue3'
 
 import ElevationProfileComponent from './ElevationProfile.vue'
 
-import Preview from '@/modules/storybook/Preview.vue'
-
 export default {
-  title: 'modules/services/Elevation Profile',
-  component: Preview,
+  title: 'modules/Routing/Elevation Profile',
   parameters: {
     layout: 'fullscreen',
   },
 } as Meta
 
-type Story = StoryObj<typeof Preview>
+type Story = StoryObj
 
 export const ElevationProfile: Story = {
   render: (args) => ({
-    components: { Preview, ElevationProfileComponent },
+    components: { ElevationProfileComponent },
     setup() {
       return { args }
     },
@@ -24,6 +21,8 @@ export const ElevationProfile: Story = {
   }),
 
   args: {
+    ascend: 123,
+    descend: 456,
     distances: [
       0, 86.91746533220935, 98.48543041420318, 105.09419478611466,
       287.87302501990825, 327.31698447306013, 349.61518432572046,

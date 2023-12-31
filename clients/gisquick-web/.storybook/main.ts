@@ -18,10 +18,6 @@ const config: StorybookConfig = {
   viteFinal(config) {
     return {
       ...config,
-      optimizeDeps: {
-        ...config.optimizeDeps,
-        exclude: ['vue-demi'],
-      },
       resolve: {
         ...config.resolve,
         alias: {

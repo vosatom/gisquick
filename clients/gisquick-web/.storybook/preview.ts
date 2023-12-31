@@ -32,6 +32,7 @@ import {
   SwitchTransition,
   SlideTop
 } from '../src/components/transitions'
+import modules from '../src/modules'
 
 // import all icons for hot reload functionality in dev mode
 if (process.env.NODE_ENV === 'development') {

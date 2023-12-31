@@ -2,7 +2,6 @@ import { type StoryObj, type Meta } from '@storybook/vue3'
 import { Feature } from 'ol'
 import { Point } from 'ol/geom'
 
-
 import appData from '../mocks/app.json'
 import project from '../mocks/project.json'
 
@@ -11,12 +10,6 @@ import { formatFeatures } from '@/formatters'
 import { setup } from '@/modules/storybook-compat'
 import { store } from '@/store/typed'
 
-setup(() => {
-  store.commit('app', appData.app)
-  store.commit('user', appData.user)
-  store.commit('project', project)
-})
-
 export default {
   title: 'Components/InfoPanel',
   component: InfoPanel,
@@ -24,10 +17,16 @@ export default {
     layout: 'centered',
   },
   argTypes: { onClose: {}, onDelete: {} },
-  render: args => ({
+  render: (args) => ({
     components: { InfoPanel },
     store,
     setup() {
+      setup(() => {
+        store.commit('app', appData.app)
+        store.commit('user', appData.user)
+        store.commit('project', project)
+      })
+
       return { args }
     },
     data() {

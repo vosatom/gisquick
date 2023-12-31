@@ -13,8 +13,10 @@
 
 <script setup lang="ts">
 import 'ol/ol.css'
-import { boundingExtent, buffer as bufferExtent } from 'ol/extent'
+import { createBrowserHistory } from 'history'
 import Vue, { onMounted, ref, provide } from 'vue'
+
+import { createMapExt } from './createMapExt'
 
 import CurrentCursor from '@/components/CurrentCursor.vue'
 import { mapKey } from '@/composables/useOlMap'
@@ -22,6 +24,10 @@ import { createMap } from '@/map/map-builder'
 import config from '@/modules/storybook/mocks/project-mnk.json'
 import { useStore } from '@/store/typed'
 const store = useStore()
+
+const props = defineProps({
+  history: Object,
+})
 
 const mapConfig = {
   project: config.ows_project,
@@ -72,47 +78,7 @@ async function update() {
 
 update()
 
-map.ext = {
-  visibleAreaPadding: () => {
-    const { top, right, bottom, left } = element.value.getBoundingClientRect()
-    return [top, left, top, left]
-  },
-  visibleAreaExtent: () => {
-    const { top, right, bottom, left } = element.value.getBoundingClientRect()
-    const p1 = map.getCoordinateFromPixel([left, top])
-    const p2 = map.getCoordinateFromPixel([right, bottom])
-    return boundingExtent([p1, p2])
-  },
-  fitToExtent(extent, options = {}) {
-    let padding = options.padding || map.ext.visibleAreaPadding()
-    map.getView().fit(extent, { duration: 450, padding })
-  },
-  zoomToFeature: (feature, options = {}) => {
-    const geom = feature.getGeometry()
-    if (!geom) {
-      return
-    }
-    const resolution = map.getView().getResolution()
-    let padding = options.padding || map.ext.visibleAreaPadding()
-    if (geom.getType() === 'Point') {
-      const center = geom.getCoordinates()
-      center[0] += (-padding[3] * resolution + padding[1] * resolution) / 2
-      center[1] += (-padding[2] * resolution + padding[0] * resolution) / 2
-      map.getView().animate({
-        center,
-        duration: 450,
-      })
-    } else {
-      const extent = geom.getExtent()
-      // add 5% buffer (padding)
-      const buffer =
-        (map.getSize()[0] - padding[1] - padding[3]) * 0.05 * resolution
-      map
-        .getView()
-        .fit(bufferExtent(extent, buffer), { duration: 450, padding })
-    }
-  },
-}
+map.ext = createMapExt(map)
 
 provide(mapKey, map)
 
@@ -120,8 +86,9 @@ const element = ref()
 
 onMounted(() => {
   map.setTarget(element.value)
-  console.log(map, element.value)
 })
 
 Vue.prototype.$map = map
+
+provide('history', props.history ?? createBrowserHistory())
 </script>
