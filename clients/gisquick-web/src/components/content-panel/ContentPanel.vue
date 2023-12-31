@@ -1,8 +1,5 @@
 <template>
   <div class="content-panel light">
-    <div class="panel-header f-row-ac f-justify-center">
-      <translate class="title">Content</translate>
-    </div>
     <v-tabs-header :items="tabsItems" v-model="activeMainTab"/>
     <v-tabs class="f-grow" :items="tabsItems" v-model="activeMainTab">
       <template v-slot:topics>
@@ -18,7 +15,6 @@
             @touchend.native.stop=""
           />
           <base-layers-tree
-            class="mt-2"
             :layers="project.baseLayers.tree"
             :expanded.sync="expandedBaseLayers"
             :value="visibleBaseLayerName"

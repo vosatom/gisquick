@@ -120,7 +120,6 @@
           </div>
         </div>
       </div>
-      <div class="bg-logo" :style="images.imgLogoStyle"/>
     </div>
   </v-dialog>
 </template>
@@ -128,7 +127,7 @@
 <script lang="js">
 import { TaskState, watchTask } from '@/tasks'
 import defaultLogo from '../assets/image_logo.svg?url'
-import defaultTextLogo from '../assets/text_logo_dark.svg?url'
+import defaultTextLogo from '../assets/mnk/logo-dark.svg?url'
 
 // chrome autofill behaviour can be troublemaker:
 // https://bugs.chromium.org/p/chromium/issues/detail?id=669724

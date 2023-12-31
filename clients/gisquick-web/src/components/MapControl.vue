@@ -37,7 +37,7 @@
       class="icon"
       @click="zoomToMax"
     >
-      <v-icon name="zoom-max"/>
+      <v-icon name="arrows-in"/>
     </v-btn>
   </div>
 </template>
