@@ -67,7 +67,7 @@
 
 <script lang="js">
 import pickBy from 'lodash/pickBy'
-import PopupContent from './PopupContent.vue'
+import PopupContent from './PopupContent2.vue'
 import VActionList from './ActionList.vue'
 import { elementBounds } from './utils/popup'
 import growTransition from './transitions/grow'

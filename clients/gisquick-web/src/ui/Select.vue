@@ -116,7 +116,7 @@
 <script lang="js">
 import debounce from 'lodash/debounce'
 import InputField from './InputField.vue'
-import PopupContent from './PopupContent.vue'
+import PopupContent from './PopupContent2.vue'
 import DocumentListener from './DocumentListener.js'
 import { escapeRegExp, removeDiacritics } from './utils/text'
 import { elementBounds } from './utils/popup'
