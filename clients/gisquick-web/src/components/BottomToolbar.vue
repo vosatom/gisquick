@@ -68,7 +68,7 @@ export default {
   box-shadow: 0 -1px 8px 0 rgba(0,0,0,.2), 0 -3px 3px -2px rgba(0,0,0,.12);
 
   .logo {
-    width: 288px;
+    width: 330px;
     text-align: center;
     height: inherit;
     padding: 4px 0;

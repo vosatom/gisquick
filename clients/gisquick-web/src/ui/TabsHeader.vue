@@ -1,5 +1,5 @@
 <template>
-  <div class="tabs-header">
+  <div class="tabs-header mb-2">
     <div class="slider" :style="sliderStyle"/>
     <div
       v-for="item in items"
@@ -61,6 +61,7 @@ export default {
     flex-grow: 1;
     flex-basis: 0;
     position: relative;
+    border-radius: 5px;
     &:not(:last-child)::after {
       content: "";
       position: absolute;
@@ -85,7 +86,6 @@ export default {
     background-color: var(--color-primary);
     bottom: 0;
     transition: .3s cubic-bezier(.25,.8,.5,1);
-
   }
 }
 </style>

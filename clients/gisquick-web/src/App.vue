@@ -67,6 +67,7 @@ import IntroPage from '@/IntroPage.vue'
 import ProjectNotFound from '@/ProjectNotFound.vue'
 import DesktopMap from '@/components/Map.vue'
 import MobileMap from '@/modules/mnk/MobileMap.vue'
+import MNKMap from '@/modules/mnk/MNKMap.vue'
 import LoginDialog from '@/components/LoginDialog.vue'
 import EmbedMap from '@/components/EmbedMap.vue'
 import PopupLayer from '@/ui/PopupLayer.vue'
@@ -102,7 +103,7 @@ export default {
       if (this.isEmbed) {
         return EmbedMap;
       }
-      return async () => window.env.mobile ? MobileMap : DesktopMap
+      return async () => window.env.mobile ? MobileMap : MNKMap
     },
     projectName () {
       return new URLSearchParams(location.search).get('PROJECT') || this.app.landing_project

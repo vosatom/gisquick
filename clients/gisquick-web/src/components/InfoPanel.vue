@@ -82,6 +82,7 @@
 import GenericInfopanel from '@/components/GenericInfopanel.vue'
 import FeatureEditor from '@/components/feature-editor/FeatureEditor.vue'
 import { externalComponent } from '@/components-loader'
+import PoiInfoPanel from '@/extensions/PoiInfoPanel/PoiInfoPanel'
 import { fetchRelationsData } from './fetchRelationsData'
 
 export default {
@@ -114,6 +115,9 @@ export default {
       return this.selected && this.features[this.index]
     },
     formComponent () {
+      if (this.layer.infopanel_component === 'PoiInfoPanel') {
+        return PoiInfoPanel
+      }
       if (this.layer.infopanel_component) {
         try {
           const project = this.$store.state.project.config
@@ -163,8 +167,8 @@ export default {
 <style lang="scss" scoped>
 .info-panel {
   position: relative;
-  border-radius: 3px;
-  border: 1px solid #aaa;
+  border-radius: 6px;
+  // border: 1px solid #aaa;
   background-color: #fff;
   overflow: hidden;
   @media (min-width: 501px) {

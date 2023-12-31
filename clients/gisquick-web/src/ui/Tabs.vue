@@ -127,7 +127,7 @@ export default {
     position: relative;
     &.animation {
       // transition: transform .4s ease;
-      transition: .4s ease;
+      // transition: .4s ease;
       transition-property: transform, height;
       // transition: transform .4s cubic-bezier(.25,.8,.5,1);
     }

@@ -3,7 +3,7 @@ import Vue from 'vue'
 import Overlay from 'ol/Overlay'
 
 import Spinner from '@/ui/Spinner.vue'
-import Poi from '@/assets/poi.svg?component'
+import poi from '@/assets/mnk/poi.png?url'
 
 export function createMarker () {
   const wrapper = document.createElement('div')
@@ -17,7 +17,7 @@ export function createMarker () {
     render () {
       return (
         <div class="point-marker">
-          <Poi class="poi"/>
+          <img src={poi} />
           <transition name="fade">
             <Spinner vShow={this.loading} size="21" width="4.5"/>
           </transition>
@@ -89,7 +89,7 @@ export default {
   .spinner {
     align-self: start;
     margin-top: 5.5px;
-    color: #555;
+    color: #fff;
   }
   .error {
     align-self: start;
