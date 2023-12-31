@@ -90,7 +90,7 @@
 <script lang="js">
 import clamp from 'lodash/clamp'
 import pick from 'lodash/pick'
-import PopupContent from './PopupContent.vue'
+import PopupContent from './PopupContent2.vue'
 import InputField from './InputField.vue'
 import { elementBounds } from './utils/popup'
 import { colorVars } from './utils/colors'

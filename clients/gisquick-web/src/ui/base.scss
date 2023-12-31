@@ -82,19 +82,13 @@
   min-width: inherit;
   font-size: 14px;
   padding: 3px 0;
-  @media (min-width: 600px) {
-    max-height: 70vh;
-    max-width: 500px;
-  }
   .separator {
     font-size: 13px;
     opacity: 0.75;
   }
   .item {
-    min-width: 200px;
     // padding: 0 12px;
     padding: 0 2px;
-    min-height: 36px;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -126,6 +120,17 @@
       opacity: 0.5;
       pointer-events: none;
     }
+  }
+}
+
+.popup-list {
+  @media (min-width: 600px) {
+    max-height: 70vh;
+    max-width: 500px;
+  }
+  .item {
+    min-width: 200px;
+    min-height: 36px;
   }
 }
 .popup-container {
