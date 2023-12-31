@@ -1,26 +1,33 @@
 import { type Meta } from '@storybook/vue3'
-import Map from '@/components/MNKMap.vue'
+import { createBrowserHistory } from 'history'
+import { provide } from 'vue'
 
-import { store } from '@/store/typed'
-
+import { languageControl } from '../constants'
 import appData from '../mocks/app.json'
 import project from '../mocks/project-mnk.json'
 
-import Map from '@/modules/mnk/MNKMap.vue'
+import DesktopMap from '@/components/Map.vue'
+import MNKDesktopMap from '@/modules/mnk/MNKMap.vue'
 import { config } from '@/modules/routing/config'
 import { setup } from '@/modules/storybook-compat'
 import { store } from '@/store/typed'
 import Swiper from '@/swiper'
 
 export default {
-  title: 'Mobile Components/MNK Map',
+  title: 'App',
   component: Map,
   parameters: {
     layout: 'fullscreen',
   },
-  render: (args) => ({
-    components: { Map },
-    setup() {
+  argTypes: {
+    language: languageControl,
+  },
+  render: (args, { parameters }) => ({
+    components: { Map: parameters.component },
+    props: ['language'],
+    setup(props) {
+      provide('history', createBrowserHistory())
+
       setup((app) => {
         store.commit('routing/init', { config })
         store.commit('app', appData.app)
@@ -32,8 +39,22 @@ export default {
 
       return { args }
     },
+    watch: {
+      language(language) {
+        this.$language.current = language
+      },
+    },
     template: `<div class="f-col" style="width:100vw;height:100vh;"><Map v-bind="args"/></div>`,
   }),
 } as Meta
 
-export const Primary = {}
+export const Desktop = {
+  parameters: {
+    component: DesktopMap,
+  },
+}
+export const DesktopMNK = {
+  parameters: {
+    component: MNKDesktopMap,
+  },
+}
