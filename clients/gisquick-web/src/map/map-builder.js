@@ -145,7 +145,7 @@ export function createQgisLayer (config, projectConfig) {
         },
         serverType: 'qgis',
         ratio: 1,
-        interpolate: false,
+        hidpi: false,
         imageLoadFunction: debounce((image, src) => {
           image.getImage().src = src
         }, 90)
