@@ -6,113 +6,17 @@ import type {
   Instruction as GraphhopperInstruction,
   IsolinePayload,
 } from './types'
-import { BaseTransformer, type IBaseTransformer } from '../../base/transformer'
 import type {
   Instruction,
   IsolineResult,
   Path,
   RouteResult,
-  SignName,
 } from '../../base/types'
+import { GraphhopperTransformer } from '../graphhopper/transformer'
 
 const DEFAULT_COLORS = ['#bf4040', '#bfaa40', '#6abf40']
 
-export class GraphhopperTransformer
-  extends BaseTransformer
-  implements IBaseTransformer
-{
-  /**
-   * Taken from https://github.com/graphhopper/directions-api-js-client/blob/master/src/GHUtil.js
-   */
-  decodePath(encoded: string, is3D = false) {
-    const len = encoded.length
-    let index = 0
-    const array = []
-    let lat = 0
-    let lng = 0
-    let ele = 0
-
-    while (index < len) {
-      let b
-      let shift = 0
-      let result = 0
-      do {
-        b = encoded.charCodeAt(index++) - 63
-        result |= (b & 0x1f) << shift
-        shift += 5
-      } while (b >= 0x20)
-      const deltaLat = result & 1 ? ~(result >> 1) : result >> 1
-      lat += deltaLat
-
-      shift = 0
-      result = 0
-      do {
-        b = encoded.charCodeAt(index++) - 63
-        result |= (b & 0x1f) << shift
-        shift += 5
-      } while (b >= 0x20)
-      const deltaLon = result & 1 ? ~(result >> 1) : result >> 1
-      lng += deltaLon
-
-      if (is3D) {
-        // elevation
-        shift = 0
-        result = 0
-        do {
-          b = encoded.charCodeAt(index++) - 63
-          result |= (b & 0x1f) << shift
-          shift += 5
-        } while (b >= 0x20)
-        const deltaEle = result & 1 ? ~(result >> 1) : result >> 1
-        ele += deltaEle
-        array.push([lng * 1e-5, lat * 1e-5, ele / 100])
-      } else array.push([lng * 1e-5, lat * 1e-5])
-    }
-    // let end = new Date().getTime();
-    // console.log("decoded " + len + " coordinates in " + ((end - start) / 1000) + "s");
-    return array
-  }
-
-  /** Match GH instructions as close as possible */
-  private getSignName(sign: number): SignName {
-    switch (sign) {
-      case -98: // an U-turn without the knowledge if it is a right or left U-turn
-        return 'uturn'
-      case -8: // a left U-turn
-        return 'uturn'
-      case -7: // keep left
-        return 'fork_left'
-      case -6: // not yet used: leave roundabout
-        return 'roundabout'
-      case -3: // turn sharp left
-        return 'turn_sharp_left'
-      case -2: // turn left
-        return 'turn_left'
-      case -1: // turn slight left
-        return 'turn_slight_left'
-      case 0: // continue on street
-        return 'depart'
-      case 1: // turn slight right
-        return 'turn_slight_right'
-      case 2: // turn right
-        return 'turn_right'
-      case 3: // turn sharp right
-        return 'turn_sharp_right'
-      case 4: // the finish instruction before the last point
-        return 'arrive'
-      case 5: // the instruction before a via point
-        return 'arrive'
-      case 6: // the instruction before entering a roundabout
-        return 'roundabout'
-      case 7: // keep right
-        return 'fork_right'
-      case 8: // a right U-turn
-        return 'uturn'
-      default: // For future compatibility it is important that all clients are able to handle also unknown instruction sign numbers
-        return 'unknown'
-    }
-  }
-
+export class FakeTransformer extends GraphhopperTransformer {
   transformInstruction(instruction: GraphhopperInstruction): Instruction {
     return {
       text: instruction.text,
@@ -148,7 +52,7 @@ export class GraphhopperTransformer
       }
 
       if (path.details) {
-        (['road_class', 'surface', 'get_off_bike'] as const).forEach(
+        ;(['road_class', 'surface', 'get_off_bike'] as const).forEach(
           (detailKey) => {
             transformedPath.details[detailKey] = path.details[detailKey]
           },

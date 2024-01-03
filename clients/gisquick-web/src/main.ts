@@ -29,6 +29,7 @@ import {
   SwitchTransition,
   SlideTop
 } from './components/transitions'
+import modules from './modules'
 
 // import all icons for hot reload functionality in dev mode
 if (process.env.NODE_ENV === 'development') {
@@ -53,6 +54,7 @@ Vue.use(ReactiveRefs)
 Vue.use(GetTextPlugin, { translations, defaultLanguage: 'en-us', muteLanguages: ['en-us'] })
 
 // register general purpose components globally
+Vue.use(modules)
 Vue.use(UI)
 Vue.component('scroll-area', mobile ? BasicScrollArea : ScrollArea)
 // Vue.component('scroll-area', BasicScrollArea)

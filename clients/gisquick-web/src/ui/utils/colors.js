@@ -2,9 +2,9 @@ export function hexColor (array) {
   return '#' + array.map(v => v.toString(16).padStart(2, '0')).join('')
 }
 
-export function hexToRgb (hex) {
+export function hexToRgb (hex, _alpha = 1) {
   hex = hex.replace('#', '')
-  let alpha = 255
+  let alpha = _alpha
   if (hex.length === 8) {
     alpha = parseInt(hex.slice(6), 16) / 255
     hex = hex.slice(0, 6)
