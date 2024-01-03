@@ -17,6 +17,17 @@
         </div>
 
         <div class="instruction-info f-row-ac">
+          <img
+            :src="walk"
+            v-if="details.get_off_bike?.[index].includes(true)"
+            :title="tr.GetOffBike"
+          />
+          <img
+            :src="steps"
+            v-if="details.road_class?.[index].includes('steps')"
+            :title="tr.Steps"
+          />
+
           <span v-if="instruction.time > 30" :title="tr.Duration">
             {{ formatDuration(instruction.time) }}
           </span>
@@ -29,8 +40,16 @@
     </ul>
 
     <div ref="instructionPopupRef" class="instruction-overlay">
-      <div v-if="activeInstruction">
+      <div v-if="activeInstruction" class="f-row-ac gap-1">
         {{ activeInstruction.text }}
+        <img
+          :src="walk"
+          v-if="details.get_off_bike?.[activeInstructionIndex].includes(true)"
+        />
+        <img
+          :src="steps"
+          v-if="details.road_class?.[activeInstructionIndex].includes('steps')"
+        />
       </div>
 
       <div class="instruction-overlay-background">
@@ -50,12 +69,16 @@ import { ref, onMounted, computed, watch } from 'vue'
 import { useVectorLayer } from '../composables/useVectorLayer'
 import { instructionHoverStyle } from '../mapStyles'
 import { formatDistance, formatDuration } from '../util/formatters'
+import { getInstructionsDetails } from '../util/getInstructionsDetails'
 
 import { useOlMap } from '@/composables/useOlMap'
 import type { Path, Instruction, Interval } from '@/modules/services/base/types'
 import { useGettext } from '@/modules/vue-gettext'
 import { useStore } from '@/store/typed'
 import { cssColor, interpolate } from '@/ui/utils/colors'
+
+const steps = '/map/mnk/stairs.png'
+const walk = '/map/mnk/walk.png'
 
 const { $gettext } = useGettext()
 
@@ -76,6 +99,8 @@ const tr = computed(() => {
     Duration: $gettext('Duration'),
     Distance: $gettext('Distance'),
     ZoomTo: $gettext('Zoom to'),
+    GetOffBike: $gettext('Get off bike'),
+    Steps: $gettext('Steps'),
   }
 })
 
@@ -140,7 +165,7 @@ watch(
     if (highlightGeometry) {
       instructionPopup.setPosition(highlightGeometry.getFirstCoordinate())
       hoverFeature.setGeometry(highlightGeometry)
-      
+
       hoverFeature.set(
         'pathColor',
         cssColor(
@@ -154,6 +179,13 @@ watch(
     }
   },
   { immediate: true },
+)
+
+const details = computed(() =>
+  getInstructionsDetails(
+    props.selectedPath.instructions,
+    props.selectedPath.details,
+  ),
 )
 </script>
 
