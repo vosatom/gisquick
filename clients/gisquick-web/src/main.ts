@@ -16,7 +16,7 @@ import VImage from '@/components/image/Image.vue'
 import GenericInfopanel from '@/components/GenericInfopanel.vue'
 
 import translations from './translations'
-import '@/assets/fonts/fonts.css'
+// import '@/assets/fonts/fonts.css'
 import '@/ui/base.scss'
 import '@/ui/layout.scss'
 import '@/ui/transitions/transitions.scss'

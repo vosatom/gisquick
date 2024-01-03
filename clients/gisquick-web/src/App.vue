@@ -227,9 +227,8 @@ export default {
 html {
   overflow: auto;
   font-size: 16px;
-  font-family: Roboto,sans-serif;
+  font-family: "IBM Plex Sans",sans-serif;
   line-height: 1.5;
-  word-spacing: 1px;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   -moz-osx-font-smoothing: grayscale;
