@@ -155,6 +155,10 @@ export interface Path {
 
   /** Snapped waypoints */
   waypoints?: number[][]
+  /** Path color */
+  color?: string
+  /** Path label */
+  label?: string
 }
 
 export type Interval = [number, number]

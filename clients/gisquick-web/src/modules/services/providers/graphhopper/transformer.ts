@@ -68,13 +68,11 @@ export class GraphhopperTransformer
         array.push([lng * 1e-5, lat * 1e-5, ele / 100])
       } else array.push([lng * 1e-5, lat * 1e-5])
     }
-    // let end = new Date().getTime();
-    // console.log("decoded " + len + " coordinates in " + ((end - start) / 1000) + "s");
     return array
   }
 
   /** Match GH instructions as close as possible */
-  private getSignName(sign: number): SignName {
+  protected getSignName(sign: number): SignName {
     switch (sign) {
       case -98: // an U-turn without the knowledge if it is a right or left U-turn
         return 'uturn'

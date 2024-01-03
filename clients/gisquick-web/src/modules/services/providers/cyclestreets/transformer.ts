@@ -47,6 +47,28 @@ export class CyclestreetsTransformer
     }
   }
 
+  private planToColor(plan: string): string {
+    switch (plan) {
+      case 'fastest':
+        return '#e44141'
+      case 'quietest':
+        return '#5fb35f'
+      case 'balanced':
+        return '#ffe86f'
+      default:
+        return '#7f7fff'
+    }
+  }
+
+  private translateLabel(label: string) {
+    const tr: Record<string, string> = {
+      fastest: $gettext('Fastest'),
+      quietest: $gettext('Quietest'),
+      balanced: $gettext('Balanced'),
+    }
+    return tr[label] ?? label
+  }
+
   /** Map road class to OSM (https://wiki.openstreetmap.org/wiki/Key:highway) */
   private mapRoadClass(roadClass: string) {
     const mapping: Record<string, string> = {
@@ -103,16 +125,25 @@ export class CyclestreetsTransformer
             }),
           )
 
+          path.descend = 0
+          path.ascend = 0
+
           if (options.includeElevations) {
-            path.elevations = marker.elevations
+            const elevations = marker.elevations
               .split(',')
               .map((c) => parseFloat(c))
+
+            const { ascend, descend } = summarizeElevations(elevations)
+            path.ascend = ascend
+            path.descend = descend
+            path.elevations = elevations
           }
 
           path.distance = parseFloat(marker.length)
           path.time = parseFloat(marker.time)
-          path.descend = 0
-          path.ascend = 0
+
+          path.color = this.planToColor(marker.plan)
+          path.label = this.translateLabel(marker.plan)
 
           path.bbox = [
             marker.west,

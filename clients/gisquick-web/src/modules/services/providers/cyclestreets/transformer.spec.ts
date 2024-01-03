@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { expect, test } from 'vitest'
 
-import mockData from './mock.json'
+import mockData from './mock/route.json'
 import { CyclestreetsTransformer } from './transformer'
 import { expectRouteTransformer } from '../../base/transformerTest'
 
@@ -28,6 +28,7 @@ test('cyclestreets route transformer', () => {
     provider: 'cyclestreets',
     paths: [
       {
+        label: 'Balanced',
         instructions: [
           {
             text: 'Na Šťáhlavce',
@@ -98,6 +99,7 @@ test('cyclestreets route transformer', () => {
         time: 901,
         descend: 16,
         ascend: 66,
+        color: '#e44141',
         waypoints: [
           [14.38581, 50.11095],
           [14.37183, 50.10126],
@@ -118,5 +120,7 @@ test('cyclestreets route transformer', () => {
         },
       },
     ],
+
+    atribution: ['CycleStreets', 'OpenStreetMap contributors'],
   })
 })

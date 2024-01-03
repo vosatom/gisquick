@@ -125,7 +125,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['user']),
+    ...mapState(['user', 'routing']),
     toolsMenuItems () {
       const tools = (this.$refs.tools && this.$refs.tools.items) || []
       return tools.filter(t => !t.disabled)

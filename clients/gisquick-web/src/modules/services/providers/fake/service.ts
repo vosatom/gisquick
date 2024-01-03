@@ -247,8 +247,6 @@ MockService.buildMethods(MockService, {
   },
 
   async autocompleteLookup({ id, autocompleteResults }) {
-    console.log({ id, autocompleteResults })
-
     // Try to take posititon from previous autocomplete result - undocumented
     const entry = autocompleteResults?.features.find((e) => e.id === id)
     if (!entry) {

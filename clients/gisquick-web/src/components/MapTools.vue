@@ -38,6 +38,7 @@ import Identification from '@/components/Identification.vue'
 import Measure from '@/components/measure/Measure.vue'
 import Print from '@/components/print/Print.vue'
 import MobileAttributesTable from '@/components/MobileAttributesTable.vue'
+import Routing from '@/modules/routing/components/Sidebar.vue'
 
 export default {
   props: {
@@ -74,6 +75,13 @@ export default {
         name: 'hidden-identification', // idea: try empty string (because of permalink)
         data: this.identificationSettings,
         component: Identification
+      }
+    },
+    routingTool () {
+      return {
+        type: 'tool',
+        name: 'routing',
+        component: Routing
       }
     },
     measureTool () {
@@ -132,6 +140,7 @@ export default {
     },
     items () {
       return [
+        this.routingTool,
         this.hiddenIdentificationTool,
         this.identificationTool,
         this.measureTool,
