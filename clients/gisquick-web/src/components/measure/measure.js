@@ -301,7 +301,7 @@ export function DistanceMeasure (map) {
       if (this.items.length) {
         this.items.forEach(v => {
           v.length = base.format.length(v._length)
-          base.getFeature(v.id).set('label', v.length)
+          base.getFeature(v.id)?.set('label', v.length)
           v.segments.forEach(s => {
             s.label = base.format.length(s.length)
           })
@@ -459,7 +459,7 @@ export function AreaMeasure (map) {
         this.items.forEach(v => {
           v.perimeter = base.format.length(v._perimeter)
           v.area = base.format.area(v._area)
-          base.getFeature(v.id).set('label', v.area)
+          base.getFeature(v.id)?.set('label', v.area)
           v.segments.forEach(s => {
             s.label = base.format.length(s.length)
           })
