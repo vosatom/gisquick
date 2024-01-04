@@ -33,10 +33,10 @@
                 <div class="order-label f-row-ac" v-text="i + 1"/>
                 <div class="field" v-text="l.coord1"/>
                 <div class="field" v-text="l.coord2"/>
-                <v-btn class="icon" @click="zoomTo(location.getFeature(l.id))">
+                <v-btn :aria-label="tr.ZoomTo" class="icon" @click="zoomTo(location.getFeature(l.id))">
                   <v-icon name="zoom-to"/>
                 </v-btn>
-                <v-btn class="icon" @click="location.remove(i)">
+                <v-btn :aria-label="tr.Delete" class="icon" @click="location.remove(i)">
                   <v-icon name="delete_forever"/>
                 </v-btn>
               </div>
@@ -82,10 +82,10 @@
               >
                 <div class="order-label f-row-ac" v-text="i + 1"/>
                 <div class="field" v-text="d.length"/>
-                <v-btn class="icon" @click="zoomTo(distance.getFeature(d.id))">
+                <v-btn :aria-label="tr.ZoomTo" class="icon" @click="zoomTo(distance.getFeature(d.id))">
                   <v-icon name="zoom-to"/>
                 </v-btn>
-                <v-btn class="icon" @click="distance.remove(i)">
+                <v-btn :aria-label="tr.Delete" class="icon" @click="distance.remove(i)">
                   <v-icon name="delete_forever"/>
                 </v-btn>
               </div>
@@ -133,10 +133,10 @@
                 <div class="order-label f-row-ac" v-text="i + 1"/>
                 <div class="field" v-text="a.perimeter"/>
                 <div class="field" v-text="a.area"/>
-                <v-btn class="icon" @click="zoomTo(area.getFeature(a.id))">
+                <v-btn :aria-label="tr.ZoomTo" class="icon" @click="zoomTo(area.getFeature(a.id))">
                   <v-icon name="zoom-to"/>
                 </v-btn>
-                <v-btn class="icon" @click="area.remove(i)">
+                <v-btn :aria-label="tr.Delete" class="icon" @click="area.remove(i)">
                   <v-icon name="delete_forever"/>
                 </v-btn>
               </div>
@@ -198,7 +198,9 @@ export default {
         Clear: this.$gettext('Clear'),
         ClearAll: this.$gettext('Clear all'),
         CoordinateSystems: this.$gettext('Coordinate systems'),
-        Units: this.$gettext('Units')
+        Units: this.$gettext('Units'),
+        Delete: this.$gettext('Delete'),
+        ZoomTo: this.$gettext('Zoom to')
       }
     },
     availableUnits () {
