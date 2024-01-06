@@ -36,6 +36,7 @@
         <div>
           <feature-editor
             v-if="editMode"
+            ref="featureEditor"
             class="edit-form"
             toolbar-target="infopanel-tool"
             :feature="feature"
@@ -83,10 +84,12 @@ import FeatureEditor from '@/components/feature-editor/FeatureEditor.vue'
 import { externalComponent } from '@/components-loader'
 import PoiInfoPanel from '@/extensions/PoiInfoPanel/PoiInfoPanel'
 import { fetchRelationsData } from './fetchRelationsData'
+import { onKeyDown } from '@vueuse/core'
 
 export default {
   name: 'info-panel',
   components: { GenericInfopanel, FeatureEditor },
+  refs: ['featureEditor'],
   props: {
     selected: Object,
     layer: Object,
@@ -98,6 +101,41 @@ export default {
     return {
       relationsData: null,
     }
+  },
+  mounted() {
+    onKeyDown('Escape', (event) => {
+      if (this.editMode && (event.shiftKey || !this.$refs.featureEditor?.isModified)) {
+        this.$emit('update:editMode', false)
+      } else if (!this.editMode) {
+        this.$emit('close')
+      }
+    })
+    onKeyDown(true, (event) => {
+      const modifierKeyPressed = event.metaKey || event.ctrlKey
+      if (!modifierKeyPressed) return
+
+      let action = ''
+
+      const key = event.code
+      if (key === 'KeyS') action = 'save'
+      if (key === 'KeyE') action = 'edit'
+      
+      switch(action) {
+        case 'save':{
+          if (this.$refs.featureEditor?.save) {
+            this.$refs.featureEditor?.save()
+          }
+          break
+        }
+        case 'edit':{
+          this.$emit('update:editMode', true)
+          break
+        }
+      }
+      if (action) {
+        event.preventDefault()
+      }
+    })
   },
   computed: {
     layersOptions () {

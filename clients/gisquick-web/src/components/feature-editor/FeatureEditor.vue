@@ -238,6 +238,9 @@ export default {
   beforeDestroy () {
     this.restore()
   },
+  mounted() {
+    this.$el.querySelector('input')?.focus() 
+  },
   methods: {
     restore () {
       this.fields = getFeatureFields(this.feature)
