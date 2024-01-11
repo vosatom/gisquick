@@ -2,7 +2,7 @@ import VectorTileLayer from 'ol/layer/VectorTile'
 import VectorTileSource from 'ol/source/VectorTile'
 import MVT from 'ol/format/MVT'
 
-import { applyStyle } from 'ol-mapbox-style'
+// import { applyStyle } from 'ol-mapbox-style'
 
 
 export function vectorTileLayer (layerConfig) {
@@ -20,7 +20,7 @@ export function vectorTileLayer (layerConfig) {
 
 export async function mapboxLayerFromURL (url) {
   const layer = new VectorTileLayer({ declutter: true })
-  await applyStyle(layer, url)
+  // await applyStyle(layer, url)
   return layer
 }
 

@@ -18,15 +18,19 @@ const config: StorybookConfig = {
   viteFinal(config) {
     return {
       ...config,
+      build: {
+        ...config.build,
+        sourcemap: false,
+      },
       resolve: {
         ...config.resolve,
         alias: {
           ...config.resolve?.alias,
           '@/icons': fileURLToPath(new URL('../icons', import.meta.url)),
-          '@storybook/vue3': '@storybook/vue'
-        }
-      }
+          '@storybook/vue3': '@storybook/vue',
+        },
+      },
     }
-  }
-};
-export default config;
+  },
+}
+export default config
