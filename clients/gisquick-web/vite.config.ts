@@ -117,11 +117,17 @@ export default defineConfig(() => {
     server: {
       port: 3000,
       proxy: {
-        '^/api': {
-          target: env.DEV_API_PROXY_TARGET ?? 'http://localhost',
+        "/ws": {
+          ws: true,
+          target: 'ws://127.0.0.1:8002',
+          secure: false,
+          changeOrigin: true,
+        },
+        "/api": {
+          target: 'http://127.0.0.1:8002',
           changeOrigin: true,
           secure: false,
-        },
+        }
       },
     },
     resolve: {
