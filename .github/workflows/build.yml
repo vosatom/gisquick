@@ -1,0 +1,103 @@
+# https://docs.docker.com/build/ci/github-actions/multi-platform/
+name: Test, build and deploy
+
+on:
+  push:
+    branches:
+      - 'master'
+      - 'develop'
+      - 'release'
+
+env:
+  REGISTRY: docker.io
+  DEPLOYMENT_NAME: gisquick.${{ github.ref_name }}
+  USER_NAME: ${{ secrets.DOCKERHUB_USERNAME }}
+  IMAGE_NAME: gisquick-web-map
+  APP_NAME: web-map
+  BASE_PATH: clients/gisquick-web
+
+jobs:
+  test:
+    # if: github.event_name == 'push' && github.event.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./${{ env.BASE_PATH }}
+    steps:
+      - name: Checkout Commit
+        uses: actions/checkout@v4
+      - name: Install dependencies if cache invalid
+        run: npm install
+      - name: Run unit tests
+        run: npm run test:unit
+
+  build-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    outputs:
+      tags: ${{ steps.meta.outputs.tags }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Log into registry ${{ env.REGISTRY }}
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.USER_NAME }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,value=latest
+            type=ref,event=branch
+            type=sha,format=long
+
+      - name: Build and push Docker image
+        id: build-and-push
+        uses: docker/build-push-action@v5
+        with:
+          platforms: linux/amd64
+          context: ./${{ env.BASE_PATH }}
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build-push
+
+    steps:
+      - name: Checkout k8 repository
+        uses: actions/checkout@v4
+        with:
+          repository: vosatom/mnk-k8s
+          token: ${{ secrets.PAT }}
+          path: k8s
+
+      - name: Update values.yaml
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq -i '.gisquick.env[0]["${{ env.APP_NAME }}"].tag = "sha-'${GITHUB_SHA}'"' ./k8s/manifests/ytt/values/${{ env.DEPLOYMENT_NAME }}.yml
+
+      - name: Push values.yaml
+        working-directory: k8s
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git commit -am "manifests/ytt: bump ${{ env.DEPLOYMENT_NAME }}(${{ env.IMAGE_NAME }}) app build image to version ${GITHUB_SHA}"
+          git push

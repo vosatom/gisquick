@@ -1,0 +1,39 @@
+name: 'Tests'
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+      - 'releases/**'
+
+jobs:
+  ui-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: clients/gisquick-web
+    steps:
+    - name: Checkout Commit
+      uses: actions/checkout@v4
+    - name : Cache
+      uses: actions/cache@v3
+      with:
+        path: "clients/gisquick-web/node_modules"
+        key: node-modules-${{ hashFiles('clients/gisquick-web/package-lock.json') }}
+    - name: Install dependencies
+      run: npm ci
+    - name: Build Storybook
+      run: npm run build-storybook --quiet
+    - name: Run Cypress
+      uses: cypress-io/github-action@v4
+      with:
+        start: npx http-server storybook-static --port 6006 --silent
+        wait-on: 'http://localhost:6006'
+        working-directory: ./clients/gisquick-web
+    - uses: actions/upload-artifact@v3
+      if: failure()
+      with:
+        name: cypress-screenshots
+        path: cypress/screenshots
+        if-no-files-found: ignore
