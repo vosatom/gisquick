@@ -1,0 +1,699 @@
+{
+  "base_layers": [
+    {
+      "name": "OpenStreetMap",
+      "title": "OpenStreetMap",
+      "type": "RasterLayer",
+      "projection": "EPSG:3857",
+      "metadata": {
+        "abstract": "",
+        "keyword_list": ""
+      },
+      "extent": [-20037508, -20037508, 20037508, 20037508],
+      "provider_type": "wms",
+      "source": {
+        "type": "xyz",
+        "url": "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+        "zmax": "19",
+        "zmin": "0"
+      },
+      "visible": true,
+      "url": "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+      "format": "",
+      "wms_layers": null
+    }
+  ],
+  "description": "Description",
+  "custom": {},
+  "bookmarks": {
+    "Cities": {
+      "pardubice": {
+        "extent": [1738274, 6441508, 1769154, 6468261],
+        "group": "Cities",
+        "id": "pardubice",
+        "name": "Pardubice",
+        "rotation": 0
+      }
+    }
+  },
+  "formatters": [
+    {
+      "name": "New EUR format",
+      "locale": "cs",
+      "config": {
+        "style": "currency",
+        "currency": "EUR"
+      }
+    }
+  ],
+  "layers": [
+    {
+      "layers": [
+        {
+          "name": "Places",
+          "title": "Places",
+          "type": "VectorLayer",
+          "projection": "EPSG:3857",
+          "metadata": {
+            "abstract": "The capitals of central Europe",
+            "keyword_list": "place, capital"
+          },
+          "attribution": {
+            "title": "Made with Natural Earth. Free vector and raster map data @ naturalearthdata.com.",
+            "url": "http://www.naturalearthdata.com"
+          },
+          "attributes": [
+            {
+              "alias": "Name",
+              "name": "name",
+              "type": "text",
+              "widget": "TextEdit",
+              "config": {
+                "IsMultiline": "0",
+                "UseHtml": "0"
+              }
+            },
+            {
+              "alias": "Country",
+              "name": "adm0name",
+              "type": "text",
+              "widget": "TextEdit",
+              "config": {
+                "IsMultiline": "0",
+                "UseHtml": "0"
+              }
+            },
+            {
+              "alias": "Timezone",
+              "name": "timezone",
+              "type": "text",
+              "widget": "TextField",
+              "config": {
+                "IsMultiline": "0",
+                "UseHtml": "0"
+              }
+            }
+          ],
+          "drawing_order": 0,
+          "visible": true,
+          "hidden": false,
+          "queryable": true,
+          "wkb_type": "Point",
+          "permissions": {
+            "view": true,
+            "insert": false,
+            "update": false,
+            "delete": false,
+            "edit_geom": false
+          },
+          "attr_table_fields": ["name", "adm0name", "timezone"],
+          "info_panel_fields": ["name", "adm0name", "timezone"]
+        },
+        {
+          "name": "Roads",
+          "title": "Roads",
+          "type": "VectorLayer",
+          "projection": "EPSG:3857",
+          "metadata": {
+            "abstract": "The roads of Central Europe",
+            "keyword_list": "road, highway"
+          },
+          "attribution": {
+            "title": "Made with Natural Earth. Free vector and raster map data @ naturalearthdata.com.",
+            "url": "http://www.naturalearthdata.com"
+          },
+          "attributes": [
+            {
+              "alias": "Type",
+              "name": "type",
+              "type": "text",
+              "widget": "TextEdit",
+              "config": {
+                "IsMultiline": "0",
+                "UseHtml": "0"
+              }
+            },
+            {
+              "alias": "Length (km)",
+              "name": "length_km",
+              "type": "int",
+              "widget": "TextEdit",
+              "config": {
+                "IsMultiline": "0",
+                "UseHtml": "0"
+              }
+            },
+            {
+              "alias": "Label",
+              "name": "label",
+              "type": "text",
+              "widget": "TextEdit",
+              "config": {
+                "IsMultiline": "0",
+                "UseHtml": "0"
+              }
+            }
+          ],
+          "drawing_order": 1,
+          "visible": true,
+          "hidden": false,
+          "queryable": true,
+          "wkb_type": "MultiLineString",
+          "permissions": {
+            "view": true,
+            "insert": false,
+            "update": false,
+            "delete": false,
+            "edit_geom": false
+          },
+          "attr_table_fields": ["type", "length_km", "label"],
+          "info_panel_fields": ["type", "length_km", "label"]
+        }
+      ],
+      "mutually_exclusive": false,
+      "name": "Places and roads"
+    },
+    {
+      "layers": [
+        {
+          "name": "Visegrad_Four",
+          "title": "Visegrad Four",
+          "type": "VectorLayer",
+          "projection": "EPSG:3857",
+          "metadata": {
+            "abstract": "The Visegrad Four (also called the Visegrad Group, or V4) is an alliance of four Central European states Czech Republic, Hungary, Poland and Slovakia for the purposes of furthering their European integration as well as advancing their military, economic and energy cooperation with one another.",
+            "keyword_list": "visegrad, czech, hungary, poland, slovakia"
+          },
+          "attribution": {
+            "title": "Made with Natural Earth. Free vector and raster map data @ naturalearthdata.com.",
+            "url": "http://www.naturalearthdata.com"
+          },
+          "attributes": [
+            {
+              "alias": "Abbreviation",
+              "name": "adm0_a3",
+              "type": "text",
+              "widget": "MediaFile",
+              "config": {
+                "accept": ["video/*", "image/*"],
+                "directory": "prefix/",
+                "filename": "<random>",
+                "max_size": 10,
+                "provider_id": "test",
+                "relative_depth": 0
+              }
+            },
+            {
+              "alias": "Name",
+              "name": "name",
+              "type": "text",
+              "widget": "TextEdit",
+              "config": {
+                "IsMultiline": "0",
+                "UseHtml": "0"
+              }
+            },
+            {
+              "alias": "Population",
+              "name": "pop_est",
+              "type": "float",
+              "widget": "TextEdit",
+              "config": {
+                "IsMultiline": "0",
+                "UseHtml": "0"
+              }
+            },
+            {
+              "alias": "GDP",
+              "name": "gdp_md_est",
+              "type": "float",
+              "widget": "TextEdit",
+              "config": {
+                "IsMultiline": "0",
+                "UseHtml": "0"
+              },
+              "format": "New EUR format"
+            },
+            {
+              "alias": "Subregion",
+              "name": "subregion",
+              "type": "text",
+              "widget": "TextEdit",
+              "config": {
+                "IsMultiline": "0",
+                "UseHtml": "0"
+              }
+            }
+          ],
+          "drawing_order": 2,
+          "visible": true,
+          "hidden": false,
+          "queryable": true,
+          "wkb_type": "MultiPolygon",
+          "permissions": {
+            "view": true,
+            "insert": true,
+            "update": true,
+            "delete": true,
+            "edit_geom": true
+          },
+          "attr_table_fields": [
+            "adm0_a3",
+            "name",
+            "pop_est",
+            "gdp_md_est",
+            "subregion"
+          ],
+          "info_panel_fields": [
+            "adm0_a3",
+            "name",
+            "pop_est",
+            "gdp_md_est",
+            "subregion"
+          ]
+        },
+        {
+          "name": "Western_Countries",
+          "title": "Western Countries",
+          "type": "VectorLayer",
+          "projection": "EPSG:3857",
+          "metadata": {
+            "abstract": "The countries of western Europe - Austria, Germany, Liechtenstein and Switzerland",
+            "keyword_list": "western, austria, germany, liechtenstein, switzerland"
+          },
+          "attribution": {
+            "title": "Made with Natural Earth. Free vector and raster map data @ naturalearthdata.com.",
+            "url": "http://www.naturalearthdata.com"
+          },
+          "attributes": [
+            {
+              "alias": "Abbreviation",
+              "name": "adm0_a3",
+              "type": "text",
+              "widget": "TextEdit",
+              "config": {
+                "IsMultiline": "0",
+                "UseHtml": "0"
+              }
+            },
+            {
+              "alias": "Name",
+              "name": "name",
+              "type": "text",
+              "widget": "TextEdit",
+              "config": {
+                "IsMultiline": "0",
+                "UseHtml": "0"
+              }
+            },
+            {
+              "alias": "Population",
+              "name": "pop_est",
+              "type": "float",
+              "widget": "TextEdit",
+              "config": {
+                "IsMultiline": "0",
+                "UseHtml": "0"
+              }
+            },
+            {
+              "alias": "GDP",
+              "name": "gdp_md_est",
+              "type": "float",
+              "widget": "TextEdit",
+              "config": {
+                "IsMultiline": "0",
+                "UseHtml": "0"
+              }
+            },
+            {
+              "alias": "Subregion",
+              "name": "subregion",
+              "type": "text",
+              "widget": "TextEdit",
+              "config": {
+                "IsMultiline": "0",
+                "UseHtml": "0"
+              }
+            }
+          ],
+          "drawing_order": 3,
+          "visible": true,
+          "hidden": false,
+          "queryable": true,
+          "wkb_type": "MultiPolygon",
+          "permissions": {
+            "view": true,
+            "insert": false,
+            "update": false,
+            "delete": false,
+            "edit_geom": false
+          },
+          "attr_table_fields": [
+            "adm0_a3",
+            "name",
+            "pop_est",
+            "gdp_md_est",
+            "subregion"
+          ],
+          "info_panel_fields": [
+            "adm0_a3",
+            "name",
+            "pop_est",
+            "gdp_md_est",
+            "subregion"
+          ]
+        },
+        {
+          "name": "Other",
+          "title": "Other Countries",
+          "type": "VectorLayer",
+          "projection": "EPSG:3857",
+          "metadata": {
+            "abstract": "The other countries of Central Europe",
+            "keyword_list": "slovenia"
+          },
+          "attribution": {
+            "title": "Made with Natural Earth. Free vector and raster map data @ naturalearthdata.com.",
+            "url": "http://www.naturalearthdata.com"
+          },
+          "attributes": [
+            {
+              "alias": "Abbreviation",
+              "name": "adm0_a3",
+              "type": "text",
+              "widget": "TextEdit",
+              "config": {
+                "IsMultiline": "0",
+                "UseHtml": "0"
+              }
+            },
+            {
+              "alias": "Name",
+              "name": "name",
+              "type": "text",
+              "widget": "TextEdit",
+              "config": {
+                "IsMultiline": "0",
+                "UseHtml": "0"
+              }
+            },
+            {
+              "alias": "Population",
+              "name": "pop_est",
+              "type": "float",
+              "widget": "TextEdit",
+              "config": {
+                "IsMultiline": "0",
+                "UseHtml": "0"
+              }
+            },
+            {
+              "alias": "GDP",
+              "name": "gdp_md_est",
+              "type": "float",
+              "widget": "TextEdit",
+              "config": {
+                "IsMultiline": "0",
+                "UseHtml": "0"
+              }
+            },
+            {
+              "alias": "Subregion",
+              "name": "subregion",
+              "type": "text",
+              "widget": "TextEdit",
+              "config": {
+                "IsMultiline": "0",
+                "UseHtml": "0"
+              }
+            }
+          ],
+          "drawing_order": 4,
+          "visible": true,
+          "hidden": false,
+          "queryable": true,
+          "wkb_type": "MultiPolygon",
+          "permissions": {
+            "view": true,
+            "insert": false,
+            "update": false,
+            "delete": false,
+            "edit_geom": false
+          },
+          "attr_table_fields": [
+            "adm0_a3",
+            "name",
+            "pop_est",
+            "gdp_md_est",
+            "subregion"
+          ],
+          "info_panel_fields": [
+            "adm0_a3",
+            "name",
+            "pop_est",
+            "gdp_md_est",
+            "subregion"
+          ]
+        }
+      ],
+      "mutually_exclusive": false,
+      "name": "Countries"
+    },
+    {
+      "name": "webmap_photos_poi",
+      "title": "POI Photos",
+      "type": "VectorLayer",
+      "projection": "EPSG:4326",
+      "metadata": {},
+      "attributes": [
+        {
+          "alias": "Id",
+          "name": "id",
+          "type": "int",
+          "constrains": ["not_null", "unique"],
+          "widget": "Hidden"
+        },
+        {
+          "alias": "POI",
+          "name": "poi_id",
+          "type": "int",
+          "constrains": ["not_null"],
+          "widget": "RelationReference"
+        },
+        {
+          "alias": "Name",
+          "name": "name",
+          "type": "text"
+        },
+        {
+          "alias": "Description",
+          "name": "desc",
+          "type": "text"
+        },
+        {
+          "alias": "License",
+          "name": "license_id",
+          "type": "int",
+          "widget": "Hidden"
+        },
+        {
+          "alias": "Order",
+          "name": "order",
+          "type": "int",
+          "widget": "Hidden"
+        },
+        {
+          "alias": "Photo",
+          "name": "photo",
+          "type": "text",
+          "constrains": ["not_null"],
+          "widget": "MediaFile",
+          "config": {
+            "provider_id": "test"
+          }
+        },
+        {
+          "alias": "Author",
+          "name": "author_id",
+          "type": "int"
+        },
+        {
+          "alias": "Updated by",
+          "name": "updated_by_id",
+          "type": "int"
+        },
+        {
+          "alias": "Created at",
+          "name": "created_at",
+          "type": "datetime"
+        },
+        {
+          "alias": "Last modification",
+          "name": "last_modification",
+          "type": "datetime"
+        },
+        {
+          "alias": "Photographer",
+          "name": "photographer",
+          "type": "text"
+        },
+        {
+          "alias": "Status",
+          "name": "status_id",
+          "type": "int"
+        }
+      ],
+      "drawing_order": 32,
+      "visible": false,
+      "hidden": false,
+      "queryable": true,
+      "wkb_type": "Point",
+      "permissions": {
+        "view": true,
+        "insert": true,
+        "update": true,
+        "delete": true,
+        "edit_geom": true
+      },
+      "attr_table_fields": [
+        "id",
+        "poi_id",
+        "name",
+        "desc",
+        "license_id",
+        "order",
+        "photo",
+        "author_id",
+        "updated_by_id",
+        "created_at",
+        "last_modification",
+        "photographer",
+        "status_id"
+      ],
+      "info_panel_fields": [
+        "id",
+        "poi_id",
+        "name",
+        "desc",
+        "license_id",
+        "order",
+        "photo",
+        "author_id",
+        "updated_by_id",
+        "created_at",
+        "last_modification",
+        "photographer",
+        "status_id"
+      ]
+    }
+  ],
+  "name": "demo/osm",
+  "ows_project": "demo/osm",
+  "ows_url": "/api/map/ows/demo/osm",
+  "print_composers": [
+    {
+      "height": 211.69545454545454,
+      "labels": [
+        "gislab_project",
+        "gislab_author",
+        "gislab_copyrights",
+        "gislab_contact",
+        "Title"
+      ],
+      "map": {
+        "height": 177.99999999999994,
+        "name": "map0",
+        "width": 276,
+        "x": 10,
+        "y": 20
+      },
+      "name": "A4 Landscape",
+      "width": 297
+    },
+    {
+      "height": 298.69545454545454,
+      "labels": [
+        "gislab_project",
+        "gislab_author",
+        "gislab_copyrights",
+        "gislab_contact",
+        "Title"
+      ],
+      "map": {
+        "height": 264.9999999999981,
+        "name": "map0",
+        "width": 399,
+        "x": 10,
+        "y": 20
+      },
+      "name": "A3 Landscape",
+      "width": 420
+    },
+    {
+      "height": 297.69545454545454,
+      "labels": [
+        "gislab_project",
+        "gislab_author",
+        "gislab_copyrights",
+        "gislab_contact",
+        "Title"
+      ],
+      "map": {
+        "height": 263.5000000000003,
+        "name": "map0",
+        "width": 189.92500000000004,
+        "x": 10,
+        "y": 20
+      },
+      "name": "A4 Portrait",
+      "width": 210
+    }
+  ],
+  "project_extent": [-20037508, -20037508, 20037508, 20037508],
+  "projection": "EPSG:3857",
+  "projections": {
+    "EPSG:3857": {
+      "proj4": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs",
+      "is_geographic": false
+    }
+  },
+  "root_title": "Countries of Central Europe",
+  "scales": [
+    591658710.9, 295829355.45, 147914677.73, 73957338.86, 36978669.43,
+    18489334.72, 9244667.36, 4622333.68, 2311166.84, 1155583.42, 577791.71,
+    288895.85, 144447.93, 72223.96, 36111.98, 18055.99, 9028, 4514, 2257,
+    1128.5, 564.25, 282.12, 141.06, 70.53
+  ],
+  "scripts": null,
+  "status": 200,
+  "tile_resolutions": [
+    156543.0339, 78271.51695, 39135.75848, 19567.87924, 9783.939619,
+    4891.969809, 2445.984905, 1222.992452, 611.4962262, 305.7481131,
+    152.8740565, 76.43702827, 38.21851414, 19.10925707, 9.554628534,
+    4.777314267, 2.388657133, 1.194328567, 0.597164283, 0.298582142,
+    0.149291071, 0.074645535, 0.037322768, 0.018661384
+  ],
+  "topics": [],
+  "units": {
+    "area": "m2",
+    "distance": "meters",
+    "factor": 39.37007874,
+    "map": "meters",
+    "position_precision": 2
+  },
+  "use_mapcache": false,
+  "zoom_extent": [570703, 5500766, 2850490, 7484596],
+  "storage": [
+    {
+      "id": "local",
+      "store_url": "",
+      "type": "local"
+    },
+    {
+      "id": "aws-s3",
+      "store_url": "https://testing.s3.eu-central-1.amazonaws.com/",
+      "type": "s3"
+    }
+  ]
+}

@@ -1,9 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
+
 import Icon from '@/ui/Icon.vue'
 import './Icon.css'
 
 const allIconsModules = import.meta.glob('@/icons/*.svg', { eager: true })
-const allIcons = Object.values(allIconsModules).map(m => m.default)
+const allIcons = Object.values(allIconsModules).map((m) => m.default)
 
 export default {
   title: 'UI Components/Icon',
@@ -13,7 +14,7 @@ export default {
 type Story = StoryObj<typeof Icon>
 
 export const AllIcons: Story = {
-  render: args => ({
+  render: (args) => ({
     components: { Icon },
     setup() {
       return { args, allIcons }
@@ -22,7 +23,9 @@ export const AllIcons: Story = {
       async copyURL(text) {
         try {
           await navigator.clipboard.writeText(text)
-        } catch (err) {}
+        } catch (err) {
+          // Ignore error
+        }
       },
     },
     template: `
