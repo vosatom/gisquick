@@ -1,0 +1,14 @@
+{
+    "app": {
+        "lang": "en-us",
+        "reset_password_url": "/api/accounts/password_reset"
+    },
+    "user": {
+        "username": "",
+        "email": "",
+        "first_name": "",
+        "last_name": "",
+        "is_superuser": false,
+        "is_guest": true
+    }
+}

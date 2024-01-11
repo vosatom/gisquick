@@ -1,8 +1,8 @@
+import { setup } from '../storybook-compat'
+
 import appData from '@/modules/storybook/mocks/app.json'
 import project from '@/modules/storybook/mocks/project.json'
-
 import { store } from '@/store/typed'
-import { setup } from '../storybook-compat'
 
 export function setupProject() {
   store.commit('app', appData.app)
