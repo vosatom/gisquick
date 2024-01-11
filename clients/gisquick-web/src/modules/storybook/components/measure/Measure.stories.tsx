@@ -1,6 +1,5 @@
 import { Meta } from '@storybook/vue3'
 
-import Preview from './Preview.vue'
 import appData from '../../mocks/app.json'
 import project from '../../mocks/project.json'
 

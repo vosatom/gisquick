@@ -4,6 +4,7 @@ module.exports = {
     browser: true,
     es2021: true,
   },
+  ignorePatterns: ["cypress", "node_modules"],
   extends: [
     'plugin:@typescript-eslint/recommended',
     'plugin:vue/essential',
