@@ -370,7 +370,7 @@ export function loadStateFromQuery(
 
   store.commit(
     MutationKey.setProfile,
-    queryParams.routing__profile ?? featureConfig.settings.defaultProfile,
+    queryParams.routing__profile ?? featureConfig?.settings.defaultProfile,
   )
 
   if (queryParams.tool === 'routing') {

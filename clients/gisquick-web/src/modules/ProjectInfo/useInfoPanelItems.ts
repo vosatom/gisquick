@@ -24,7 +24,7 @@ export function useInfoPanelItems() {
           content: store.state.project.config.description,
         },
       },
-      store.state.project.config.custom.report_issue && {
+      store.state.project.config.custom?.report_issue && {
         key: 'issue',
         component: Issue,
       },

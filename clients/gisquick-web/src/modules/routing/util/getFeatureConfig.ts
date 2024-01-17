@@ -4,5 +4,5 @@ export function getFeatureConfig<T extends keyof ServicesConfig['features']>(
   config: ServicesConfig,
   featureKey: T,
 ) {
-  return config.features[featureKey] as NonNullable<ServicesConfig['features'][T]>
+  return config.features?.[featureKey] as NonNullable<ServicesConfig['features'][T]>
 }

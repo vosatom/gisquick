@@ -23,7 +23,7 @@ export function useProvider(
       providerKey = providerKey[0]
     }
 
-    const provider = config.providers[providerKey]
+    const provider = config.providers?.[providerKey]
     if (!provider?.type || !(provider.type in loaders)) return
     const result = new loaders[provider.type]() as BaseService
 

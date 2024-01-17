@@ -44,6 +44,7 @@ export default {
 
     const config = store.state.routing.config
     const featureConfig = getFeatureConfig(config, 'comments')
+    if (!featureConfig) return
     const provider = config.providers[featureConfig.provider]
     const { baseUrl, appId, locale } = provider?.settings ?? {}
 
